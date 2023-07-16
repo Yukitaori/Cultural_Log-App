@@ -3,10 +3,12 @@
   top: 0;
   z-index: 10;
   width: 100vw;
-  max-width: 1090px;
+  max-width: 1280px;
   height: 15vh;
   border-radius: 0 0 50px 50px;
   background-color: var(--main-bg-color);
+  border: 3px solid var(--second-color);
+  border-top: none;
   padding: 0.5em;
   display: flex;
   justify-content: space-around;
@@ -14,8 +16,7 @@
 }
 
 .navBar a {
-  max-width: 20%;
-  width: fit-content;
+  height: 60%;
 }
 
 .navBar a img {
