@@ -1,0 +1,35 @@
+.home {
+  height: 100%;
+  width: 100%;
+  max-width: 1280px;
+  max-height: 1183px;
+}
+
+.screen {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 1280px;
+  max-height: 1183px;
+  overflow: hidden;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  z-index: 0;
+}
+
+.body {
+  position: relative;
+  top: 15vh;
+  height: calc(100% - 15vh);
+  max-height: calc(1183px - 15vh);
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
