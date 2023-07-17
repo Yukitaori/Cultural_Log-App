@@ -5,16 +5,16 @@ class DiscManager extends AbstractManager {
     super({ table: "disc" });
   }
 
-  insert(item) {
+  insert(disc) {
     return this.database.query(`insert into ${this.table} (title) values (?)`, [
-      item.title,
+      disc.title,
     ]);
   }
 
-  update(item) {
+  update(disc) {
     return this.database.query(
       `update ${this.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      [disc.title, disc.id]
     );
   }
 }

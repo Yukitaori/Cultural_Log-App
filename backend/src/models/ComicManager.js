@@ -5,16 +5,16 @@ class ComicManager extends AbstractManager {
     super({ table: "comic" });
   }
 
-  insert(item) {
+  insert(comic) {
     return this.database.query(`insert into ${this.table} (title) values (?)`, [
-      item.title,
+      comic.title,
     ]);
   }
 
-  update(item) {
+  update(comic) {
     return this.database.query(
       `update ${this.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      [comic.title, comic.id]
     );
   }
 }

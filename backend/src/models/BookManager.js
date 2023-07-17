@@ -5,16 +5,16 @@ class BookManager extends AbstractManager {
     super({ table: "book" });
   }
 
-  insert(item) {
+  insert(book) {
     return this.database.query(`insert into ${this.table} (title) values (?)`, [
-      item.title,
+      book.title,
     ]);
   }
 
-  update(item) {
+  update(book) {
     return this.database.query(
       `update ${this.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      [book.title, book.id]
     );
   }
 }

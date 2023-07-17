@@ -5,16 +5,16 @@ class MovieManager extends AbstractManager {
     super({ table: "movie" });
   }
 
-  insert(item) {
+  insert(movie) {
     return this.database.query(`insert into ${this.table} (title) values (?)`, [
-      item.title,
+      movie.title,
     ]);
   }
 
-  update(item) {
+  update(movie) {
     return this.database.query(
       `update ${this.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      [movie.title, movie.id]
     );
   }
 }
