@@ -27,6 +27,8 @@ CREATE TABLE IF NOT EXISTS `CP4`.`user` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+INSERT into user (pseudo, hashed_password) VALUES ('Yuki', '$argon2id$v=19$m=65536,t=5,p=1$JghS5crVWZwjDe2GBG2BYA$S/f+cMapdWccEWwCLm+IX8YveQxmJ+PKMVgkAxmlGF4');
+
 -- -----------------------------------------------------
 -- Table `CP4`.`movie`
 -- -----------------------------------------------------
