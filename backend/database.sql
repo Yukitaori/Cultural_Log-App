@@ -23,10 +23,9 @@ USE `CP4` ;
 CREATE TABLE IF NOT EXISTS `CP4`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `pseudo` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `hashed_password` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `CP4`.`movie`
