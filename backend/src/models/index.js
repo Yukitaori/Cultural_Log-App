@@ -30,9 +30,24 @@ pool.getConnection().catch(() => {
 const models = {};
 
 const ItemManager = require("./ItemManager");
+const BookManager = require("./BookManager");
+const ComicManager = require("./ComicManager");
+const DiscManager = require("./DiscManager");
+const MovieManager = require("./MovieManager");
+const UserManager = require("./UserManager");
 
 models.item = new ItemManager();
 models.item.setDatabase(pool);
+models.book = new BookManager();
+models.book.setDatabase(pool);
+models.comic = new ComicManager();
+models.comic.setDatabase(pool);
+models.disc = new DiscManager();
+models.disc.setDatabase(pool);
+models.movie = new MovieManager();
+models.movie.setDatabase(pool);
+models.user = new UserManager();
+models.user.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
