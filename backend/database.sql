@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `CP4`.`movie` (
   `lent_to` VARCHAR(80) NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_movie_user0`
+  CONSTRAINT `fk_movie_user`
     FOREIGN KEY (`user_id`)
     REFERENCES `CP4`.`user` (`id`)
     ON DELETE NO ACTION
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `CP4`.`book` (
   `lent_to` VARCHAR(80) NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_movie_user1`
+  CONSTRAINT `fk_book_user`
     FOREIGN KEY (`user_id`)
     REFERENCES `CP4`.`user` (`id`)
     ON DELETE NO ACTION
@@ -78,7 +78,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `CP4`.`album`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `CP4`.`album` (
+CREATE TABLE IF NOT EXISTS `CP4`.`disc` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(80) NOT NULL,
   `artist` VARCHAR(80) NULL,
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `CP4`.`album` (
   `lent_to` VARCHAR(80) NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_movie_user2`
+  CONSTRAINT `fk_disc_user`
     FOREIGN KEY (`user_id`)
     REFERENCES `CP4`.`user` (`id`)
     ON DELETE NO ACTION
@@ -101,11 +101,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `CP4`.`comic_book`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `CP4`.`comic_book` (
+CREATE TABLE IF NOT EXISTS `CP4`.`comic` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(80) NOT NULL,
   `artist` VARCHAR(80) NULL,
-  `scenarist` VARCHAR(80) NULL,
+  `writer` VARCHAR(80) NULL,
   `read` DATE NULL,
   `is_read` TINYINT NULL,
   `rating` INT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `CP4`.`comic_book` (
   `lent_to` VARCHAR(80) NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_movie_user3`
+  CONSTRAINT `fk_comic_user`
     FOREIGN KEY (`user_id`)
     REFERENCES `CP4`.`user` (`id`)
     ON DELETE NO ACTION

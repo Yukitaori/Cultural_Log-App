@@ -5,16 +5,37 @@ class DiscManager extends AbstractManager {
     super({ table: "disc" });
   }
 
-  insert(disc) {
-    return this.database.query(`insert into ${this.table} (title) values (?)`, [
-      disc.title,
-    ]);
+  insert(disc, userId) {
+    return this.database.query(
+      `insert into ${this.table} (title, artist, listened, is_listened, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        disc.title,
+        disc.artist,
+        disc.listened,
+        disc.is_listened,
+        disc.rating,
+        disc.owned,
+        disc.is_lent,
+        disc.lent_to,
+        userId,
+      ]
+    );
   }
 
-  update(disc) {
+  update(disc, userId) {
     return this.database.query(
-      `update ${this.table} set title = ? where id = ?`,
-      [disc.title, disc.id]
+      `update ${this.table} set title = ?, artist = ?, listened = ?, is_listened = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
+      [
+        disc.title,
+        disc.artist,
+        disc.listened,
+        disc.is_listened,
+        disc.rating,
+        disc.owned,
+        disc.is_lent,
+        disc.lent_to,
+        userId,
+      ]
     );
   }
 }
