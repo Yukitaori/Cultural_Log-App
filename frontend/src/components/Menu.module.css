@@ -1,0 +1,19 @@
+.menu {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.menuButton {
+  cursor: pointer;
+  height: 10%;
+  width: 50%;
+  padding: 0.2em;
+  border-radius: 25px;
+  background-color: var(--second-bg-color);
+  color: var(--main-color);
+  font-size: 1.2rem;
+}

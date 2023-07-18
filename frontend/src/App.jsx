@@ -5,24 +5,42 @@ import Comics from "./components/Comics";
 import Discs from "./components/Discs";
 import Movies from "./components/Movies";
 import Welcome from "./components/Welcome";
+import Menu from "./components/Menu";
 import "./App.css";
-import { UserContextProvider } from "./contexts/UserContext";
+import { useUserContext } from "./contexts/UserContext";
 
 function App() {
+  const { user } = useUserContext();
   return (
-    <UserContextProvider>
-      <div className="App">
+    <div className="App">
+      {user?.id ? (
         <Routes>
           <Route path="/" element={<Home />}>
             <Route index element={<Welcome />} />
-            <Route path="books" element={<Books />} />
-            <Route path="comics" element={<Comics />} />
-            <Route path="discs" element={<Discs />} />
-            <Route path="movies" element={<Movies />} />
+            <Route path="books" element={<Books />}>
+              <Route index element={<Menu part="books" />} />
+            </Route>
+            <Route path="comics" element={<Comics />}>
+              <Route index element={<Menu part="comics" />} />
+            </Route>
+            <Route path="discs" element={<Discs />}>
+              <Route index element={<Menu part="discs" />} />
+            </Route>
+            <Route path="movies" element={<Movies />}>
+              <Route index element={<Menu part="movies" />} />
+            </Route>
+            <Route path="/:whatever" element={<Welcome />} />
           </Route>
         </Routes>
-      </div>
-    </UserContextProvider>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route index element={<Welcome />} />
+            <Route path="/:whatever" element={<Welcome />} />
+          </Route>
+        </Routes>
+      )}
+    </div>
   );
 }
 
