@@ -35,6 +35,10 @@
   font-size: 1.2rem;
 }
 
+.infoMessage {
+  background-color: var(--second-bg-color);
+}
+
 .loginButton {
   cursor: pointer;
   height: 3em;

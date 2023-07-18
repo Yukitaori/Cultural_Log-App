@@ -1,12 +1,16 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from "react";
 import styles from "./Login.module.css";
+import { useUserContext } from "../contexts/UserContext";
+import instance from "../services/APIService";
 
 function Login() {
+  const {login} = useUserContext();
   const [loginInfo, setLoginInfo] = useState({
     pseudo: "",
     password: "",
   });
+  const [infoMessage, setInfoMessage] = useState(null);
 
   const handleChange = (e) => {
     setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
@@ -14,6 +18,21 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    instance.post("/login", loginInfo).then((response) => {
+      if (response.data) {
+        login(response.data)
+        setLoginInfo({
+          pseudo: "",
+          password: "",
+        })
+        setInfoMessage(null);
+      }
+    }).catch((error) => {
+      if (error.response?.status === 401)
+        setInfoMessage("Les informations renseignées sont incorrectes.");
+      else setInfoMessage("Merci d'essayer plus tard.");
+    });
+
   }
 
   return (
@@ -39,6 +58,9 @@ function Login() {
             placeholder="Entre ton mot de passe"
           />
         </div>
+        {infoMessage ? <div className={styles.infoMessage}>
+          <p>{infoMessage}</p>
+        </div> : null}
         <button type="submit" className={styles.loginButton}>Se connecter</button>
       </form>
     </div>

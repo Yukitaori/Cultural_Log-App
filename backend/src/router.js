@@ -9,13 +9,19 @@ const discControllers = require("./controllers/discControllers");
 const movieControllers = require("./controllers/movieControllers");
 const userControllers = require("./controllers/userControllers");
 
-const { hashPassword } = require("./services/auth");
+const {
+  hashPassword,
+  verifyPassword,
+  getUserByPseudo,
+} = require("./services/auth");
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
 router.put("/items/:id", itemControllers.edit);
 router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
+
+router.post("/login", getUserByPseudo, verifyPassword);
 
 router.get("/books", bookControllers.browse);
 router.post("/books", hashPassword, bookControllers.add);
