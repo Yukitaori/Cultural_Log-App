@@ -13,6 +13,7 @@ const {
   hashPassword,
   verifyPassword,
   getUserByPseudo,
+  logout,
 } = require("./services/auth");
 
 router.get("/items", itemControllers.browse);
@@ -22,6 +23,7 @@ router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
 
 router.post("/login", getUserByPseudo, verifyPassword);
+router.get("/logout", logout);
 
 router.get("/books", bookControllers.browse);
 router.post("/books", hashPassword, bookControllers.add);

@@ -4,7 +4,7 @@ import Login from "./Login";
 import { useUserContext } from "../contexts/UserContext";
 
 function Welcome() {
-  const { user } = useUserContext();
+  const { user, logout } = useUserContext();
   return (
     <div className={styles.welcome}>
       {!user?.id ? (
@@ -13,7 +13,16 @@ function Welcome() {
           <Login />
         </>
       ) : (
-        <h1>Bonjour, {user.pseudo}</h1>
+        <>
+          <h1>Bonjour, {user.pseudo}</h1>
+          <button
+            type="button"
+            className={styles.logoutButton}
+            onClick={logout}
+          >
+            Logout
+          </button>
+        </>
       )}
     </div>
   );
