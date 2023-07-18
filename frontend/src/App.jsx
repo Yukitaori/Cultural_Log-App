@@ -19,15 +19,27 @@ function App() {
             <Route index element={<Welcome />} />
             <Route path="books" element={<Books />}>
               <Route index element={<Menu part="books" />} />
+              <Route path="search" element={<p>Rechercher</p>} />
+              <Route path="add" element={<p>Ajouter</p>} />
+              <Route path="list" element={<p>Liste</p>} />
             </Route>
             <Route path="comics" element={<Comics />}>
               <Route index element={<Menu part="comics" />} />
+              <Route path="search" element={<p>Rechercher</p>} />
+              <Route path="add" element={<p>Ajouter</p>} />
+              <Route path="list" element={<p>Liste</p>} />
             </Route>
             <Route path="discs" element={<Discs />}>
               <Route index element={<Menu part="discs" />} />
+              <Route path="search" element={<p>Rechercher</p>} />
+              <Route path="add" element={<p>Ajouter</p>} />
+              <Route path="list" element={<p>Liste</p>} />
             </Route>
             <Route path="movies" element={<Movies />}>
               <Route index element={<Menu part="movies" />} />
+              <Route path="search" element={<p>Rechercher</p>} />
+              <Route path="add" element={<p>Ajouter</p>} />
+              <Route path="list" element={<p>Liste</p>} />
             </Route>
             <Route path="/:whatever" element={<Welcome />} />
           </Route>
