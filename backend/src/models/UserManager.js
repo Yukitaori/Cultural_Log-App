@@ -5,6 +5,12 @@ class UserManager extends AbstractManager {
     super({ table: "user" });
   }
 
+  findByPseudo(user) {
+    return this.database.query(`select * from ${this.table} where pseudo = ?`, [
+      user.pseudo,
+    ]);
+  }
+
   insert(user) {
     return this.database.query(
       `insert into ${this.table} (pseudo, hashed_password) values (?, ?)`,

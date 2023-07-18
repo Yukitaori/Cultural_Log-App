@@ -3,7 +3,9 @@
   height: 90%;
   padding: 0.5em;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
   align-items: center;
   background-color: var(--main-bg-color);
   border: 3px solid var(--second-color);

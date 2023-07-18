@@ -1,5 +1,6 @@
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
+const models = require("../models");
 
 const { JWT_SECRET, JWT_TIMING } = process.env;
 
@@ -8,6 +9,24 @@ const hashingOptions = {
   memoryCost: 2 ** 16,
   timeCost: 5,
   parallelism: 1,
+};
+
+const getUserByPseudo = (req, res, next) => {
+  models.user
+    .findByPseudo(req.body)
+    .then(([users]) => {
+      if (users[0]) {
+        [req.user] = users;
+        next();
+      } else {
+        // Si aucun utilisateur avec cet email n'existe => 401
+        res.sendStatus(401);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
 };
 
 const hashPassword = (req, res, next) => {
@@ -25,7 +44,7 @@ const hashPassword = (req, res, next) => {
     });
 };
 
-const verifyPassword = (req, res, next) => {
+const verifyPassword = (req, res) => {
   // vérification que le hash du password fourni par l'utilisateur est le même que dans la base de données
   // Si oui => suppression du hashedPassword et du password et on fournit un token
   argon2
@@ -43,7 +62,7 @@ const verifyPassword = (req, res, next) => {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production",
         });
-        next();
+        res.send(req.user);
       }
     })
     .catch((err) => {
@@ -70,6 +89,7 @@ const logout = (req, res) => {
 };
 
 module.exports = {
+  getUserByPseudo,
   verifyPassword,
   hashPassword,
   verifyToken,

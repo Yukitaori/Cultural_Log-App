@@ -1,0 +1,55 @@
+.login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 90%;
+  align-items: center;
+}
+
+.formBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.formBlock input {
+  height: 3rem;
+  width: 80%;
+  padding: 0.5em;
+  border-radius: 25px;
+  background-color: var(--second-bg-color);
+  color: var(--main-color);
+  font-weight: bold;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.infoMessage {
+  padding: 0.5rem;
+  font-weight: bolder;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.loginButton {
+  cursor: pointer;
+  height: 3em;
+  width: 50%;
+  padding: 0.5em;
+  border-radius: 25px;
+  background-color: var(--second-bg-color);
+  color: var(--main-color);
+  font-size: 1.2rem;
+  box-shadow: 0 0 15px var(--main-color);
+}
