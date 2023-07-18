@@ -20,7 +20,7 @@ function Welcome() {
             className={styles.logoutButton}
             onClick={logout}
           >
-            Logout
+            Se déconnecter
           </button>
         </>
       )}
