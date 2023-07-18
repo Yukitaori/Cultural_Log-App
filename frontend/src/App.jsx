@@ -24,25 +24,25 @@ function App() {
               <Route index element={<Menu part="books" />} />
               <Route path="search" element={<Search />} />
               <Route path="add" element={<Add />} />
-              <Route path="list" element={<List />} />
+              <Route path="list" element={<List part="books" />} />
             </Route>
             <Route path="comics" element={<Comics />}>
               <Route index element={<Menu part="comics" />} />
               <Route path="search" element={<Search />} />
               <Route path="add" element={<Add />} />
-              <Route path="list" element={<List />} />
+              <Route path="list" element={<List part="comics" />} />
             </Route>
             <Route path="discs" element={<Discs />}>
               <Route index element={<Menu part="discs" />} />
               <Route path="search" element={<Search />} />
               <Route path="add" element={<Add />} />
-              <Route path="list" element={<List />} />
+              <Route path="list" element={<List part="discs" />} />
             </Route>
             <Route path="movies" element={<Movies />}>
               <Route index element={<Menu part="movies" />} />
               <Route path="search" element={<Search />} />
               <Route path="add" element={<Add />} />
-              <Route path="list" element={<List />} />
+              <Route path="list" element={<List part="movies" />} />
             </Route>
             <Route path="/:whatever" element={<Welcome />} />
           </Route>

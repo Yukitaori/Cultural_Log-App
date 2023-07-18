@@ -51,6 +51,11 @@ CREATE TABLE IF NOT EXISTS `CP4`.`movie` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO movie (title, director, seen, is_seen, rating, owned, is_lent, user_id) VALUES ('La famille Tenenbaum', 'Wes Anderson', '2007-01-18', 1, 9, 1, 0, 1);
+INSERT INTO movie (title, director, seen, is_seen, rating, owned, is_lent, user_id) VALUES ('La vie aquatique', 'Wes Anderson', '2008-02-02', 1, 7, 1, 0, 1);
+INSERT INTO movie (title, director, seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Babel', 'Alejandro Gonzales Inarritu', '2006-10-09', 1, 9, 1, 0, 1);
+INSERT INTO movie (title, director, seen, is_seen, rating, owned, is_lent, lent_to, user_id) VALUES ('Cube', 'Vincenzo Natali', '2001-01-25', 1, 9, 1, 1, "Yohan Genin", 1);
+
 
 -- -----------------------------------------------------
 -- Table `CP4`.`book`
