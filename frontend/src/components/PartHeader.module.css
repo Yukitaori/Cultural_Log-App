@@ -1,0 +1,25 @@
+.partHeader {
+  width: 100%;
+  height: 4rem;
+  padding: 0.5em;
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.back {
+  cursor: pointer;
+  background: none;
+  justify-self: baseline;
+}
+
+.back img {
+  height: 4rem;
+}
+
+.partHeader h1 {
+  grid-column: 3 / 4;
+  text-align: center;
+}
