@@ -29,7 +29,7 @@ function Login() {
       }
     }).catch((error) => {
       if (error.response?.status === 401)
-        setInfoMessage("Les informations renseignées sont incorrectes.");
+        setInfoMessage("Tu n'es pas autorisé(e) à utiliser cette application.");
       else setInfoMessage("Merci d'essayer plus tard.");
     });
 

@@ -9,7 +9,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 3em;
+  gap: 3rem;
   width: 90%;
   align-items: center;
 }
@@ -17,14 +17,14 @@
 .formBlock {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 0.5rem;
   align-items: center;
   width: 100%;
   font-size: 1.2rem;
 }
 
 .formBlock input {
-  height: 3em;
+  height: 3rem;
   width: 80%;
   padding: 0.5em;
   border-radius: 25px;
@@ -32,11 +32,14 @@
   color: var(--main-color);
   font-weight: bold;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .infoMessage {
-  background-color: var(--second-bg-color);
+  padding: 0.5rem;
+  font-weight: bolder;
+  font-size: 1.2rem;
+  text-align: center;
 }
 
 .loginButton {
