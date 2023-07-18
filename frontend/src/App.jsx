@@ -6,6 +6,9 @@ import Discs from "./components/Discs";
 import Movies from "./components/Movies";
 import Welcome from "./components/Welcome";
 import Menu from "./components/Menu";
+import Add from "./components/Add";
+import Search from "./components/Search";
+import List from "./components/List";
 import "./App.css";
 import { useUserContext } from "./contexts/UserContext";
 
@@ -19,27 +22,27 @@ function App() {
             <Route index element={<Welcome />} />
             <Route path="books" element={<Books />}>
               <Route index element={<Menu part="books" />} />
-              <Route path="search" element={<p>Rechercher</p>} />
-              <Route path="add" element={<p>Ajouter</p>} />
-              <Route path="list" element={<p>Liste</p>} />
+              <Route path="search" element={<Search />} />
+              <Route path="add" element={<Add />} />
+              <Route path="list" element={<List />} />
             </Route>
             <Route path="comics" element={<Comics />}>
               <Route index element={<Menu part="comics" />} />
-              <Route path="search" element={<p>Rechercher</p>} />
-              <Route path="add" element={<p>Ajouter</p>} />
-              <Route path="list" element={<p>Liste</p>} />
+              <Route path="search" element={<Search />} />
+              <Route path="add" element={<Add />} />
+              <Route path="list" element={<List />} />
             </Route>
             <Route path="discs" element={<Discs />}>
               <Route index element={<Menu part="discs" />} />
-              <Route path="search" element={<p>Rechercher</p>} />
-              <Route path="add" element={<p>Ajouter</p>} />
-              <Route path="list" element={<p>Liste</p>} />
+              <Route path="search" element={<Search />} />
+              <Route path="add" element={<Add />} />
+              <Route path="list" element={<List />} />
             </Route>
             <Route path="movies" element={<Movies />}>
               <Route index element={<Menu part="movies" />} />
-              <Route path="search" element={<p>Rechercher</p>} />
-              <Route path="add" element={<p>Ajouter</p>} />
-              <Route path="list" element={<p>Liste</p>} />
+              <Route path="search" element={<Search />} />
+              <Route path="add" element={<Add />} />
+              <Route path="list" element={<List />} />
             </Route>
             <Route path="/:whatever" element={<Welcome />} />
           </Route>
