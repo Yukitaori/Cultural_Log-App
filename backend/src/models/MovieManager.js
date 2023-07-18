@@ -7,11 +7,11 @@ class MovieManager extends AbstractManager {
 
   insert(movie, userId) {
     return this.database.query(
-      `insert into ${this.table} (title, director, seen, is_seen, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (title, director, when_seen, is_seen, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         movie.title,
         movie.director,
-        movie.seen,
+        movie.when_seen,
         movie.is_seen,
         movie.rating,
         movie.owned,
@@ -24,11 +24,11 @@ class MovieManager extends AbstractManager {
 
   update(movie, userId) {
     return this.database.query(
-      `update ${this.table} set title = ?, director = ?, seen = ?, is_seen = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
+      `update ${this.table} set title = ?, director = ?, when_seen = ?, is_seen = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
       [
         movie.title,
         movie.director,
-        movie.seen,
+        movie.when_seen,
         movie.is_seen,
         movie.rating,
         movie.owned,

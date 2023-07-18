@@ -7,12 +7,12 @@ class ComicManager extends AbstractManager {
 
   insert(comic, userId) {
     return this.database.query(
-      `insert into ${this.table} (title, artist, writer, read, is_read, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (title, artist, writer, when_read, is_read, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         comic.title,
         comic.artist,
         comic.writer,
-        comic.read,
+        comic.when_read,
         comic.is_read,
         comic.rating,
         comic.owned,
@@ -25,12 +25,12 @@ class ComicManager extends AbstractManager {
 
   update(comic, userId) {
     return this.database.query(
-      `update ${this.table} set title = ?, artist = ?, writer = ?, read = ?, is_read = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
+      `update ${this.table} set title = ?, artist = ?, writer = ?, when_read = ?, is_read = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
       [
         comic.title,
         comic.artist,
         comic.writer,
-        comic.read,
+        comic.when_read,
         comic.is_read,
         comic.rating,
         comic.owned,

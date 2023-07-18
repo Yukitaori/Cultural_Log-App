@@ -7,11 +7,11 @@ class DiscManager extends AbstractManager {
 
   insert(disc, userId) {
     return this.database.query(
-      `insert into ${this.table} (title, artist, listened, is_listened, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (title, artist, when_listened, is_listened, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         disc.title,
         disc.artist,
-        disc.listened,
+        disc.when_listened,
         disc.is_listened,
         disc.rating,
         disc.owned,
@@ -24,11 +24,11 @@ class DiscManager extends AbstractManager {
 
   update(disc, userId) {
     return this.database.query(
-      `update ${this.table} set title = ?, artist = ?, listened = ?, is_listened = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
+      `update ${this.table} set title = ?, artist = ?, when_listened = ?, is_listened = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
       [
         disc.title,
         disc.artist,
-        disc.listened,
+        disc.when_listened,
         disc.is_listened,
         disc.rating,
         disc.owned,
