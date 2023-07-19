@@ -14,6 +14,7 @@ const {
   verifyPassword,
   getUserByPseudo,
   logout,
+  verifyToken,
 } = require("./services/auth");
 
 router.get("/items", itemControllers.browse);
@@ -28,22 +29,22 @@ router.get("/logout", logout);
 router.get("/books", bookControllers.browse);
 router.get("/books/:id", bookControllers.read);
 router.delete("/books/:id", bookControllers.destroy);
-router.post("/books", hashPassword, bookControllers.add);
+router.post("/books", verifyToken, bookControllers.add);
 
 router.get("/comics", comicControllers.browse);
 router.get("/comics/:id", comicControllers.read);
 router.delete("/comics/:id", comicControllers.destroy);
-router.post("/comics", hashPassword, comicControllers.add);
+router.post("/comics", verifyToken, comicControllers.add);
 
 router.get("/discs", discControllers.browse);
 router.get("/discs/:id", discControllers.read);
 router.delete("/discs/:id", discControllers.destroy);
-router.post("/discs", hashPassword, discControllers.add);
+router.post("/discs", verifyToken, discControllers.add);
 
 router.get("/movies", movieControllers.browse);
 router.get("/movies/:id", movieControllers.read);
 router.delete("/movies/:id", movieControllers.destroy);
-router.post("/movies", hashPassword, movieControllers.add);
+router.post("/movies", verifyToken, movieControllers.add);
 
 router.get("/users", userControllers.browse);
 router.post("/users", hashPassword, userControllers.add);

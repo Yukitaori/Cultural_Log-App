@@ -52,11 +52,12 @@ const edit = (req, res) => {
 
 const add = (req, res) => {
   const disc = req.body;
+  const id = req.payloads?.sub;
 
   // TODO validations (length, format...)
 
   models.disc
-    .insert(disc)
+    .insert(disc, id)
     .then(([result]) => {
       res.location(`/discs/${result.insertId}`).sendStatus(201);
     })

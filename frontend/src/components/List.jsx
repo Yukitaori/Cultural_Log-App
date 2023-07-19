@@ -20,6 +20,7 @@ function List({ part }) {
   }, []);
 
   return (
+    // TODO Mettre en place les boutons tri et filtres
     <div className={styles.list}>
       {itemsToDisplay &&
         itemsToDisplay.map((item) => {
