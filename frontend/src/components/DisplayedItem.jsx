@@ -19,17 +19,17 @@ function DisplayedItem({ part }) {
   };
 
   const deleteForGood = () => {
-    // instance
-    //   .delete(`/${part}/${id}`)
-    //   .then((response) => {
-    //     if (response.status === 200) {
-    //       setMessage("Suppression effectuée !");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //     setMessage("Il y a eu une erreur. Réessaye plus tard.");
-    //   });
+    instance
+      .delete(`/${part}/${id}`)
+      .then((response) => {
+        if (response.status === 204) {
+          setMessage("Suppression effectuée !");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setMessage("Il y a eu une erreur. Réessaye plus tard.");
+      });
     setMessage("Suppression effectuée !");
   };
 
