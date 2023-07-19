@@ -18,6 +18,11 @@ function DisplayedItem({ part }) {
     setOpenModal(true);
   };
 
+  const handleClickEdit = () => {
+    // TODO ajouter la navigation vers le composant Add
+    console.info("edit");
+  };
+
   const deleteForGood = () => {
     instance
       .delete(`/${part}/${id}`)
@@ -123,7 +128,11 @@ function DisplayedItem({ part }) {
         </div>
 
         <div className={styles.buttons}>
-          <button className={styles.edit} type="button">
+          <button
+            className={styles.edit}
+            type="button"
+            onClick={handleClickEdit}
+          >
             <img src={pen} alt="crayon" />
           </button>
           <button
