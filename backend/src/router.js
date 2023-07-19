@@ -26,15 +26,19 @@ router.post("/login", getUserByPseudo, verifyPassword);
 router.get("/logout", logout);
 
 router.get("/books", bookControllers.browse);
+router.get("/books/:id", bookControllers.read);
 router.post("/books", hashPassword, bookControllers.add);
 
 router.get("/comics", comicControllers.browse);
+router.get("/comics/:id", comicControllers.read);
 router.post("/comics", hashPassword, comicControllers.add);
 
 router.get("/discs", discControllers.browse);
+router.get("/discs/:id", discControllers.read);
 router.post("/discs", hashPassword, discControllers.add);
 
 router.get("/movies", movieControllers.browse);
+router.get("/movies/:id", movieControllers.read);
 router.post("/movies", hashPassword, movieControllers.add);
 
 router.get("/users", userControllers.browse);

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./List.module.css";
 import instance from "../services/APIService";
 
 function List({ part }) {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [itemsToDisplay, setItemsToDisplay] = useState(null);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function List({ part }) {
             <button
               className={styles.listButtons}
               type="button"
-              // onClick={() => navigate(`/${part}/${item.id}`)}
+              onClick={() => navigate(`/${part}/${item.id}`)}
             >
               <p>{item.title}</p>
             </button>
