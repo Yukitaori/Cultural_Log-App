@@ -7,11 +7,11 @@ class BookManager extends AbstractManager {
 
   insert(book, userId) {
     return this.database.query(
-      `insert into ${this.table} (title, author, read, is_read, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (title, author, when_read, is_read, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         book.title,
         book.author,
-        book.read,
+        book.when_read,
         book.is_read,
         book.rating,
         book.owned,
@@ -24,11 +24,11 @@ class BookManager extends AbstractManager {
 
   update(book, userId) {
     return this.database.query(
-      `update ${this.table} set title = ?, author = ?, read = ?, is_read = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
+      `update ${this.table} set title = ?, author = ?, when_read = ?, is_read = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
       [
         book.title,
         book.author,
-        book.read,
+        book.when_read,
         book.is_read,
         book.rating,
         book.owned,

@@ -13,7 +13,7 @@ function PartHeader({ partName }) {
         className={styles.back}
         type="button"
       >
-        <img src={back} alt="" />
+        <img src={back} alt="flèche de retour en arrière" />
       </button>
       <h1>{partName}</h1>
     </div>

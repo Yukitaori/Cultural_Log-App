@@ -11,6 +11,7 @@ import Search from "./components/Search";
 import List from "./components/List";
 import "./App.css";
 import { useUserContext } from "./contexts/UserContext";
+import DisplayedItem from "./components/DisplayedItem";
 
 function App() {
   const { user } = useUserContext();
@@ -24,25 +25,29 @@ function App() {
               <Route index element={<Menu part="books" />} />
               <Route path="search" element={<Search />} />
               <Route path="add" element={<Add />} />
-              <Route path="list" element={<List />} />
+              <Route path="list" element={<List part="books" />} />
+              <Route path=":id" element={<DisplayedItem part="books" />} />
             </Route>
             <Route path="comics" element={<Comics />}>
               <Route index element={<Menu part="comics" />} />
               <Route path="search" element={<Search />} />
               <Route path="add" element={<Add />} />
-              <Route path="list" element={<List />} />
+              <Route path="list" element={<List part="comics" />} />
+              <Route path=":id" element={<DisplayedItem part="comics" />} />
             </Route>
             <Route path="discs" element={<Discs />}>
               <Route index element={<Menu part="discs" />} />
               <Route path="search" element={<Search />} />
               <Route path="add" element={<Add />} />
-              <Route path="list" element={<List />} />
+              <Route path="list" element={<List part="discs" />} />
+              <Route path=":id" element={<DisplayedItem part="discs" />} />
             </Route>
             <Route path="movies" element={<Movies />}>
               <Route index element={<Menu part="movies" />} />
               <Route path="search" element={<Search />} />
               <Route path="add" element={<Add />} />
-              <Route path="list" element={<List />} />
+              <Route path="list" element={<List part="movies" />} />
+              <Route path=":id" element={<DisplayedItem part="movies" />} />
             </Route>
             <Route path="/:whatever" element={<Welcome />} />
           </Route>

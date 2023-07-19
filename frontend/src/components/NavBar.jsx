@@ -18,22 +18,31 @@ function NavBar() {
     <div className={styles.navBar}>
       <NavLink to={user?.id ? "/books" : ""}>
         {({ isActive }) => (
-          <img src={isActive && user?.id ? bookActive : book} alt="" />
+          <img
+            src={isActive && user?.id ? bookActive : book}
+            alt="livre ouvert"
+          />
         )}
       </NavLink>
       <NavLink to={user?.id ? "/comics" : ""}>
         {({ isActive }) => (
-          <img src={isActive && user?.id ? comicsActive : comics} alt="" />
+          <img
+            src={isActive && user?.id ? comicsActive : comics}
+            alt="bulle de bande dessinée"
+          />
         )}
       </NavLink>
       <NavLink to={user?.id ? "/discs" : ""}>
         {({ isActive }) => (
-          <img src={isActive && user?.id ? discActive : disc} alt="" />
+          <img src={isActive && user?.id ? discActive : disc} alt="disque" />
         )}
       </NavLink>
       <NavLink to={user?.id ? "/movies" : ""}>
         {({ isActive }) => (
-          <img src={isActive && user?.id ? movieActive : movie} alt="" />
+          <img
+            src={isActive && user?.id ? movieActive : movie}
+            alt="pellicule de film"
+          />
         )}
       </NavLink>
     </div>

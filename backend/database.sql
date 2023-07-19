@@ -20,6 +20,7 @@ USE `CP4` ;
 -- -----------------------------------------------------
 -- Table `CP4`.`user`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS user;
 CREATE TABLE IF NOT EXISTS `CP4`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `pseudo` VARCHAR(45) NOT NULL,
@@ -32,11 +33,12 @@ INSERT into user (pseudo, hashed_password) VALUES ('Yuki', '$argon2id$v=19$m=655
 -- -----------------------------------------------------
 -- Table `CP4`.`movie`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS movie;
 CREATE TABLE IF NOT EXISTS `CP4`.`movie` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(80) NOT NULL,
   `director` VARCHAR(80) NULL,
-  `seen` DATE NULL,
+  `when_seen` DATE NULL,
   `is_seen` TINYINT NULL,
   `rating` INT NULL,
   `owned` TINYINT NULL,
@@ -51,15 +53,21 @@ CREATE TABLE IF NOT EXISTS `CP4`.`movie` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('La famille Tenenbaum', 'Wes Anderson', '2007-01-18', 1, 9, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('La vie aquatique', 'Wes Anderson', '2008-02-02', 1, 7, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Babel', 'Alejandro Gonzales Inarritu', '2006-10-09', 1, 9, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, lent_to, user_id) VALUES ('Cube', 'Vincenzo Natali', '2001-01-25', 1, 7, 1, 1, "Yohan Genin", 1);
+
 
 -- -----------------------------------------------------
 -- Table `CP4`.`book`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS book;
 CREATE TABLE IF NOT EXISTS `CP4`.`book` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(80) NOT NULL,
   `author` VARCHAR(80) NULL,
-  `read` DATE NULL,
+  `when_read` DATE NULL,
   `is_read` TINYINT NULL,
   `rating` INT NULL,
   `owned` TINYINT NULL,
@@ -74,15 +82,20 @@ CREATE TABLE IF NOT EXISTS `CP4`.`book` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO book (title, author, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('La Horde du Contrevent', 'Alain Damasio', '2018-07-15', 1, 10, 1, 0, 1);
+INSERT INTO book (title, author, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Dune', 'Frank Herbert', '2001-08-16', 1, 10, 1, 0, 1);
+INSERT INTO book (title, author, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Fondation', 'Isaac Asimov', '2017-07-31', 1, 10, 1, 0, 1);
+
 
 -- -----------------------------------------------------
 -- Table `CP4`.`album`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS disc;
 CREATE TABLE IF NOT EXISTS `CP4`.`disc` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(80) NOT NULL,
   `artist` VARCHAR(80) NULL,
-  `listened` DATE NULL,
+  `when_listened` DATE NULL,
   `is_listened` TINYINT NULL,
   `rating` INT NULL,
   `owned` TINYINT NULL,
@@ -97,16 +110,21 @@ CREATE TABLE IF NOT EXISTS `CP4`.`disc` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO disc (title, artist, when_listened, is_listened, rating, owned, is_lent, user_id) VALUES ('Discovery', 'Daft Punk', '1998-12-01', 1, 10, 1, 0, 1);
+INSERT INTO disc (title, artist, when_listened, is_listened, rating, owned, is_lent, user_id) VALUES ('The Mysterious Production of Eggs', 'Andrew Bird', '2003-01-01', 1, 9, 1, 0, 1);
+INSERT INTO disc (title, artist, when_listened, is_listened, rating, owned, is_lent, user_id) VALUES ('The Garden', 'Zero 7', '2008-01-01', 1, 7, 1, 0, 1);
+
 
 -- -----------------------------------------------------
 -- Table `CP4`.`comic_book`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS comic;
 CREATE TABLE IF NOT EXISTS `CP4`.`comic` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(80) NOT NULL,
   `artist` VARCHAR(80) NULL,
   `writer` VARCHAR(80) NULL,
-  `read` DATE NULL,
+  `when_read` DATE NULL,
   `is_read` TINYINT NULL,
   `rating` INT NULL,
   `owned` TINYINT NULL,
@@ -120,6 +138,10 @@ CREATE TABLE IF NOT EXISTS `CP4`.`comic` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+INSERT INTO comic (title, artist, writer, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Superman Red Son', 'Dave Johnson', 'Mark Millar', '2014-10-05', 1, 8, 1, 0, 1);
+INSERT INTO comic (title, artist, writer, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Blacksad', 'Juanjo Guarnido', 'Juan Diaz Canales', '2007-05-05', 1, 10, 1, 0, 1);
+INSERT INTO comic (title, artist, writer, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Calvin & Hobbes', 'Bill Waterson', 'Bill Waterson', '1997-11-11', 1, 10, 1, 0, 1);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
