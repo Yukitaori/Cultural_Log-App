@@ -66,6 +66,7 @@ function Add({ part }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // TODO améliorer le schéma de validation
     const { error } = schema.validate(itemToAdd);
     if (error) {
       setInfoMessage(error.message);
