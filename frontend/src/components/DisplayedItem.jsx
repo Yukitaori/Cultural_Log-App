@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
+import ModalWrapper from "./ModalWrapper/ModalWrapper";
+import BasicModal from "./ModalWrapper/BasicModal";
 import styles from "./DisplayedItem.module.css";
 import instance from "../services/APIService";
 import pen from "../assets/icons/pen.png";
@@ -9,6 +11,12 @@ import bin from "../assets/icons/bin.png";
 function DisplayedItem({ part }) {
   const { id } = useParams();
   const [itemToDisplay, setItemToDisplay] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleClickDelete = () => {
+    setOpenModal(true);
+  };
+
   const transformDate = (day) => {
     const dayToTransform = new Date(day);
     const newDay = [
@@ -102,10 +110,27 @@ function DisplayedItem({ part }) {
           <button className={styles.edit} type="button">
             <img src={pen} alt="crayon" />
           </button>
-          <button className={styles.delete} type="button">
+          <button
+            className={styles.delete}
+            type="button"
+            onClick={handleClickDelete}
+          >
             <img src={bin} alt="poubelle" />
           </button>
         </div>
+        {openModal ? (
+          <ModalWrapper>
+            <BasicModal
+              modalText="Souhaites-tu REELLEMENT supprimer cet élément ?"
+              closeModal={() => setOpenModal(false)}
+              actionYesButton={() => {
+                console.info("delete");
+                setOpenModal(false);
+              }}
+              actionNoButton={() => setOpenModal(false)}
+            />
+          </ModalWrapper>
+        ) : null}
       </div>
     )
   );
