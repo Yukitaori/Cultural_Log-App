@@ -52,11 +52,12 @@ const edit = (req, res) => {
 
 const add = (req, res) => {
   const comic = req.body;
+  const id = req.payloads?.sub;
 
   // TODO validations (length, format...)
 
   models.comic
-    .insert(comic)
+    .insert(comic, id)
     .then(([result]) => {
       res.location(`/comics/${result.insertId}`).sendStatus(201);
     })

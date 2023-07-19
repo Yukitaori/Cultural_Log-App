@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Add.module.css";
+import schema from "../services/validators";
+import instance from "../services/APIService";
 
 function Add({ part }) {
   const [itemToAdd, setItemToAdd] = useState(null);
@@ -12,11 +14,11 @@ function Add({ part }) {
         title: "",
         director: "",
         is_seen: "0",
-        when_seen: "",
+        when_seen: null,
         rating: "",
         owned: "0",
         is_lent: "0",
-        lent_to: "",
+        lent_to: null,
       });
     }
     if (part === "books") {
@@ -24,11 +26,11 @@ function Add({ part }) {
         title: "",
         author: "",
         is_read: "0",
-        when_read: "",
+        when_read: null,
         rating: "",
         owned: "0",
         is_lent: "0",
-        lent_to: "",
+        lent_to: null,
       });
     }
     if (part === "discs") {
@@ -36,11 +38,11 @@ function Add({ part }) {
         title: "",
         artist: "",
         is_listened: "0",
-        when_listened: "",
+        when_listened: null,
         rating: "",
         owned: "0",
         is_lent: "0",
-        lent_to: "",
+        lent_to: null,
       });
     }
     if (part === "comics") {
@@ -49,11 +51,11 @@ function Add({ part }) {
         artist: "",
         writer: "",
         is_read: "0",
-        when_read: "",
+        when_read: null,
         rating: "",
         owned: "0",
         is_lent: "0",
-        lent_to: "",
+        lent_to: null,
       });
     }
   }, []);
@@ -64,25 +66,39 @@ function Add({ part }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { error } = schema.validate(itemToAdd);
+    if (error) {
+      setInfoMessage(error.message);
+    } else {
+      instance
+        .post(`/${part}`, itemToAdd)
+        .then((response) => {
+          if (response.status === 201) {
+            setItemToAdd(null);
+            setInfoMessage("L'ajout s'est hyper bien passé !");
+          }
+        })
+        .catch((err) => {
+          setInfoMessage("Il y a eu un problème. Réessaye plus tard");
 
-    console.info(itemToAdd);
-    setInfoMessage("Yessss");
-    setItemToAdd(null);
+          console.error(err);
+        });
+    }
   };
 
   useEffect(() => {
     if (itemToAdd) {
-      if (itemToAdd.is_lent === "0") {
-        itemToAdd.lent_to = "";
+      if (itemToAdd.is_lent === "0" && itemToAdd.lent_to) {
+        setItemToAdd({ ...itemToAdd, [itemToAdd.lent_to]: null });
       }
-      if (itemToAdd.is_read === "0") {
-        itemToAdd.when_read = "";
+      if (itemToAdd.is_read === "0" && itemToAdd.when_read) {
+        setItemToAdd({ ...itemToAdd, [itemToAdd.when_read]: null });
       }
-      if (itemToAdd.is_listened === "0") {
-        itemToAdd.when_listened = "";
+      if (itemToAdd.is_listened === "0" && itemToAdd.when_listened) {
+        setItemToAdd({ ...itemToAdd, [itemToAdd.when_listened]: null });
       }
-      if (itemToAdd.is_seen === "0") {
-        itemToAdd.when_seen = "";
+      if (itemToAdd.is_seen === "0" && itemToAdd.when_seen) {
+        setItemToAdd({ ...itemToAdd, [itemToAdd.when_seen]: null });
       }
     }
   }, [itemToAdd]);
@@ -145,7 +161,7 @@ function Add({ part }) {
                     break;
                   case "rating":
                     field = "Note";
-                    input = "number";
+                    input = "text";
                     break;
                   case "owned":
                     field = "Possédé ?";
@@ -176,10 +192,9 @@ function Add({ part }) {
 
                 if (itemKey === "lent_to" && itemToAdd.is_lent === "1") {
                   return (
-                    <div className={styles.formBlock}>
+                    <div className={styles.formBlock} key={itemKey}>
                       <label htmlFor={itemKey}>{getField(itemKey).field}</label>
                       <input
-                        key={itemKey}
                         name={itemKey}
                         type={getField(itemKey).input}
                         value={itemToAdd.itemKey}
@@ -190,10 +205,9 @@ function Add({ part }) {
                 }
                 if (input === "text") {
                   return (
-                    <div className={styles.formBlock}>
+                    <div className={styles.formBlock} key={itemKey}>
                       <label htmlFor={itemKey}>{getField(itemKey).field}</label>
                       <input
-                        key={itemKey}
                         name={itemKey}
                         type={getField(itemKey).input}
                         value={itemToAdd.itemKey}
@@ -204,12 +218,11 @@ function Add({ part }) {
                 }
                 if (input === "radio") {
                   return (
-                    <div className={styles.formBlock}>
+                    <div className={styles.formBlock} key={itemKey}>
                       <p>{getField(itemKey).field}</p>
                       <div className={styles.radio}>
                         <label htmlFor={itemKey}>Non</label>
                         <input
-                          key={itemKey}
                           name={itemKey}
                           type="radio"
                           value={0}
@@ -218,7 +231,6 @@ function Add({ part }) {
                         />
                         <label htmlFor={itemKey}>Oui</label>
                         <input
-                          key={itemKey}
                           name={itemKey}
                           type="radio"
                           value={1}
@@ -235,10 +247,9 @@ function Add({ part }) {
                 }
 
                 return (
-                  <div className={styles.formBlock}>
+                  <div className={styles.formBlock} key={itemKey}>
                     <label htmlFor={itemKey}>{getField(itemKey).field}</label>
                     <input
-                      key={itemKey}
                       name={itemKey}
                       type={getField(itemKey).input}
                       value={itemToAdd.itemKey}

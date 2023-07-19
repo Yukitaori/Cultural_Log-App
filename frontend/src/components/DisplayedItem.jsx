@@ -60,6 +60,12 @@ function DisplayedItem({ part }) {
         console.error(error);
       });
   }, []);
+  const ratingStars = [];
+  if (itemToDisplay) {
+    for (let i = 1; i <= parseInt(itemToDisplay.rating, 10); i += 1) {
+      ratingStars.push(<p>☆</p>);
+    }
+  }
 
   return (
     itemToDisplay && (
@@ -109,6 +115,11 @@ function DisplayedItem({ part }) {
               </p>
             </div>
           ) : null}
+
+          <div className={styles.infoPart}>
+            {ratingStars.map((star) => star)}
+            <p>{` (${itemToDisplay.rating} / 10)`}</p>
+          </div>
 
           {itemToDisplay.owned === 1 ? (
             <div className={styles.infoPart}>

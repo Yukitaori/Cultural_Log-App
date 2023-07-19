@@ -52,11 +52,12 @@ const edit = (req, res) => {
 
 const add = (req, res) => {
   const movie = req.body;
+  const id = req.payloads?.sub;
 
   // TODO validations (length, format...)
 
   models.movie
-    .insert(movie)
+    .insert(movie, id)
     .then(([result]) => {
       res.location(`/movies/${result.insertId}`).sendStatus(201);
     })
