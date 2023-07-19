@@ -25,6 +25,7 @@ function List({ part }) {
         itemsToDisplay.map((item) => {
           return (
             <button
+              key={`${part}${item.id}`}
               className={styles.listButtons}
               type="button"
               onClick={() => navigate(`/${part}/${item.id}`)}
