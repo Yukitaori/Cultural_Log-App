@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import styles from "./List.module.css";
+import styles from "./DisplayedItem.module.css";
 import instance from "../services/APIService";
+import pen from "../assets/icons/pen.png";
+import bin from "../assets/icons/bin.png";
 
 function DisplayedItem({ part }) {
   const { id } = useParams();
@@ -33,6 +35,14 @@ function DisplayedItem({ part }) {
             itemToDisplay.when_read ||
             itemToDisplay.when_listened}
         </p>
+        <div className={styles.buttons}>
+          <button className={styles.edit} type="button">
+            <img src={pen} alt="crayon" />
+          </button>
+          <button className={styles.delete} type="button">
+            <img src={bin} alt="poubelle" />
+          </button>
+        </div>
       </div>
     )
   );
