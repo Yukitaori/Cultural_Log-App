@@ -12,9 +12,25 @@ function DisplayedItem({ part }) {
   const { id } = useParams();
   const [itemToDisplay, setItemToDisplay] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState(null);
 
   const handleClickDelete = () => {
     setOpenModal(true);
+  };
+
+  const deleteForGood = () => {
+    // instance
+    //   .delete(`/${part}/${id}`)
+    //   .then((response) => {
+    //     if (response.status === 200) {
+    //       setMessage("Suppression effectuée !");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     setMessage("Il y a eu une erreur. Réessaye plus tard.");
+    //   });
+    setMessage("Suppression effectuée !");
   };
 
   const transformDate = (day) => {
@@ -123,11 +139,12 @@ function DisplayedItem({ part }) {
             <BasicModal
               modalText="Souhaites-tu REELLEMENT supprimer cet élément ?"
               closeModal={() => setOpenModal(false)}
-              actionYesButton={() => {
-                console.info("delete");
-                setOpenModal(false);
-              }}
+              actionYesButton={deleteForGood}
               actionNoButton={() => setOpenModal(false)}
+              setOpenModal={setOpenModal}
+              setMessage={setMessage}
+              message={message}
+              part={part}
             />
           </ModalWrapper>
         ) : null}
