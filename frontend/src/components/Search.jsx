@@ -74,14 +74,6 @@ function Search({ part }) {
           handleClick(val);
         }}
       />
-      {/* <input
-        placeholder="Tu cherches quoi ?"
-        className={styles.searchBar}
-        type="search"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      /> */}
-      {/* <div className={styles.list}></div> */}
     </div>
   );
 }
