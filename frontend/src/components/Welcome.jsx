@@ -4,13 +4,16 @@ import Login from "./Login";
 import { useUserContext } from "../contexts/UserContext";
 
 function Welcome() {
-  const { user, logout } = useUserContext();
+  const { user, logout, logoutMessage } = useUserContext();
   return (
     <div className={styles.welcome}>
       {!user?.id ? (
         <>
           <h1>Bienvenue !</h1>
           <Login />
+          {logoutMessage ? (
+            <div className={styles.message}>{logoutMessage}</div>
+          ) : null}
         </>
       ) : (
         <>
@@ -18,7 +21,7 @@ function Welcome() {
           <button
             type="button"
             className={styles.logoutButton}
-            onClick={logout}
+            onClick={() => logout(false)}
           >
             Se déconnecter
           </button>

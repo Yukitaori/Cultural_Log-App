@@ -3,12 +3,13 @@ import React, { useState, useEffect } from "react";
 import Autocomplete from "react-autocomplete";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useUserContext } from "../contexts/UserContext";
 import styles from "./Search.module.css";
 import instance from "../services/APIService";
 
 function Search({ part }) {
   const navigate = useNavigate();
-
+  const { logout } = useUserContext();
   const [search, setSearch] = useState("");
   const [itemsToCheck, setItemsToCheck] = useState([]);
 
@@ -21,9 +22,16 @@ function Search({ part }) {
 
   useEffect(() => {
     if (search.length >= 3) {
-      instance.get(`/${part}WithTitle/${search}`).then((response) => {
-        setItemsToCheck(response.data);
-      });
+      instance
+        .get(`/${part}WithTitle/${search}`)
+        .then((response) => {
+          setItemsToCheck(response.data);
+        })
+        .catch((error) => {
+          if (error.response.status === 401) {
+            logout(true);
+          }
+        });
     } else {
       setItemsToCheck([]);
     }

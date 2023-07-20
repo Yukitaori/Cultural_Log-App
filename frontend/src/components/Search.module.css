@@ -45,20 +45,20 @@
   text-align: center;
 }
 
-.searchBar {
-  box-shadow: 0 5px 5px 0px black;
-  border: 3px solid var(--second-bg-color);
-  background-color: var(--main-bg-color);
-  color: var(--main-color);
-  border-radius: 50px;
-  padding: 1rem;
-  width: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
-  text-align: center;
-  font-weight: bold;
-  text-align: center;
-  font-size: calc(0.2rem + 2vh);
+@media screen and (max-height: 450px) {
+  .search input {
+    font-size: calc(0.2rem + 4vh);
+  }
+  .search div div {
+    font-size: calc(0.2rem + 4vh);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .search input {
+    font-size: calc(0.2rem + 2vh);
+  }
+  .search div div {
+    font-size: calc(0.2rem + 2vh);
+  }
 }

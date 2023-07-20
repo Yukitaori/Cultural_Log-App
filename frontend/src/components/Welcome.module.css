@@ -23,4 +23,30 @@
   color: var(--main-color);
   font-size: calc(0.2rem + 2vh);
   box-shadow: 0 0 15px var(--main-color);
+  transition: 0.5s;
+}
+
+.logoutButton:hover {
+  background-color: var(--main-bg-color);
+  transition: 0.5s;
+}
+
+.message {
+  font-size: calc(0.2rem + 2vh);
+  text-align: center;
+}
+
+@media screen and (max-height: 450px) {
+  .welcome {
+    justify-content: flex-start;
+    overflow: auto;
+    padding: 1rem;
+  }
+  .logoutButton {
+    font-size: calc(0.2rem + 4vh);
+  }
+  
+  .message {
+    font-size: calc(0.2rem + 4vh);
+  }
 }

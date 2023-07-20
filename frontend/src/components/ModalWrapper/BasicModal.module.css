@@ -31,11 +31,12 @@
   font-size: 1.1rem;
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: 0.5s;
 }
 
 .btn_inside_modal:hover {
-  filter: brightness(0.6);
+  border: 2px solid var(--main-color);
+  transition: 0.5s;
 }
 
 .btn_for_no {
@@ -44,4 +45,13 @@
 
 .btn_for_yes {
   margin-left: 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .modal_text {
+    font-size: calc(0.2rem + 4vh);
+  }
+  .basic_modal_container {
+    padding: 1rem 0;
+  }
 }

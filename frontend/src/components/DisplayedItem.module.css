@@ -7,6 +7,7 @@
   justify-content: flex-start;
   align-items: center;
   font-size: calc(0.2rem + 2vh);
+  overflow: auto;
 }
 
 .title {
@@ -23,12 +24,14 @@
 }
 
 .info {
+  padding-top: 2rem;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 1em;
+  gap: 2rem;
+  margin-bottom: 3rem;
 }
 
 .infoPart {
@@ -57,11 +60,13 @@
 }
 
 .delete {
+  cursor: pointer;
   height: 80%;
   grid-column: 5/6;
   background: none;
 }
 .edit {
+  cursor: pointer;
   height: 80%;
   grid-column: 1/2;
   background: none;
@@ -69,4 +74,70 @@
 
 .buttons img {
   height: 100%;
+}
+
+@media screen and (max-height: 450px) {
+  .title {
+    padding: 0.5rem;
+  }
+  
+  .displayedItem {
+    font-size: calc(0.2rem + 4vh);
+    padding: 1rem;
+  }
+
+  .buttons {
+    position: fixed;
+  }
+
+  .edit {
+    justify-self: start;
+    background-color: var(--main-bg-color);
+    padding: 0.5rem;
+    border-radius: 50px;
+  }
+
+  .delete {
+    justify-self: end;
+    background-color: var(--main-bg-color);
+    padding: 0.5rem;
+    border-radius: 50px;
+  }
+
+  .info {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-height: 1000px) {
+  .info {
+    gap: 1rem;
+  }
+
+  .buttons {
+    position: fixed;
+  }
+
+  .edit {
+    justify-self: start;
+    background-color: var(--main-bg-color);
+    padding: 0.5rem;
+    border-radius: 50px;
+    border: 3px solid var(--second-color);
+  }
+
+  .delete {
+    justify-self: end;
+    background-color: var(--main-bg-color);
+    padding: 0.5rem;
+    border-radius: 50px;
+    border: 3px solid var(--second-color);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .info {
+    gap: 4rem;
+    width: 70%;
+  }
 }

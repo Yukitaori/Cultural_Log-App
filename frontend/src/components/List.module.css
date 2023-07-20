@@ -90,3 +90,17 @@ cursor: pointer;
   appearance: none;
   transition: 0.5s;
  }
+
+ @media screen and (max-height: 450px) {
+  .listButtons, .filters {
+    font-size: calc(0.2rem + 4vh);
+  }
+
+  .filters {
+    flex-direction: row;
+  }
+  
+  .filtersButtons {
+    gap: 2rem;
+  }
+}

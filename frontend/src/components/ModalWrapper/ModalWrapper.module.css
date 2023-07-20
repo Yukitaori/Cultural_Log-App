@@ -78,3 +78,18 @@
     padding: 10px;
   }
 }
+
+@media screen and (max-height: 450px) {
+  .background_box {
+    height: fit-content;
+    width: fit-content;
+    min-height: 200px;
+    min-width: 200px;
+    max-width: 600px;
+    max-height: 70vh;
+    padding: 10px;
+    overflow: auto;
+    justify-content: flex-start;
+    font-size: calc(0.2rem + 4vh);
+  }
+}

@@ -9,7 +9,6 @@ function PartHeader({ partName }) {
   return (
     <div className={styles.partHeader}>
       <button
-        // TODO revoir la navigation
         onClick={() => navigate(-1)}
         className={styles.back}
         type="button"

@@ -17,4 +17,17 @@
   color: var(--main-color);
   font-size: calc(0.2rem + 2vh);
   font-weight: bold;
+  transition: 0.3s;
+}
+
+.menuButton:hover {
+  border: 2px solid var(--main-color);
+  transition: 0.3s;
+}
+
+@media screen and (max-height: 450px) {
+  .menuButton {
+    height: 20%;
+    font-size: calc(0.2rem + 4vh);
+  }
 }

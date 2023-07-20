@@ -26,30 +26,46 @@ router.delete("/items/:id", itemControllers.destroy);
 router.post("/login", getUserByPseudo, verifyPassword);
 router.get("/logout", logout);
 
-router.get("/books", bookControllers.browse);
-router.get("/booksWithTitle/:string", bookControllers.searchWithTitle);
-router.get("/books/:id", bookControllers.read);
+router.get("/books", verifyToken, bookControllers.browse);
+router.get(
+  "/booksWithTitle/:string",
+  verifyToken,
+  bookControllers.searchWithTitle
+);
+router.get("/books/:id", verifyToken, bookControllers.read);
 router.put("/books/:id", verifyToken, bookControllers.edit);
 router.delete("/books/:id", verifyToken, bookControllers.destroy);
 router.post("/books", verifyToken, bookControllers.add);
 
-router.get("/comics", comicControllers.browse);
-router.get("/comicsWithTitle/:string", comicControllers.searchWithTitle);
-router.get("/comics/:id", comicControllers.read);
+router.get("/comics", verifyToken, comicControllers.browse);
+router.get(
+  "/comicsWithTitle/:string",
+  verifyToken,
+  comicControllers.searchWithTitle
+);
+router.get("/comics/:id", verifyToken, comicControllers.read);
 router.put("/comics/:id", verifyToken, comicControllers.edit);
 router.delete("/comics/:id", verifyToken, comicControllers.destroy);
 router.post("/comics", verifyToken, comicControllers.add);
 
-router.get("/discs", discControllers.browse);
-router.get("/discsWithTitle/:string", discControllers.searchWithTitle);
-router.get("/discs/:id", discControllers.read);
+router.get("/discs", verifyToken, discControllers.browse);
+router.get(
+  "/discsWithTitle/:string",
+  verifyToken,
+  discControllers.searchWithTitle
+);
+router.get("/discs/:id", verifyToken, discControllers.read);
 router.put("/discs/:id", verifyToken, discControllers.edit);
 router.delete("/discs/:id", verifyToken, discControllers.destroy);
 router.post("/discs", verifyToken, discControllers.add);
 
-router.get("/movies", movieControllers.browse);
-router.get("/moviesWithTitle/:string", movieControllers.searchWithTitle);
-router.get("/movies/:id", movieControllers.read);
+router.get("/movies", verifyToken, movieControllers.browse);
+router.get(
+  "/moviesWithTitle/:string",
+  verifyToken,
+  movieControllers.searchWithTitle
+);
+router.get("/movies/:id", verifyToken, movieControllers.read);
 router.put("/movies/:id", verifyToken, movieControllers.edit);
 router.delete("/movies/:id", verifyToken, movieControllers.destroy);
 router.post("/movies", verifyToken, movieControllers.add);

@@ -46,6 +46,12 @@
   font-weight: bold;
   text-align: center;
   font-size: calc(0.2rem + 2vh);
+  transition: 0.5s;
+}
+
+.formBlock input:focus {
+  border: solid 3px var(--main-bg-color);
+  transition: 0.5s;
 }
 
 .radio {
@@ -55,7 +61,26 @@
 }
 
 .radio input {
-  width: 1.5em;
+  cursor: pointer;
+   width: 1.5rem;
+   height: 1.5rem;
+   border-radius: 25px;
+   background-color: var(--main-bg-color);
+   border: solid 1px var(--second-color);
+   appearance: none;
+   transition: 0.5s;
+  }
+  
+.radio input:checked {
+  background-color: var(--second-color);
+  border: solid 1px var(--main-bg-color);
+  transition: 0.5s;
+}
+
+.radio input:hover {
+  background-color: var(--second-color);
+  border: solid 1px var(--main-bg-color);
+  transition: 0.5s;
 }
 
 .infoMessage {
@@ -75,5 +100,21 @@
   color: var(--main-color);
   font-size: calc(0.2rem + 2vh);
   box-shadow: 0 0 15px var(--main-color);
-  margin-bottom: 1rem;;
+  margin: 1rem 0;
+  transition: 0.5s;
+}
+
+.addButton:hover {
+  background-color: var(--main-bg-color);
+  transition: 0.5s;
+}
+
+@media screen and (max-height: 450px) {
+  .formBlock p, .formBlock label, .formBlock input {
+    font-size: calc(0.2rem + 4vh);
+  }
+
+  .addButton {
+    font-size: calc(0.2rem + 4vh);
+  }
 }

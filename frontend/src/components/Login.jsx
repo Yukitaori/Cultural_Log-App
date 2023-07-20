@@ -5,7 +5,7 @@ import { useUserContext } from "../contexts/UserContext";
 import instance from "../services/APIService";
 
 function Login() {
-  const {login} = useUserContext();
+  const {login, setLogoutMessage } = useUserContext();
   const [loginInfo, setLoginInfo] = useState({
     pseudo: "",
     password: "",
@@ -25,6 +25,7 @@ function Login() {
           pseudo: "",
           password: "",
         })
+        setLogoutMessage(null);
         setInfoMessage(null);
       }
     }).catch((error) => {
