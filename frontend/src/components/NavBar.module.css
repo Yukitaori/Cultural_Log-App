@@ -31,9 +31,12 @@
   position: fixed;
   z-index: 5;
   top: 12vh;
-  left: calc(50vw - 2rem);
+  left: calc(auto);
   padding: 0.2em;
-  width: 4rem;
+  height: 10vh;
+  width: 10vh;
+  max-height: 4rem;
+  max-width: 4rem;
   border-radius: 50px;
   background-color: var(--main-bg-color);
   border: 3px solid var(--second-color);

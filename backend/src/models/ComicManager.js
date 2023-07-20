@@ -5,6 +5,13 @@ class ComicManager extends AbstractManager {
     super({ table: "comic" });
   }
 
+  findComicWithTitle(title) {
+    return this.database.query(
+      `select id, title from  ${this.table} where title like ?`,
+      [`%${title}%`]
+    );
+  }
+
   insert(comic, userId) {
     return this.database.query(
       `insert into ${this.table} (title, artist, writer, when_read, is_read, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,

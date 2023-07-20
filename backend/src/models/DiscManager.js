@@ -5,6 +5,13 @@ class DiscManager extends AbstractManager {
     super({ table: "disc" });
   }
 
+  findDiscWithTitle(title) {
+    return this.database.query(
+      `select id, title from  ${this.table} where title like ?`,
+      [`%${title}%`]
+    );
+  }
+
   insert(disc, userId) {
     return this.database.query(
       `insert into ${this.table} (title, artist, when_listened, is_listened, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
