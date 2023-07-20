@@ -5,10 +5,17 @@ class BookManager extends AbstractManager {
     super({ table: "book" });
   }
 
-  findBookWithTitle(title) {
+  findBookWithPartTitle(title) {
     return this.database.query(
       `select id, title from  ${this.table} where title like ? order by title ASC`,
       [`%${title}%`]
+    );
+  }
+
+  findBookWithTitle(title) {
+    return this.database.query(
+      `select id, title from  ${this.table} where title = ?`,
+      [title]
     );
   }
 

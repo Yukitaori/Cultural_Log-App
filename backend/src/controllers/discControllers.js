@@ -46,7 +46,6 @@ const edit = (req, res) => {
 
   const disc = req.body;
   const id = req.payloads?.sub;
-  // TODO validations (length, format...)
 
   disc.id = parseInt(req.params.id, 10);
   disc.when_listened = transformDate(disc.when_listened);
@@ -65,21 +64,27 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const add = async (req, res) => {
   const disc = req.body;
   const id = req.payloads?.sub;
-
-  // TODO validations (length, format...)
-
-  models.disc
-    .insert(disc, id)
-    .then(([result]) => {
-      res.location(`/discs/${result.insertId}`).sendStatus(201);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  try {
+    const [existingTitle] = await models.disc.findDiscWithTitle(disc.title);
+    if (!existingTitle[0]) {
+      models.disc
+        .insert(disc, id)
+        .then(([result]) => {
+          res.location(`/discs/${result.insertId}`).sendStatus(201);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.sendStatus(500);
+        });
+    } else {
+      res.send("Ce titre existe déjà !");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const destroy = (req, res) => {
@@ -98,9 +103,9 @@ const destroy = (req, res) => {
     });
 };
 
-const searchWithTitle = (req, res) => {
+const searchWithPartTitle = (req, res) => {
   models.disc
-    .findDiscWithTitle(req.params.string)
+    .findDiscWithPartTitle(req.params.string)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -120,5 +125,5 @@ module.exports = {
   edit,
   add,
   destroy,
-  searchWithTitle,
+  searchWithPartTitle,
 };

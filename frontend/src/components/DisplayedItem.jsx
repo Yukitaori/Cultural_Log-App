@@ -123,10 +123,12 @@ function DisplayedItem({ part }) {
             </div>
           ) : null}
 
-          <div className={styles.infoPart}>
-            {ratingStars.map((star) => star)}
-            <p>{` (${itemToDisplay.rating} / 10)`}</p>
-          </div>
+          {itemToDisplay.rating ? (
+            <div className={styles.infoPart}>
+              {ratingStars.map((star) => star)}
+              <p>{` (${itemToDisplay.rating} / 10)`}</p>
+            </div>
+          ) : null}
 
           {itemToDisplay.owned === 1 ? (
             <div className={styles.infoPart}>

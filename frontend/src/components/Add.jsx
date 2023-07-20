@@ -48,7 +48,7 @@ function Add({ part, edition }) {
           director: "",
           is_seen: "0",
           when_seen: null,
-          rating: "",
+          rating: null,
           owned: "0",
           is_lent: "0",
           lent_to: null,
@@ -60,7 +60,7 @@ function Add({ part, edition }) {
           author: "",
           is_read: "0",
           when_read: null,
-          rating: "",
+          rating: null,
           owned: "0",
           is_lent: "0",
           lent_to: null,
@@ -72,7 +72,7 @@ function Add({ part, edition }) {
           artist: "",
           is_listened: "0",
           when_listened: null,
-          rating: "",
+          rating: null,
           owned: "0",
           is_lent: "0",
           lent_to: null,
@@ -85,7 +85,7 @@ function Add({ part, edition }) {
           writer: "",
           is_read: "0",
           when_read: null,
-          rating: "",
+          rating: null,
           owned: "0",
           is_lent: "0",
           lent_to: null,
@@ -107,13 +107,13 @@ function Add({ part, edition }) {
     // TODO améliorer le schéma de validation
     if (edition) {
       // TODO gérer la suppression des valeurs des champs when_*** et lent_to si la propriété is_*** ou is_lent est à faux
+      // et le champ rating si les champs is_*** sont à faux
       instance
         .put(`/${part}/${id}`, itemToEdit)
         .then((response) => {
           if (response.status === 204) {
             setItemToEdit(null);
             setInfoMessage("La modification s'est hyper bien passée !");
-            setTimeout(() => navigate(-1), 2000);
           }
         })
         .catch((err) => {
@@ -136,6 +136,8 @@ function Add({ part, edition }) {
               setItemToAdd(null);
               setInfoMessage("L'ajout s'est hyper bien passé !");
               setTimeout(() => navigate(-1), 2000);
+            } else {
+              setInfoMessage(response.data);
             }
           })
           .catch((err) => {
@@ -258,19 +260,7 @@ function Add({ part, edition }) {
                     </div>
                   );
                 }
-                if (input === "text") {
-                  return (
-                    <div className={styles.formBlock} key={itemKey}>
-                      <label htmlFor={itemKey}>{getField(itemKey).field}</label>
-                      <input
-                        name={itemKey}
-                        type={getField(itemKey).input}
-                        value={itemToEdit[itemKey]}
-                        onChange={(e) => handleChange(e)}
-                      />
-                    </div>
-                  );
-                }
+
                 if (input === "radio") {
                   return (
                     <div className={styles.formBlock} key={itemKey}>
@@ -298,22 +288,37 @@ function Add({ part, edition }) {
                 }
 
                 if (
-                  itemKey === "when_read" &&
+                  (itemKey === "when_read" || itemKey === "rating") &&
                   (itemToEdit.is_read === 0 || itemToEdit.is_read === "0")
                 ) {
                   return null;
                 }
                 if (
-                  itemKey === "when_listened" &&
-                  (itemToEdit.is_read === 0 || itemToEdit.is_read === "0")
+                  (itemKey === "when_listened" || itemKey === "rating") &&
+                  (itemToEdit.is_listened === 0 ||
+                    itemToEdit.is_listened === "0")
                 ) {
                   return null;
                 }
                 if (
-                  itemKey === "when_seen" &&
+                  (itemKey === "when_seen" || itemKey === "rating") &&
                   (itemToEdit.is_seen === 0 || itemToEdit.is_seen === "0")
                 ) {
                   return null;
+                }
+
+                if (input === "text") {
+                  return (
+                    <div className={styles.formBlock} key={itemKey}>
+                      <label htmlFor={itemKey}>{getField(itemKey).field}</label>
+                      <input
+                        name={itemKey}
+                        type={getField(itemKey).input}
+                        value={itemToEdit[itemKey]}
+                        onChange={(e) => handleChange(e)}
+                      />
+                    </div>
+                  );
                 }
 
                 if (
@@ -452,19 +457,6 @@ function Add({ part, edition }) {
                     </div>
                   );
                 }
-                if (input === "text") {
-                  return (
-                    <div className={styles.formBlock} key={itemKey}>
-                      <label htmlFor={itemKey}>{getField(itemKey).field}</label>
-                      <input
-                        name={itemKey}
-                        type={getField(itemKey).input}
-                        value={itemToAdd.itemKey}
-                        onChange={(e) => handleChange(e)}
-                      />
-                    </div>
-                  );
-                }
                 if (input === "radio") {
                   return (
                     <div className={styles.formBlock} key={itemKey}>
@@ -491,22 +483,36 @@ function Add({ part, edition }) {
                 }
 
                 if (
-                  itemKey === "when_read" &&
+                  (itemKey === "when_read" || itemKey === "rating") &&
                   (itemToAdd.is_read === 0 || itemToAdd.is_read === "0")
                 ) {
                   return null;
                 }
                 if (
-                  itemKey === "when_listened" &&
-                  (itemToAdd.is_read === 0 || itemToAdd.is_read === "0")
+                  (itemKey === "when_listened" || itemKey === "rating") &&
+                  (itemToAdd.is_listened === 0 || itemToAdd.is_listened === "0")
                 ) {
                   return null;
                 }
                 if (
-                  itemKey === "when_seen" &&
+                  (itemKey === "when_seen" || itemKey === "rating") &&
                   (itemToAdd.is_seen === 0 || itemToAdd.is_seen === "0")
                 ) {
                   return null;
+                }
+
+                if (input === "text") {
+                  return (
+                    <div className={styles.formBlock} key={itemKey}>
+                      <label htmlFor={itemKey}>{getField(itemKey).field}</label>
+                      <input
+                        name={itemKey}
+                        type={getField(itemKey).input}
+                        value={itemToAdd.itemKey}
+                        onChange={(e) => handleChange(e)}
+                      />
+                    </div>
+                  );
                 }
 
                 if (

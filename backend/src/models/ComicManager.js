@@ -5,10 +5,17 @@ class ComicManager extends AbstractManager {
     super({ table: "comic" });
   }
 
-  findComicWithTitle(title) {
+  findComicWithPartTitle(title) {
     return this.database.query(
       `select id, title from  ${this.table} where title like ? order by title ASC`,
       [`%${title}%`]
+    );
+  }
+
+  findComicWithTitle(title) {
+    return this.database.query(
+      `select id, title from  ${this.table} where title = ?`,
+      [title]
     );
   }
 

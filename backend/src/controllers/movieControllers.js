@@ -45,7 +45,6 @@ const edit = (req, res) => {
   };
   const movie = req.body;
   const id = req.payloads?.sub;
-  // TODO validations (length, format...)
 
   movie.id = parseInt(req.params.id, 10);
   movie.when_seen = transformDate(movie.when_seen);
@@ -65,21 +64,27 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const add = async (req, res) => {
   const movie = req.body;
   const id = req.payloads?.sub;
-
-  // TODO validations (length, format...)
-
-  models.movie
-    .insert(movie, id)
-    .then(([result]) => {
-      res.location(`/movies/${result.insertId}`).sendStatus(201);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  try {
+    const [existingTitle] = await models.movie.findMovieWithTitle(movie.title);
+    if (!existingTitle[0]) {
+      models.movie
+        .insert(movie, id)
+        .then(([result]) => {
+          res.location(`/movies/${result.insertId}`).sendStatus(201);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.sendStatus(500);
+        });
+    } else {
+      res.send("Ce titre existe déjà !");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const destroy = (req, res) => {
@@ -98,9 +103,9 @@ const destroy = (req, res) => {
     });
 };
 
-const searchWithTitle = (req, res) => {
+const searchWithPartTitle = (req, res) => {
   models.movie
-    .findMovieWithTitle(req.params.string)
+    .findMovieWithPartTitle(req.params.string)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -120,5 +125,5 @@ module.exports = {
   edit,
   add,
   destroy,
-  searchWithTitle,
+  searchWithPartTitle,
 };

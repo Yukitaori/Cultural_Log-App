@@ -46,7 +46,6 @@ const edit = (req, res) => {
 
   const comic = req.body;
   const id = req.payloads?.sub;
-  // TODO validations (length, format...)
 
   comic.id = parseInt(req.params.id, 10);
   comic.when_read = transformDate(comic.when_read);
@@ -66,21 +65,27 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const add = async (req, res) => {
   const comic = req.body;
   const id = req.payloads?.sub;
-
-  // TODO validations (length, format...)
-
-  models.comic
-    .insert(comic, id)
-    .then(([result]) => {
-      res.location(`/comics/${result.insertId}`).sendStatus(201);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  try {
+    const [existingTitle] = await models.comic.findComicWithTitle(comic.title);
+    if (!existingTitle[0]) {
+      models.comic
+        .insert(comic, id)
+        .then(([result]) => {
+          res.location(`/comics/${result.insertId}`).sendStatus(201);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.sendStatus(500);
+        });
+    } else {
+      res.send("Ce titre existe déjà !");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const destroy = (req, res) => {
@@ -99,9 +104,9 @@ const destroy = (req, res) => {
     });
 };
 
-const searchWithTitle = (req, res) => {
+const searchWithPartTitle = (req, res) => {
   models.comic
-    .findComicWithTitle(req.params.string)
+    .findComicWithPartTitle(req.params.string)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -121,5 +126,5 @@ module.exports = {
   edit,
   add,
   destroy,
-  searchWithTitle,
+  searchWithPartTitle,
 };
