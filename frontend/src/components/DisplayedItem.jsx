@@ -22,7 +22,6 @@ function DisplayedItem({ part }) {
   };
 
   const handleClickEdit = () => {
-    // TODO ajouter la navigation vers le composant Add
     navigate(`/${part}/edit/${id}`);
   };
 
