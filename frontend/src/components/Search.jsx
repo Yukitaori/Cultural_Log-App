@@ -21,14 +21,9 @@ function Search({ part }) {
 
   useEffect(() => {
     if (search.length >= 3) {
-      instance
-        .get(`/${part}WithTitle/${search}`)
-        .then((response) => {
-          setItemsToCheck(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      instance.get(`/${part}WithTitle/${search}`).then((response) => {
+        setItemsToCheck(response.data);
+      });
     } else {
       setItemsToCheck([]);
     }
@@ -36,6 +31,7 @@ function Search({ part }) {
 
   return (
     <div className={styles.search}>
+      <h1>Tu cherches un titre ?</h1>
       <Autocomplete
         getItemValue={(item) => item.title}
         items={itemsToCheck}

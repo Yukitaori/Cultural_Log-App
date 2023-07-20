@@ -7,7 +7,7 @@ class ComicManager extends AbstractManager {
 
   findComicWithTitle(title) {
     return this.database.query(
-      `select id, title from  ${this.table} where title like ?`,
+      `select id, title from  ${this.table} where title like ? order by title ASC`,
       [`%${title}%`]
     );
   }
