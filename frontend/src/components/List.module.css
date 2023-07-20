@@ -22,6 +22,7 @@
   grid-column: 3/4;
   background: none;
   cursor: pointer;
+  justify-self: center;
 }
 
 .filter img {
@@ -46,12 +47,16 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-
+  border: solid 3px var(--second-color);
+  background-color: var(--second-bg-color);
+  border-radius: 25px;
+  padding: 0.5em;
+  font-weight: 600;
 }
 
 .filtersButtons {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   gap: 0.5rem;
   width: 100%;
@@ -63,5 +68,25 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-
 }
+
+.filtersButton input {
+cursor: pointer;
+ width: 1.5rem;
+ height: 1.5rem;
+ border-radius: 25px;
+ background-color: var(--main-bg-color);
+ border: solid 1px var(--second-color);
+ appearance: none;
+}
+
+.filtersButton input:checked {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 25px;
+  background-color: var(--second-color);
+  border: solid 1px var(--main-bg-color);
+  appearance: none;
+  transition: 0.5s;
+ }

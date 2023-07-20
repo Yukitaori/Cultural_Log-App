@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import styles from "./List.module.css";
 import instance from "../services/APIService";
-import filter from "../assets/icons/filter.png";
+import filterButton from "../assets/icons/filter.png";
 import ModalWrapper from "./ModalWrapper/ModalWrapper";
 import BasicModal from "./ModalWrapper/BasicModal";
 
@@ -14,14 +14,9 @@ function List({ part }) {
   const [filters, setFilters] = useState({});
 
   useEffect(() => {
-    instance
-      .get(`/${part}`)
-      .then((response) => {
-        setItemsToDisplay(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    instance.get(`/${part}`).then((response) => {
+      setItemsToDisplay(response.data);
+    });
   }, []);
 
   const handleClickFilter = () => {
@@ -32,9 +27,9 @@ function List({ part }) {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    console.info(filters);
-  }, [filters]);
+  // useEffect(() => {
+  //   console.info(filters);
+  // }, [filters]);
 
   const filterMenu = () => {
     return (
@@ -204,22 +199,37 @@ function List({ part }) {
           type="button"
           onClick={handleClickFilter}
         >
-          <img src={filter} alt="filtre" />
+          <img src={filterButton} alt="filtre" />
         </button>
       </div>
       {itemsToDisplay &&
-        itemsToDisplay.map((item) => {
-          return (
-            <button
-              key={`${part}${item.id}`}
-              className={styles.listButtons}
-              type="button"
-              onClick={() => navigate(`/${part}/${item.id}`)}
-            >
-              <p>{item.title}</p>
-            </button>
-          );
-        })}
+        itemsToDisplay
+          .filter((item) => {
+            return (
+              Object.keys(filters).length === 0 ||
+              ((!filters.owned || parseInt(filters.owned, 10) === item.owned) &&
+                (!filters.is_lent ||
+                  parseInt(filters.is_lent, 10) === item.is_lent) &&
+                (!filters.is_seen ||
+                  parseInt(filters.is_seen, 10) === item.is_seen) &&
+                (!filters.is_read ||
+                  parseInt(filters.is_read, 10) === item.is_read) &&
+                (!filters.is_listened ||
+                  parseInt(filters.is_listened, 10) === item.owned))
+            );
+          })
+          .map((item) => {
+            return (
+              <button
+                key={`${part}${item.id}`}
+                className={styles.listButtons}
+                type="button"
+                onClick={() => navigate(`/${part}/${item.id}`)}
+              >
+                <p>{item.title}</p>
+              </button>
+            );
+          })}
     </div>
   );
 }
