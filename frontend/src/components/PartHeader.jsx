@@ -10,7 +10,7 @@ function PartHeader({ partName }) {
     <div className={styles.partHeader}>
       <button
         // TODO revoir la navigation
-        onClick={() => navigate("/")}
+        onClick={() => navigate(-1)}
         className={styles.back}
         type="button"
       >

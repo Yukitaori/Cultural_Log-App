@@ -26,3 +26,16 @@
   max-width: 100px;
   max-height: 100px;
 }
+
+.home {
+  position: fixed;
+  z-index: 5;
+  top: 12vh;
+  left: calc(50vw - 2rem);
+  padding: 0.2em;
+  width: 4rem;
+  border-radius: 50px;
+  background-color: var(--main-bg-color);
+  border: 3px solid var(--second-color);
+  box-shadow: 7px 7px 10px black;
+}
