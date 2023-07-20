@@ -7,6 +7,12 @@
   align-items: center;
 }
 
+.search h1 {
+  margin-bottom: 1rem;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
 .search > div {
   width: 80%;
   display: flex;
@@ -36,6 +42,7 @@
   border-radius: 25px 25px 0 0;
   background-color: var(--main-bg-color);
   color: var(--main-color);
+  text-align: center;
 }
 
 .searchBar {

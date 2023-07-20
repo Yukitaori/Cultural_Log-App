@@ -11,6 +11,8 @@ export default function BasicModal({
   message,
   setMessage,
   part,
+  filter,
+  filterMenu,
 }) {
   const navigate = useNavigate();
   const handleModalClose = () => {
@@ -35,6 +37,7 @@ export default function BasicModal({
       ) : (
         <p className={styles.modal_text}>{modalText}</p>
       )}
+      {filter ? filterMenu() : null}
       {message ? (
         <div className={styles.btn_modal_box}>
           <button
@@ -50,16 +53,16 @@ export default function BasicModal({
           <button
             type="button"
             className={`${styles.btn_inside_modal} ${styles.btn_for_no}`}
-            onClick={handleModalClose}
+            onClick={filter ? actionNoButton : handleModalClose}
           >
             Nope
           </button>
           <button
             type="button"
             className={`${styles.btn_inside_modal} ${styles.btn_for_yes}`}
-            onClick={handleAction}
+            onClick={filter ? actionYesButton : handleAction}
           >
-            Banco !
+            Banco
           </button>
         </div>
       )}
@@ -76,4 +79,6 @@ BasicModal.propTypes = {
   setMessage: PropTypes.func.isRequired,
   setOpenModal: PropTypes.func.isRequired,
   part: PropTypes.string.isRequired,
+  filter: PropTypes.bool.isRequired,
+  filterMenu: PropTypes.func.isRequired,
 };
