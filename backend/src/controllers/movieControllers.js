@@ -103,9 +103,9 @@ const destroy = (req, res) => {
     });
 };
 
-const searchWithTitle = (req, res) => {
+const searchWithPartTitle = (req, res) => {
   models.movie
-    .findMovieWithTitle(req.params.string)
+    .findMovieWithPartTitle(req.params.string)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -125,5 +125,5 @@ module.exports = {
   edit,
   add,
   destroy,
-  searchWithTitle,
+  searchWithPartTitle,
 };

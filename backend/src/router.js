@@ -32,7 +32,7 @@ router.get("/books", verifyToken, bookControllers.browse);
 router.get(
   "/booksWithTitle/:string",
   verifyToken,
-  bookControllers.searchWithTitle
+  bookControllers.searchWithPartTitle
 );
 router.get("/books/:id", verifyToken, bookControllers.read);
 router.put("/books/:id", verifyToken, bookControllers.edit);
@@ -45,7 +45,7 @@ router.get("/comics", verifyToken, comicControllers.browse);
 router.get(
   "/comicsWithTitle/:string",
   verifyToken,
-  comicControllers.searchWithTitle
+  comicControllers.searchWithPartTitle
 );
 router.get("/comics/:id", verifyToken, comicControllers.read);
 router.put("/comics/:id", verifyToken, comicControllers.edit);
@@ -58,7 +58,7 @@ router.get("/discs", verifyToken, discControllers.browse);
 router.get(
   "/discsWithTitle/:string",
   verifyToken,
-  discControllers.searchWithTitle
+  discControllers.searchWithPartTitle
 );
 router.get("/discs/:id", verifyToken, discControllers.read);
 router.put("/discs/:id", verifyToken, discControllers.edit);
@@ -71,7 +71,7 @@ router.get("/movies", verifyToken, movieControllers.browse);
 router.get(
   "/moviesWithTitle/:string",
   verifyToken,
-  movieControllers.searchWithTitle
+  movieControllers.searchWithPartTitle
 );
 router.get("/movies/:id", verifyToken, movieControllers.read);
 router.put("/movies/:id", verifyToken, movieControllers.edit);

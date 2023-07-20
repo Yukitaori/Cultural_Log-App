@@ -5,10 +5,17 @@ class MovieManager extends AbstractManager {
     super({ table: "movie" });
   }
 
-  findMovieWithTitle(title) {
+  findMovieWithPartTitle(title) {
     return this.database.query(
       `select id, title from  ${this.table} where title like ? order by title ASC`,
       [`%${title}%`]
+    );
+  }
+
+  findMovieWithTitle(title) {
+    return this.database.query(
+      `select id, title from  ${this.table} where title = ?`,
+      [title]
     );
   }
 

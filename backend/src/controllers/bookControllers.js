@@ -104,9 +104,9 @@ const destroy = (req, res) => {
     });
 };
 
-const searchWithTitle = (req, res) => {
+const searchWithPartTitle = (req, res) => {
   models.book
-    .findBookWithTitle(req.params.string)
+    .findBookWithPartTitle(req.params.string)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -126,5 +126,5 @@ module.exports = {
   edit,
   add,
   destroy,
-  searchWithTitle,
+  searchWithPartTitle,
 };

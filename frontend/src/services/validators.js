@@ -29,7 +29,7 @@ const schema = Joi.object().keys({
     "string.max":
       "Le nom de l'artiste/du dessinateur doit avoir une longueur maximale de 80 caractères.",
   }),
-  rating: Joi.number().integer().min(0).max(10).messages({
+  rating: Joi.number().integer().optional().allow("", null).messages({
     "number.base":
       "La note doit être constitué uniquement de caractères numériques.",
     "number.min":
