@@ -46,3 +46,12 @@
 .btn_for_yes {
   margin-left: 10px;
 }
+
+@media screen and (max-height: 450px) {
+  .modal_text {
+    font-size: calc(0.2rem + 4vh);
+  }
+  .basic_modal_container {
+    padding: 1rem 0;
+  }
+}

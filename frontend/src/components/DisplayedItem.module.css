@@ -72,3 +72,13 @@
 .buttons img {
   height: 100%;
 }
+
+@media screen and (max-height: 450px) {
+  .title {
+    padding: 1rem;
+  }
+  .displayedItem {
+    font-size: calc(0.2rem + 4vh);
+    padding: 1rem;
+  }
+}

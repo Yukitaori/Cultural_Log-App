@@ -108,3 +108,13 @@
   background-color: var(--main-bg-color);
   transition: 0.5s;
 }
+
+@media screen and (max-height: 450px) {
+  .formBlock p, .formBlock label, .formBlock input {
+    font-size: calc(0.2rem + 4vh);
+  }
+
+  .addButton {
+    font-size: calc(0.2rem + 4vh);
+  }
+}
