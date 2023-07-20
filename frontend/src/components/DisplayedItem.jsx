@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useParams, useNavigate } from "react-router-dom";
+import { useUserContext } from "../contexts/UserContext";
 import ModalWrapper from "./ModalWrapper/ModalWrapper";
 import BasicModal from "./ModalWrapper/BasicModal";
 import styles from "./DisplayedItem.module.css";
@@ -9,6 +10,7 @@ import pen from "../assets/icons/pen.png";
 import bin from "../assets/icons/bin.png";
 
 function DisplayedItem({ part }) {
+  const { logout } = useUserContext();
   const navigate = useNavigate();
   const { id } = useParams();
   const [itemToDisplay, setItemToDisplay] = useState(null);
@@ -33,8 +35,11 @@ function DisplayedItem({ part }) {
         }
       })
       .catch((error) => {
-        console.error(error);
-        setMessage("Il y a eu une erreur. Réessaye plus tard.");
+        if (error.response.status === 401) {
+          logout(true);
+        } else {
+          setMessage("Il y a eu une erreur. Réessaye plus tard.");
+        }
       });
     setMessage("Suppression effectuée !");
   };
@@ -58,7 +63,9 @@ function DisplayedItem({ part }) {
         setItemToDisplay(response.data);
       })
       .catch((error) => {
-        console.error(error);
+        if (error.response.status === 401) {
+          logout(true);
+        }
       });
   }, []);
   const ratingStars = [];

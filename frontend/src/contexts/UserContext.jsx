@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { createContext, useMemo, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../hooks/useLocalStorage";
 import instance from "../services/APIService";
 
@@ -8,6 +9,7 @@ const UserContext = createContext();
 export default UserContext;
 
 export function UserContextProvider({ children }) {
+  const navigate = useNavigate();
   const [user, setUser] = useLocalStorage("user", null);
   const [logoutMessage, setLogoutMessage] = useState(null);
   const login = (_user) => {
@@ -23,6 +25,7 @@ export function UserContextProvider({ children }) {
     }
     instance.get("/logout");
     setUser(null);
+    navigate("/");
   };
 
   const value = useMemo(

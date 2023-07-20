@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../contexts/UserContext";
 import styles from "./List.module.css";
 import instance from "../services/APIService";
 import filterButton from "../assets/icons/filter.png";
@@ -8,15 +9,23 @@ import ModalWrapper from "./ModalWrapper/ModalWrapper";
 import BasicModal from "./ModalWrapper/BasicModal";
 
 function List({ part }) {
+  const { logout } = useUserContext();
   const navigate = useNavigate();
   const [itemsToDisplay, setItemsToDisplay] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [filters, setFilters] = useState({});
 
   useEffect(() => {
-    instance.get(`/${part}`).then((response) => {
-      setItemsToDisplay(response.data);
-    });
+    instance
+      .get(`/${part}`)
+      .then((response) => {
+        setItemsToDisplay(response.data);
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          logout(true);
+        }
+      });
   }, []);
 
   const handleClickFilter = () => {

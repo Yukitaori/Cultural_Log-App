@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useParams, useNavigate } from "react-router-dom";
+import { useUserContext } from "../contexts/UserContext";
 import styles from "./Add.module.css";
 import schema from "../services/validators";
 import instance from "../services/APIService";
@@ -10,6 +11,7 @@ function Add({ part, edition }) {
   const [itemToEdit, setItemToEdit] = useState(null);
   const [infoMessage, setInfoMessage] = useState(null);
   const { id } = useParams();
+  const { logout } = useUserContext();
   const navigate = useNavigate();
 
   const transformDate = (day) => {
@@ -35,7 +37,9 @@ function Add({ part, edition }) {
           setItemToEdit(response.data);
         })
         .catch((error) => {
-          console.error(error);
+          if (error.response.status === 401) {
+            logout(true);
+          }
         });
     } else {
       if (part === "movies") {
@@ -113,9 +117,11 @@ function Add({ part, edition }) {
           }
         })
         .catch((err) => {
-          setInfoMessage("Il y a eu un problème. Réessaye plus tard");
-
-          console.error(err);
+          if (err.response.status === 401) {
+            logout(true);
+          } else {
+            setInfoMessage("Il y a eu un problème. Réessaye plus tard");
+          }
         });
     } else {
       const { error } = schema.validate(itemToAdd);
@@ -133,8 +139,11 @@ function Add({ part, edition }) {
             }
           })
           .catch((err) => {
-            setInfoMessage("Il y a eu un problème. Réessaye plus tard");
-            console.error(err);
+            if (err.response.status === 401) {
+              logout(true);
+            } else {
+              setInfoMessage("Il y a eu un problème. Réessaye plus tard");
+            }
           });
       }
     }
