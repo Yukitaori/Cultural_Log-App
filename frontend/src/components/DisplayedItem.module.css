@@ -77,8 +77,27 @@
   .title {
     padding: 1rem;
   }
+  
   .displayedItem {
     font-size: calc(0.2rem + 4vh);
     padding: 1rem;
+  }
+
+  .buttons {
+    position: fixed;
+  }
+
+  .edit {
+    justify-self: start;
+    background-color: var(--main-bg-color);
+    padding: 0.5rem;
+    border-radius: 50px;
+  }
+
+  .delete {
+    justify-self: end;
+    background-color: var(--main-bg-color);
+    padding: 0.5rem;
+    border-radius: 50px;
   }
 }
