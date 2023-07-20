@@ -23,7 +23,7 @@ function App() {
             <Route index element={<Welcome />} />
             <Route path="books" element={<Books />}>
               <Route index element={<Menu part="books" />} />
-              <Route path="search" element={<Search />} />
+              <Route path="search" element={<Search part="books" />} />
               <Route path="add" element={<Add part="books" />} />
               <Route path="list" element={<List part="books" />} />
               <Route path="edit/:id" element={<Add part="books" edition />} />
@@ -31,7 +31,7 @@ function App() {
             </Route>
             <Route path="comics" element={<Comics />}>
               <Route index element={<Menu part="comics" />} />
-              <Route path="search" element={<Search />} />
+              <Route path="search" element={<Search part="comics" />} />
               <Route path="add" element={<Add part="comics" />} />
               <Route path="list" element={<List part="comics" />} />
               <Route path="edit/:id" element={<Add part="comics" edition />} />
@@ -39,7 +39,7 @@ function App() {
             </Route>
             <Route path="discs" element={<Discs />}>
               <Route index element={<Menu part="discs" />} />
-              <Route path="search" element={<Search />} />
+              <Route path="search" element={<Search part="discs" />} />
               <Route path="add" element={<Add part="discs" />} />
               <Route path="list" element={<List part="discs" />} />
               <Route path="edit/:id" element={<Add part="discs" edition />} />
@@ -47,7 +47,7 @@ function App() {
             </Route>
             <Route path="movies" element={<Movies />}>
               <Route index element={<Menu part="movies" />} />
-              <Route path="search" element={<Search />} />
+              <Route path="search" element={<Search part="movies" />} />
               <Route path="add" element={<Add part="movies" />} />
               <Route path="list" element={<List part="movies" />} />
               <Route path="edit/:id" element={<Add part="movies" edition />} />
