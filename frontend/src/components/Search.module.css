@@ -61,4 +61,7 @@
   .search div div {
     font-size: calc(0.2rem + 2vh);
   }
+  .search > div {
+    margin-top: 5rem;
+  }
 }
