@@ -64,19 +64,27 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const add = async (req, res) => {
   const disc = req.body;
   const id = req.payloads?.sub;
-
-  models.disc
-    .insert(disc, id)
-    .then(([result]) => {
-      res.location(`/discs/${result.insertId}`).sendStatus(201);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  try {
+    const [existingTitle] = await models.disc.findDiscWithTitle(disc.title);
+    if (!existingTitle[0]) {
+      models.disc
+        .insert(disc, id)
+        .then(([result]) => {
+          res.location(`/discs/${result.insertId}`).sendStatus(201);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.sendStatus(500);
+        });
+    } else {
+      res.send("Ce titre existe déjà !");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const destroy = (req, res) => {

@@ -64,19 +64,27 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const add = async (req, res) => {
   const movie = req.body;
   const id = req.payloads?.sub;
-
-  models.movie
-    .insert(movie, id)
-    .then(([result]) => {
-      res.location(`/movies/${result.insertId}`).sendStatus(201);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  try {
+    const [existingTitle] = await models.movie.findMovieWithTitle(movie.title);
+    if (!existingTitle[0]) {
+      models.movie
+        .insert(movie, id)
+        .then(([result]) => {
+          res.location(`/movies/${result.insertId}`).sendStatus(201);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.sendStatus(500);
+        });
+    } else {
+      res.send("Ce titre existe déjà !");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const destroy = (req, res) => {

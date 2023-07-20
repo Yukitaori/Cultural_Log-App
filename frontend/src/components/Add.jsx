@@ -136,6 +136,8 @@ function Add({ part, edition }) {
               setItemToAdd(null);
               setInfoMessage("L'ajout s'est hyper bien passé !");
               setTimeout(() => navigate(-1), 2000);
+            } else {
+              setInfoMessage(response.data);
             }
           })
           .catch((err) => {
