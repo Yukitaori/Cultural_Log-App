@@ -45,7 +45,6 @@ const edit = (req, res) => {
   };
   const movie = req.body;
   const id = req.payloads?.sub;
-  // TODO validations (length, format...)
 
   movie.id = parseInt(req.params.id, 10);
   movie.when_seen = transformDate(movie.when_seen);
@@ -68,8 +67,6 @@ const edit = (req, res) => {
 const add = (req, res) => {
   const movie = req.body;
   const id = req.payloads?.sub;
-
-  // TODO validations (length, format...)
 
   models.movie
     .insert(movie, id)

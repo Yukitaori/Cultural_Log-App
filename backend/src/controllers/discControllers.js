@@ -46,7 +46,6 @@ const edit = (req, res) => {
 
   const disc = req.body;
   const id = req.payloads?.sub;
-  // TODO validations (length, format...)
 
   disc.id = parseInt(req.params.id, 10);
   disc.when_listened = transformDate(disc.when_listened);
@@ -68,8 +67,6 @@ const edit = (req, res) => {
 const add = (req, res) => {
   const disc = req.body;
   const id = req.payloads?.sub;
-
-  // TODO validations (length, format...)
 
   models.disc
     .insert(disc, id)

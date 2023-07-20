@@ -46,7 +46,6 @@ const edit = (req, res) => {
 
   const book = req.body;
   const id = req.payloads?.sub;
-  // TODO validations (length, format...)
 
   book.id = parseInt(req.params.id, 10);
   book.when_read = transformDate(book.when_read);
@@ -69,8 +68,6 @@ const edit = (req, res) => {
 const add = (req, res) => {
   const book = req.body;
   const id = req.payloads?.sub;
-
-  // TODO validations (length, format...)
 
   models.book
     .insert(book, id)

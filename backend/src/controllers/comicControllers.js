@@ -46,7 +46,6 @@ const edit = (req, res) => {
 
   const comic = req.body;
   const id = req.payloads?.sub;
-  // TODO validations (length, format...)
 
   comic.id = parseInt(req.params.id, 10);
   comic.when_read = transformDate(comic.when_read);
@@ -69,8 +68,6 @@ const edit = (req, res) => {
 const add = (req, res) => {
   const comic = req.body;
   const id = req.payloads?.sub;
-
-  // TODO validations (length, format...)
 
   models.comic
     .insert(comic, id)
