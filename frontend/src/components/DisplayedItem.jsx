@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ModalWrapper from "./ModalWrapper/ModalWrapper";
 import BasicModal from "./ModalWrapper/BasicModal";
 import styles from "./DisplayedItem.module.css";
@@ -9,6 +9,7 @@ import pen from "../assets/icons/pen.png";
 import bin from "../assets/icons/bin.png";
 
 function DisplayedItem({ part }) {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [itemToDisplay, setItemToDisplay] = useState(null);
   const [openModal, setOpenModal] = useState(false);
@@ -20,7 +21,7 @@ function DisplayedItem({ part }) {
 
   const handleClickEdit = () => {
     // TODO ajouter la navigation vers le composant Add
-    console.info("edit");
+    navigate(`/${part}/edit/${id}`);
   };
 
   const deleteForGood = () => {

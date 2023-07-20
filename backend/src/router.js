@@ -28,22 +28,26 @@ router.get("/logout", logout);
 
 router.get("/books", bookControllers.browse);
 router.get("/books/:id", bookControllers.read);
-router.delete("/books/:id", bookControllers.destroy);
+router.put("/books/:id", verifyToken, bookControllers.edit);
+router.delete("/books/:id", verifyToken, bookControllers.destroy);
 router.post("/books", verifyToken, bookControllers.add);
 
 router.get("/comics", comicControllers.browse);
 router.get("/comics/:id", comicControllers.read);
-router.delete("/comics/:id", comicControllers.destroy);
+router.put("/comics/:id", verifyToken, comicControllers.edit);
+router.delete("/comics/:id", verifyToken, comicControllers.destroy);
 router.post("/comics", verifyToken, comicControllers.add);
 
 router.get("/discs", discControllers.browse);
 router.get("/discs/:id", discControllers.read);
-router.delete("/discs/:id", discControllers.destroy);
+router.put("/discs/:id", verifyToken, discControllers.edit);
+router.delete("/discs/:id", verifyToken, discControllers.destroy);
 router.post("/discs", verifyToken, discControllers.add);
 
 router.get("/movies", movieControllers.browse);
 router.get("/movies/:id", movieControllers.read);
-router.delete("/movies/:id", movieControllers.destroy);
+router.put("/movies/:id", verifyToken, movieControllers.edit);
+router.delete("/movies/:id", verifyToken, movieControllers.destroy);
 router.post("/movies", verifyToken, movieControllers.add);
 
 router.get("/users", userControllers.browse);

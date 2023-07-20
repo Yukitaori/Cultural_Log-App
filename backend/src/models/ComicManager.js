@@ -37,6 +37,7 @@ class ComicManager extends AbstractManager {
         comic.is_lent,
         comic.lent_to,
         userId,
+        comic.id,
       ]
     );
   }

@@ -35,6 +35,7 @@ class MovieManager extends AbstractManager {
         movie.is_lent,
         movie.lent_to,
         userId,
+        movie.id,
       ]
     );
   }

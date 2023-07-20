@@ -29,14 +29,29 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const disc = req.body;
+  const transformDate = (day) => {
+    if (day) {
+      const dayToTransform = new Date(day);
+      const newDay = [
+        `${dayToTransform.getFullYear()}`,
+        `${dayToTransform.getMonth() + 1}`,
+        `${dayToTransform.getDate()}`,
+      ]
+        .map((string) => (string.length === 1 ? `0${string}` : string))
+        .join("-");
+      return newDay;
+    }
+    return null;
+  };
 
+  const disc = req.body;
+  const id = req.payloads?.sub;
   // TODO validations (length, format...)
 
   disc.id = parseInt(req.params.id, 10);
-
+  disc.when_listened = transformDate(disc.when_listened);
   models.disc
-    .update(disc)
+    .update(disc, id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
