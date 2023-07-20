@@ -49,6 +49,9 @@
   .search input {
     font-size: calc(0.2rem + 4vh);
   }
+  .search h1 {
+    font-size: calc(0.2rem + 4vh);
+  }
   .search div div {
     font-size: calc(0.2rem + 4vh);
   }

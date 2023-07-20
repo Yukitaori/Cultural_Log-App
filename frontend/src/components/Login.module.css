@@ -42,6 +42,13 @@
   text-align: center;
 }
 
+.infoMessage {
+  padding: 0.5rem;
+  font-weight: bolder;
+  font-size: calc(0.2rem + 2vh);
+  text-align: center;
+}
+
 .loginButton {
   cursor: pointer;
   height: 3em;

@@ -114,6 +114,7 @@ function Add({ part, edition }) {
           if (response.status === 204) {
             setItemToEdit(null);
             setInfoMessage("La modification s'est hyper bien passée !");
+            setTimeout(() => navigate(-1), 1000);
           }
         })
         .catch((err) => {
@@ -135,7 +136,7 @@ function Add({ part, edition }) {
             if (response.status === 201) {
               setItemToAdd(null);
               setInfoMessage("L'ajout s'est hyper bien passé !");
-              setTimeout(() => navigate(-1), 2000);
+              setTimeout(() => navigate(-1), 1000);
             } else {
               setInfoMessage(response.data);
             }
