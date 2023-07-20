@@ -57,11 +57,13 @@
 }
 
 .delete {
+  cursor: pointer;
   height: 80%;
   grid-column: 5/6;
   background: none;
 }
 .edit {
+  cursor: pointer;
   height: 80%;
   grid-column: 1/2;
   background: none;

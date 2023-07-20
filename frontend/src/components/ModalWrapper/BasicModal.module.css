@@ -31,11 +31,12 @@
   font-size: 1.1rem;
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: 0.5s;
 }
 
 .btn_inside_modal:hover {
-  filter: brightness(0.6);
+  border: 2px solid var(--main-color);
+  transition: 0.5s;
 }
 
 .btn_for_no {
