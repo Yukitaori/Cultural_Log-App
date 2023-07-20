@@ -1,0 +1,25 @@
+.discs {
+  width: 80%;
+  height: 90%;
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+  align-items: center;
+  background-color: var(--main-bg-color);
+  border: 3px solid var(--second-color);
+  border-radius: 50px;
+  box-shadow: 7px 7px 10px black;
+}
+
+.partBody {
+  height: calc(100% - 4rem);
+  width: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.partBody::-webkit-scrollbar {
+  display: none;
+}

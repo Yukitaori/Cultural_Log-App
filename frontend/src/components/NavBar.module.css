@@ -18,6 +18,14 @@
 
 .navBar a {
   height: 60%;
+  border-radius: 50px;
+  transition: 0.5s;
+
+}
+
+.navBar a:hover {
+  scale: 1.1;
+  transition: 0.5s;
 }
 
 .navBar a img {
@@ -25,4 +33,27 @@
   height: 100%;
   max-width: 100px;
   max-height: 100px;
+}
+
+.home {
+  position: fixed;
+  z-index: 5;
+  top: 12vh;
+  left: calc(auto);
+  padding: 0.2em;
+  height: 10vh;
+  width: 10vh;
+  max-height: 4rem;
+  max-width: 4rem;
+  border-radius: 50px;
+  background-color: var(--main-bg-color);
+  border: 3px solid var(--second-color);
+  box-shadow: 7px 7px 10px black;
+  transition: 0.5s;
+}
+
+.home:hover {
+  background-color: var(--second-bg-color);
+  border: 3px solid var(--main-color);
+  transition: 0.5s;
 }

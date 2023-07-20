@@ -1,8 +1,10 @@
 .home {
   height: 100%;
   width: 100%;
-  max-width: 1280px;
-  max-height: 1183px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .screen {
@@ -10,8 +12,6 @@
   top: 0;
   height: 100%;
   width: 100%;
-  max-width: 1280px;
-  max-height: 1183px;
   overflow: hidden;
 }
 
@@ -19,14 +19,14 @@
   position: fixed;
   top: 0;
   z-index: 0;
+  width: 100vmax;
+  height: 100vmax;
 }
 
 .body {
   position: relative;
   top: 15vh;
   height: calc(100% - 15vh);
-  max-height: calc(1183px - 15vh);
-  max-width: 1280px;
   width: 100%;
   display: flex;
   flex-direction: column;

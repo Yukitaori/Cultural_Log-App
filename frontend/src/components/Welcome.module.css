@@ -3,10 +3,50 @@
   height: 90%;
   padding: 0.5em;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
   align-items: center;
   background-color: var(--main-bg-color);
   border: 3px solid var(--second-color);
   border-radius: 50px;
   box-shadow: 7px 7px 10px black;
+}
+
+.logoutButton {
+  cursor: pointer;
+  height: 3em;
+  width: 50%;
+  padding: 0.5em;
+  border-radius: 50px;
+  background-color: var(--second-bg-color);
+  color: var(--main-color);
+  font-size: calc(0.2rem + 2vh);
+  box-shadow: 0 0 15px var(--main-color);
+  transition: 0.5s;
+}
+
+.logoutButton:hover {
+  background-color: var(--main-bg-color);
+  transition: 0.5s;
+}
+
+.message {
+  font-size: calc(0.2rem + 2vh);
+  text-align: center;
+}
+
+@media screen and (max-height: 450px) {
+  .welcome {
+    justify-content: flex-start;
+    overflow: auto;
+    padding: 1rem;
+  }
+  .logoutButton {
+    font-size: calc(0.2rem + 4vh);
+  }
+  
+  .message {
+    font-size: calc(0.2rem + 4vh);
+  }
 }

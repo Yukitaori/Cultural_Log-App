@@ -1,0 +1,77 @@
+.login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 90%;
+  align-items: center;
+}
+
+.formBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+  font-size: calc(0.2rem + 2vh);
+}
+
+.formBlock input {
+  height: 3rem;
+  width: 80%;
+  padding: 0.5em;
+  border-radius: 50px;
+  background-color: var(--second-bg-color);
+  color: var(--main-color);
+  font-weight: bold;
+  text-align: center;
+  font-size: calc(0.2rem + 2vh);
+}
+
+.message {
+  padding: 0.5rem;
+  font-weight: bolder;
+  font-size: calc(0.2rem + 2vh);
+  text-align: center;
+}
+
+.loginButton {
+  cursor: pointer;
+  height: 3em;
+  width: 50%;
+  padding: 0.5em;
+  border-radius: 50px;
+  background-color: var(--second-bg-color);
+  color: var(--main-color);
+  font-size: calc(0.2rem + 2vh);
+  box-shadow: 0 0 15px var(--main-color);
+  transition: 0.5s;
+}
+
+.loginButton:hover {
+  background-color: var(--main-bg-color);
+  transition: 0.5s;
+}
+
+@media screen and (max-height: 450px) {
+  .loginButton {
+    font-size: calc(0.2rem + 4vh);
+  }
+  .formBlock {
+    font-size: calc(0.2rem + 4vh);
+  }
+
+  .message {
+    font-size: calc(0.2rem + 4vh);
+  }
+  .formBlock input {
+    font-size: calc(0.2rem + 4vh);
+  }
+}

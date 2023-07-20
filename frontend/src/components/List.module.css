@@ -1,0 +1,106 @@
+.listButtons {
+  cursor: pointer;
+  height: 5%;
+  width: 100%;
+  padding: 0.2em;
+  margin-bottom: 0.2em;
+  background: none;
+  color: var(--main-color);
+  font-size: calc(0.2rem + 2vh);
+  font-weight: bold;
+}
+
+.actionButtons {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  margin-bottom: 1rem;
+}
+
+.filter {
+  width: 100%;
+  max-width: 7vh;
+  grid-column: 3/4;
+  background: none;
+  cursor: pointer;
+  justify-self: center;
+}
+
+.filter img {
+  width: 100%;
+}
+
+.filters {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: calc(0.2rem + 2vh);
+}
+
+.filtersPart {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border: solid 3px var(--second-color);
+  background-color: var(--second-bg-color);
+  border-radius: 25px;
+  padding: 0.5em;
+  font-weight: 600;
+}
+
+.filtersButtons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.filtersButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filtersButton input {
+cursor: pointer;
+ width: 1.5rem;
+ height: 1.5rem;
+ border-radius: 25px;
+ background-color: var(--main-bg-color);
+ border: solid 1px var(--second-color);
+ appearance: none;
+}
+
+.filtersButton input:checked {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 25px;
+  background-color: var(--second-color);
+  border: solid 1px var(--main-bg-color);
+  appearance: none;
+  transition: 0.5s;
+ }
+
+ @media screen and (max-height: 450px) {
+  .listButtons, .filters {
+    font-size: calc(0.2rem + 4vh);
+  }
+
+  .filters {
+    flex-direction: row;
+  }
+  
+  .filtersButtons {
+    gap: 2rem;
+  }
+}

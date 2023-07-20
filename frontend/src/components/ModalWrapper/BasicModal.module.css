@@ -1,0 +1,57 @@
+.basic_modal_container {
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.modal_text {
+  margin: 5px 0;
+  text-align: center;
+  font-weight: 500;
+  font-size: calc(0.2rem + 2vh);
+}
+
+.btn_modal_box {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+}
+
+.btn_inside_modal {
+  padding: 10px 20px;
+  background-color: var(--second-bg-color);
+  color: var(--main-color);
+  box-shadow: 5px 5px 5px 0px black;
+  font-weight: 900;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btn_inside_modal:hover {
+  border: 2px solid var(--main-color);
+  transition: 0.5s;
+}
+
+.btn_for_no {
+  margin-right: 10px;
+}
+
+.btn_for_yes {
+  margin-left: 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .modal_text {
+    font-size: calc(0.2rem + 4vh);
+  }
+  .basic_modal_container {
+    padding: 1rem 0;
+  }
+}
