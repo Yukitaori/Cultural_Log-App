@@ -1,6 +1,3 @@
-<h1 align="center">Babyplace</h1>
-
-
 <!-- Introduction -->
 <h1 href='#'>🫡Introduction</h1>
 <p>Ciao ragazzi e ragazze. 👋.<br/>
