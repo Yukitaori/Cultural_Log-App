@@ -57,6 +57,20 @@ INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, 
 INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('La vie aquatique', 'Wes Anderson', '2008-02-02', 1, 7, 1, 0, 1);
 INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Babel', 'Alejandro Gonzales Inarritu', '2006-10-09', 1, 9, 1, 0, 1);
 INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, lent_to, user_id) VALUES ('Cube', 'Vincenzo Natali', '2001-01-25', 1, 7, 1, 1, "Yohan Genin", 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Donnie Darko', 'Richard Kelly', '2004-06-25', 1, 10, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Reservoir Dogs', 'Quentin Tarantino', '2000-02-12', 1, 9, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Gladiator', 'Ridley Scott', '1998-12-31', 1, 9, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('This Must Be The Place', 'Paolo Sorrentino', '2012-01-11', 1, 9, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Un conte de Noel', 'Arnaud Desplechin', '2008-05-24', 1, 9, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Jurassic Park', 'Steven Spielberg', '1993-07-02', 1, 9, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Ghost Dog', 'Jim Jarmush', '1993-07-02', 1, 8, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Supergrave', 'Greg Mottola', '2005-08-30', 1, 10, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('The Host', 'Bong Joon-Ho', '2008-09-02', 1, 9, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Luca', 'Enrico Casarosa', '2021-06-18', 1, 10, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('A nos amours', 'Maurice Pialat', '2005-09-02', 1, 9, 0, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('The Mission', 'Johnnie To', '2004-03-02', 1, 8, 0, 0, 1);
+INSERT INTO movie (title, director, is_seen, owned, is_lent, user_id) VALUES ('Stalker', 'Andrei Tarkovsky', 0, 1, 0, 1);
+INSERT INTO movie (title, director, when_seen, is_seen, rating, owned, is_lent, user_id) VALUES ('Lost in Translation', 'Sofia Coppola', '2004-02-01', 0, 8, 1, 0, 1);
 
 
 -- -----------------------------------------------------
@@ -85,6 +99,8 @@ ENGINE = InnoDB;
 INSERT INTO book (title, author, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('La Horde du Contrevent', 'Alain Damasio', '2018-07-15', 1, 10, 1, 0, 1);
 INSERT INTO book (title, author, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Dune', 'Frank Herbert', '2001-08-16', 1, 10, 1, 0, 1);
 INSERT INTO book (title, author, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Fondation', 'Isaac Asimov', '2017-07-31', 1, 10, 1, 0, 1);
+INSERT INTO book (title, author, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('La Belgariade', 'David Eddings', '2022-07-16', 1, 7, 1, 0, 1);
+INSERT INTO book (title, author, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Monsieur Malaussene', 'Daniel Pennac', '2011-10-25', 1, 10, 1, 0, 1);
 
 
 -- -----------------------------------------------------
@@ -113,6 +129,10 @@ ENGINE = InnoDB;
 INSERT INTO disc (title, artist, when_listened, is_listened, rating, owned, is_lent, user_id) VALUES ('Discovery', 'Daft Punk', '1998-12-01', 1, 10, 1, 0, 1);
 INSERT INTO disc (title, artist, when_listened, is_listened, rating, owned, is_lent, user_id) VALUES ('The Mysterious Production of Eggs', 'Andrew Bird', '2003-01-01', 1, 9, 1, 0, 1);
 INSERT INTO disc (title, artist, when_listened, is_listened, rating, owned, is_lent, user_id) VALUES ('The Garden', 'Zero 7', '2008-01-01', 1, 7, 1, 0, 1);
+INSERT INTO disc (title, artist, when_listened, is_listened, rating, owned, is_lent, user_id) VALUES ('Love Letters', 'Metronomy', '2012-07-20', 1, 10, 1, 0, 1);
+INSERT INTO disc (title, artist, when_listened, is_listened, rating, owned, is_lent, user_id) VALUES ('Everything Now', 'Arcade Fire', '2019-12-03', 1, 9, 1, 0, 1);
+INSERT INTO disc (title, artist, when_listened, is_listened, rating, owned, is_lent, user_id) VALUES ('Demon Days', 'Gorillaz', '2005-06-03', 1, 10, 1, 0, 1);
+INSERT INTO disc (title, artist, when_listened, is_listened, rating, owned, is_lent, user_id) VALUES ('Rouge', 'Jean-Jacques Goldman', '1996-08-10', 1, 9, 1, 0, 1);
 
 
 -- -----------------------------------------------------
@@ -142,6 +162,10 @@ ENGINE = InnoDB;
 INSERT INTO comic (title, artist, writer, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Superman Red Son', 'Dave Johnson', 'Mark Millar', '2014-10-05', 1, 8, 1, 0, 1);
 INSERT INTO comic (title, artist, writer, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Blacksad', 'Juanjo Guarnido', 'Juan Diaz Canales', '2007-05-05', 1, 10, 1, 0, 1);
 INSERT INTO comic (title, artist, writer, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Calvin & Hobbes', 'Bill Waterson', 'Bill Waterson', '1997-11-11', 1, 10, 1, 0, 1);
+INSERT INTO comic (title, artist, writer, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Portugal', 'Cyril Pedrosa', 'Cyril Pedrosa', '2012-01-11', 1, 10, 1, 0, 1);
+INSERT INTO comic (title, artist, writer, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Okko', 'Hub', 'Hub', '2005-12-08', 1, 8, 1, 0, 1);
+INSERT INTO comic (title, artist, writer, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Le Château des animaux', 'Felix Delep', 'Xavier Dorison', '2021-10-31', 1, 9, 1, 0, 1);
+INSERT INTO comic (title, artist, writer, when_read, is_read, rating, owned, is_lent, user_id) VALUES ('Lastman', 'Bastien Vivex et Michael Sanlaville', 'Bastien Vives et Balak', '2013-12-01', 1, 10, 1, 0, 1);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
