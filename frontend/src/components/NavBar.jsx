@@ -9,6 +9,7 @@ import disc from "../assets/icons/disc.png";
 import discActive from "../assets/icons/discActive.png";
 import movie from "../assets/icons/movie.png";
 import movieActive from "../assets/icons/movieActive.png";
+import home from "../assets/icons/home.png";
 import { useUserContext } from "../contexts/UserContext";
 
 function NavBar() {
@@ -45,6 +46,11 @@ function NavBar() {
           />
         )}
       </NavLink>
+      <div className={styles.home}>
+        <NavLink to="/">
+          <img src={home} alt="house" />
+        </NavLink>
+      </div>
     </div>
   );
 }

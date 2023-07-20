@@ -29,14 +29,29 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
+  const transformDate = (day) => {
+    if (day) {
+      const dayToTransform = new Date(day);
+      const newDay = [
+        `${dayToTransform.getFullYear()}`,
+        `${dayToTransform.getMonth() + 1}`,
+        `${dayToTransform.getDate()}`,
+      ]
+        .map((string) => (string.length === 1 ? `0${string}` : string))
+        .join("-");
+      return newDay;
+    }
+    return null;
+  };
   const movie = req.body;
-
+  const id = req.payloads?.sub;
   // TODO validations (length, format...)
 
   movie.id = parseInt(req.params.id, 10);
+  movie.when_seen = transformDate(movie.when_seen);
 
   models.movie
-    .update(movie)
+    .update(movie, id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);

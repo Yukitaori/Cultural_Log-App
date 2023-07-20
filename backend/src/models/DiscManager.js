@@ -35,6 +35,7 @@ class DiscManager extends AbstractManager {
         disc.is_lent,
         disc.lent_to,
         userId,
+        disc.id,
       ]
     );
   }

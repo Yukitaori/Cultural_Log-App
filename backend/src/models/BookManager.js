@@ -35,6 +35,7 @@ class BookManager extends AbstractManager {
         book.is_lent,
         book.lent_to,
         userId,
+        book.id,
       ]
     );
   }

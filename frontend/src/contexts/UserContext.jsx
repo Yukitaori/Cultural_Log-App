@@ -14,6 +14,8 @@ export function UserContextProvider({ children }) {
   };
 
   const logout = () => {
+    // TODO : mettre en place un interceptor pour les 203 qui logout
+    // et afficher un message de déconnexion sur l'écran de login
     instance.get("/logout");
     setUser(null);
   };
