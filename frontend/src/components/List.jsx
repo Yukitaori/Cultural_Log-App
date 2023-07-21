@@ -149,7 +149,7 @@ function List({ part }) {
         ) : null}
         {part === "comics" || part === "books" ? (
           <div className={styles.filtersPart}>
-            <p>Ecoutés ?</p>
+            <p>Lus ?</p>
             <div className={styles.filtersButtons}>
               <div className={styles.filtersButton}>
                 <label htmlFor="is_read">Oui</label>
@@ -157,6 +157,7 @@ function List({ part }) {
                   name="is_read"
                   type="radio"
                   value="1"
+                  onChange={(e) => handleChange(e)}
                   defaultChecked={filters.is_read && filters.is_read === "1"}
                 />
               </div>
@@ -166,6 +167,7 @@ function List({ part }) {
                   name="is_read"
                   type="radio"
                   value="0"
+                  onChange={(e) => handleChange(e)}
                   defaultChecked={filters.is_read && filters.is_read === "0"}
                 />
               </div>
@@ -207,34 +209,37 @@ function List({ part }) {
           <img src={filterButton} alt="filtre" />
         </button>
       </div>
-      {itemsToDisplay &&
-        itemsToDisplay
-          .filter((item) => {
-            return (
-              Object.keys(filters).length === 0 ||
-              ((!filters.owned || parseInt(filters.owned, 10) === item.owned) &&
-                (!filters.is_lent ||
-                  parseInt(filters.is_lent, 10) === item.is_lent) &&
-                (!filters.is_seen ||
-                  parseInt(filters.is_seen, 10) === item.is_seen) &&
-                (!filters.is_read ||
-                  parseInt(filters.is_read, 10) === item.is_read) &&
-                (!filters.is_listened ||
-                  parseInt(filters.is_listened, 10) === item.owned))
-            );
-          })
-          .map((item) => {
-            return (
-              <button
-                key={`${part}${item.id}`}
-                className={styles.listButtons}
-                type="button"
-                onClick={() => navigate(`/${part}/${item.id}`)}
-              >
-                <p>{item.title}</p>
-              </button>
-            );
-          })}
+      <div className={styles.itemsToDisplay}>
+        {itemsToDisplay &&
+          itemsToDisplay
+            .filter((item) => {
+              return (
+                Object.keys(filters).length === 0 ||
+                ((!filters.owned ||
+                  parseInt(filters.owned, 10) === item.owned) &&
+                  (!filters.is_lent ||
+                    parseInt(filters.is_lent, 10) === item.is_lent) &&
+                  (!filters.is_seen ||
+                    parseInt(filters.is_seen, 10) === item.is_seen) &&
+                  (!filters.is_read ||
+                    parseInt(filters.is_read, 10) === item.is_read) &&
+                  (!filters.is_listened ||
+                    parseInt(filters.is_listened, 10) === item.owned))
+              );
+            })
+            .map((item) => {
+              return (
+                <button
+                  key={`${part}${item.id}`}
+                  className={styles.listButtons}
+                  type="button"
+                  onClick={() => navigate(`/${part}/${item.id}`)}
+                >
+                  <p>{item.title}</p>
+                </button>
+              );
+            })}
+      </div>
     </div>
   );
 }
