@@ -17,14 +17,17 @@ function DisplayedItem({ part }) {
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState(null);
 
+  // Si l'utilisateur clique sur le bouton delete, une modale de confirmation s'affiche.
   const handleClickDelete = () => {
     setOpenModal(true);
   };
 
+  // Si l'utilisateur clique sur le bouton edit, il est redirigé vers la page pour éditer l'item concerné
   const handleClickEdit = () => {
     navigate(`/${part}/edit/${id}`);
   };
 
+  // Gestion du delete de l'item consulté à l'intérieur de la modale
   const deleteForGood = () => {
     instance
       .delete(`/${part}/${id}`)
@@ -43,6 +46,7 @@ function DisplayedItem({ part }) {
     setMessage("Suppression effectuée !");
   };
 
+  // Fonction pour transformé la date dans un format plus adapté à l'affichage (DD/MM/YYYY)
   const transformDate = (day) => {
     const dayToTransform = new Date(day);
     const newDay = [
@@ -55,6 +59,7 @@ function DisplayedItem({ part }) {
     return newDay;
   };
 
+  // Au montage du composant, fetch de toutes les infos de l'item demandé
   useEffect(() => {
     instance
       .get(`/${part}/${id}`)
@@ -67,6 +72,8 @@ function DisplayedItem({ part }) {
         }
       });
   }, []);
+
+  // Boucle pour afficher le nombre d'étoiles correspondant à la note attribuée à l'item
   const ratingStars = [];
   if (itemToDisplay) {
     for (let i = 1; i <= parseInt(itemToDisplay.rating, 10); i += 1) {

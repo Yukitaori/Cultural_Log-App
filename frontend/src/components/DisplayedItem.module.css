@@ -74,6 +74,7 @@
 
 .buttons img {
   height: 100%;
+  filter: drop-shadow(2px 2px 1px black);
 }
 
 @media screen and (max-height: 450px) {

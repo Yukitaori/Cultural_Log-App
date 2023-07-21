@@ -16,6 +16,7 @@ function Login() {
     setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
   };
 
+  // Si l'utilisateur ne rentre pas les bons éléments de login, un message s'affiche, sinon => Login
   const handleSubmit = (e) => {
     e.preventDefault();
     instance.post("/login", loginInfo).then((response) => {
