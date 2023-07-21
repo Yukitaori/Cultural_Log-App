@@ -36,10 +36,6 @@ function List({ part }) {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
 
-  // useEffect(() => {
-  //   console.info(filters);
-  // }, [filters]);
-
   const filterMenu = () => {
     return (
       <div className={styles.filters}>

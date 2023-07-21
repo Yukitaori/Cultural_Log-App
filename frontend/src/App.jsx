@@ -18,6 +18,7 @@ function App() {
   return (
     <div className="App">
       {user?.id ? (
+        // Les routes ne sont accessibles que si l'utilisateur est connecté.
         <Routes>
           <Route path="/" element={<Home />}>
             <Route index element={<Welcome />} />
@@ -57,6 +58,7 @@ function App() {
           </Route>
         </Routes>
       ) : (
+        // Si l'utilisateur non connecté essaye d'accéder à une autre route, il est redirigé vers le home.
         <Routes>
           <Route path="/" element={<Home />}>
             <Route index element={<Welcome />} />

@@ -74,7 +74,7 @@ Some commands :</h3>
 <li>_Prettier_ : "Quality of code" tool as well, focuses on the styleguide</li>
 <li> _ Airbnb Standard_ : One of the most known "standards", even though it's not officially linked to ES/JS</li>
 <li> _Nodemon_ : Allows to restart the server everytime a .js file is udated</li>
-  </ul>
+</ul>
 
 <br/>
 <h3>Then I've added :</h3>
@@ -92,8 +92,9 @@ Some commands :</h3>
 <h1 href='#'>🚧 What's next 🚧</h1>
 <ul>
 <li>Video Games section (yaaaaay)</li>
-<li>Sort by rating and/or date of reading/watching/listening</li>
 <li>Account creation so anyone can enjoy the app</li>
+<li>Sort by rating and/or date of reading/watching/listening in the lists</li>
+<li>Pagination in the lists</li>
 </ul>
 <br/>
 <br/>
