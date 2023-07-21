@@ -246,8 +246,22 @@ function Add({ part, edition }) {
                 // Conditionnement de la forme de l'input et du comportement en fonction des informations renseignées
                 // et de la propriété de l'item concernée
                 if (
+                  itemKey === "is_lent" &&
+                  (itemToEdit.owned === "0" || itemToEdit.owned === 0)
+                ) {
+                  return null;
+                }
+
+                if (
                   itemKey === "lent_to" &&
                   (itemToEdit.is_lent === "0" || itemToEdit.is_lent === 0)
+                ) {
+                  return null;
+                }
+
+                if (
+                  (itemKey === "lent_to" && itemToEdit.owned === "0") ||
+                  (itemKey === "lent_to" && itemToEdit.owned === 0)
                 ) {
                   return null;
                 }
@@ -279,7 +293,10 @@ function Add({ part, edition }) {
                           name={itemKey}
                           type="radio"
                           value={0}
-                          defaultChecked={itemToEdit[itemKey] === 0}
+                          defaultChecked={
+                            itemToEdit[itemKey] === 0 ||
+                            itemToEdit[itemKey] === "0"
+                          }
                           onChange={(e) => handleChange(e)}
                         />
                         <label htmlFor={itemKey}>Oui</label>
@@ -287,7 +304,10 @@ function Add({ part, edition }) {
                           name={itemKey}
                           type="radio"
                           value={1}
-                          defaultChecked={itemToEdit[itemKey] === 1}
+                          defaultChecked={
+                            itemToEdit[itemKey] === 1 ||
+                            itemToEdit[itemKey] === "1"
+                          }
                           onChange={(e) => handleChange(e)}
                         />
                       </div>
@@ -444,8 +464,22 @@ function Add({ part, edition }) {
 
               const getFormPart = (input) => {
                 if (
+                  itemKey === "is_lent" &&
+                  (itemToAdd.owned === "0" || itemToAdd.owned === 0)
+                ) {
+                  return null;
+                }
+
+                if (
                   itemKey === "lent_to" &&
                   (itemToAdd.is_lent === "0" || itemToAdd.is_lent === 0)
+                ) {
+                  return null;
+                }
+
+                if (
+                  (itemKey === "lent_to" && itemToAdd.owned === "0") ||
+                  (itemKey === "lent_to" && itemToAdd.owned === 0)
                 ) {
                   return null;
                 }
@@ -466,6 +500,7 @@ function Add({ part, edition }) {
                     </div>
                   );
                 }
+
                 if (input === "radio") {
                   return (
                     <div className={styles.formBlock} key={itemKey}>
@@ -476,7 +511,11 @@ function Add({ part, edition }) {
                           name={itemKey}
                           type="radio"
                           value={0}
-                          defaultChecked
+                          defaultChecked={
+                            !itemToAdd[itemKey] ||
+                            itemToAdd[itemKey] === "0" ||
+                            itemToAdd[itemKey] === 0
+                          }
                           onChange={(e) => handleChange(e)}
                         />
                         <label htmlFor={itemKey}>Oui</label>
@@ -484,6 +523,10 @@ function Add({ part, edition }) {
                           name={itemKey}
                           type="radio"
                           value={1}
+                          defaultChecked={
+                            itemToAdd[itemKey] === "1" ||
+                            itemToAdd[itemKey] === 1
+                          }
                           onChange={(e) => handleChange(e)}
                         />
                       </div>
