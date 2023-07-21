@@ -48,6 +48,15 @@
 
 .listButtons p {
   text-align: center;
+  word-break: break-all;
+  padding: 0.5rem;
+  border-radius: 50px;
+  transition: 0.2s;
+}
+
+.listButtons p:hover {
+  background-color: var(--second-bg-color);
+  transition: 0.2s;
 }
 
 .filter {

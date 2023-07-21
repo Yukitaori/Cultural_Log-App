@@ -42,8 +42,11 @@
     justify-content: flex-start;
     overflow: auto;
     padding: 1rem;
+    gap: 1rem;
   }
+
   .logoutButton {
+    margin-top: 3rem;
     font-size: calc(0.2rem + 4vh);
   }
   
