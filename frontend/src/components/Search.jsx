@@ -13,6 +13,7 @@ function Search({ part }) {
   const [search, setSearch] = useState("");
   const [itemsToCheck, setItemsToCheck] = useState([]);
 
+  // Lorsque l'utilisateur clique sur un titre, il est redirigé vers la page correspondant à l'item concerné
   const handleClick = (title) => {
     const itemToDisplayId = itemsToCheck.find(
       (item) => item.title === title
@@ -20,6 +21,7 @@ function Search({ part }) {
     navigate(`/${part}/${itemToDisplayId}`);
   };
 
+  // Une requête n'est envoyée que si la string cherchée comporte au moins 3 caractères
   useEffect(() => {
     if (search.length >= 3) {
       instance

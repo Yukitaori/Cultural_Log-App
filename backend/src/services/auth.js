@@ -12,6 +12,7 @@ const hashingOptions = {
 };
 
 const getUserByPseudo = (req, res, next) => {
+  // On récupère l'utilisateur en fonction du pseudo rentré lors du login
   models.user
     .findByPseudo(req.body)
     .then(([users]) => {
@@ -46,7 +47,7 @@ const hashPassword = (req, res, next) => {
 
 const verifyPassword = (req, res) => {
   // vérification que le hash du password fourni par l'utilisateur est le même que dans la base de données
-  // Si oui => suppression du hashedPassword et du password et on fournit un token
+  // Si oui => suppression du hashedPassword et du password du corps de la requête et on fournit un token
   argon2
     .verify(req.user.hashed_password, req.body.password, hashingOptions)
     .then((isPasswordOk) => {
@@ -72,6 +73,7 @@ const verifyPassword = (req, res) => {
 };
 
 const verifyToken = (req, res, next) => {
+  // On vérifie si le token est toujours vaide
   try {
     const token = req.cookies.access_token;
     if (!token) {
@@ -80,11 +82,13 @@ const verifyToken = (req, res, next) => {
     req.payloads = jwt.verify(token, JWT_SECRET);
     return next();
   } catch (err) {
+    // Si non, on renvoit une 401 pour déconnexion auto de l'utilisateur
     return res.sendStatus(401);
   }
 };
 
 const logout = (req, res) => {
+  // Lors de la déconnexion, on nettoie le cookie relatif au token
   res.clearCookie("access_token").sendStatus(200);
 };
 

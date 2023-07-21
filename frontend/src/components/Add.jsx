@@ -29,6 +29,7 @@ function Add({ part, edition }) {
     return null;
   };
 
+  // Si on est en mode édition, le useEffect fetch les données de l'item pour l'affichage dans le formulaire
   useEffect(() => {
     if (edition) {
       instance
@@ -42,6 +43,7 @@ function Add({ part, edition }) {
           }
         });
     } else {
+      // Sinon, il détermine la forme de l'objet (et du formulaire) en fonction de la catégorie de l'item
       if (part === "movies") {
         setItemToAdd({
           title: "",
@@ -103,8 +105,9 @@ function Add({ part, edition }) {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     // TODO améliorer le schéma de validation
+    e.preventDefault();
+    // Comportement du Submit en mode édition
     if (edition) {
       // TODO gérer la suppression des valeurs des champs when_*** et lent_to si la propriété is_*** ou is_lent est à faux
       // et le champ rating si les champs is_*** sont à faux
@@ -125,6 +128,7 @@ function Add({ part, edition }) {
           }
         });
     } else {
+      // Comportement du Submit en mode ajout
       const { error } = schema.validate(itemToAdd);
       if (error) {
         setInfoMessage(error.message);
@@ -164,6 +168,7 @@ function Add({ part, edition }) {
           ? Object.keys(itemToEdit).map((itemKey) => {
               if (itemKey === "id" || itemKey === "user_id") return null;
               const getField = (key) => {
+                // Conditionnement des types d'input et des labels en fonction de la propriété de l'objet à afficher
                 let field;
                 let input;
                 switch (key) {
@@ -238,6 +243,8 @@ function Add({ part, edition }) {
               };
 
               const getFormPart = (input) => {
+                // Conditionnement de la forme de l'input et du comportement en fonction des informations renseignées
+                // et de la propriété de l'item concernée
                 if (
                   itemKey === "lent_to" &&
                   (itemToEdit.is_lent === "0" || itemToEdit.is_lent === 0)
@@ -287,7 +294,7 @@ function Add({ part, edition }) {
                     </div>
                   );
                 }
-
+                // Si une propriété is_*** est à false, l'input pour le when_*** associé n'est pas affichée
                 if (
                   (itemKey === "when_read" || itemKey === "rating") &&
                   (itemToEdit.is_read === 0 || itemToEdit.is_read === "0")
@@ -361,6 +368,7 @@ function Add({ part, edition }) {
         {itemToAdd
           ? Object.keys(itemToAdd).map((itemKey) => {
               const getField = (key) => {
+                // Conditionnement des types d'input et des labels en fonction de la propriété de l'objet à afficher
                 let field;
                 let input;
                 switch (key) {
@@ -482,7 +490,7 @@ function Add({ part, edition }) {
                     </div>
                   );
                 }
-
+                // Si une propriété is_*** est à false, l'input pour le when_*** associé n'est pas affichée
                 if (
                   (itemKey === "when_read" || itemKey === "rating") &&
                   (itemToAdd.is_read === 0 || itemToAdd.is_read === "0")

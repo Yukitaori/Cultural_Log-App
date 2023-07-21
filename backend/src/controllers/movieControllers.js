@@ -30,6 +30,7 @@ const read = (req, res) => {
 
 const edit = (req, res) => {
   const transformDate = (day) => {
+    // Transformation des dates en format facilitant la manipulation en base de données
     if (day) {
       const dayToTransform = new Date(day);
       const newDay = [
@@ -68,6 +69,7 @@ const add = async (req, res) => {
   const movie = req.body;
   const id = req.payloads?.sub;
   try {
+    // Vérification du doublon du titre en base de données
     const [existingTitle] = await models.movie.findMovieWithTitle(movie.title);
     if (!existingTitle[0]) {
       models.movie
