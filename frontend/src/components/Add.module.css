@@ -73,8 +73,9 @@
   
 .radio input:checked {
   background-color: var(--second-color);
-  border: solid 1px var(--main-bg-color);
+  border: solid 1px var(--second-bg-color);
   transition: 0.5s;
+  box-shadow: 0px 0px 1px 3px var(--main-bg-color) inset ;
 }
 
 .radio input:hover {

@@ -33,6 +33,7 @@
   height: 100%;
   max-width: 100px;
   max-height: 100px;
+  filter: drop-shadow(2px 2px 1px black);
 }
 
 .home {
