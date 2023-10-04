@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
 import styles from "./Add.module.css";
 import schema from "../services/validators";
 import instance from "../services/APIService";
 
-function Add({ part }) {
-  const [itemToAdd, setItemToAdd] = useState(null);
+function Edit({ part }) {
+  const [itemToEdit, setItemToEdit] = useState(null);
   const [infoMessage, setInfoMessage] = useState(null);
+  const { id } = useParams();
   const { logout } = useUserContext();
   const navigate = useNavigate();
+
+  // TODO Faire apparaître les infos de l'item dans les champs connus
 
   const transformDate = (day) => {
     if (day) {
@@ -27,80 +30,41 @@ function Add({ part }) {
     return null;
   };
 
+  // Le useEffect fetch les données de l'item pour l'affichage dans le formulaire
   useEffect(() => {
-    // Le useEffect détermine la forme de l'objet (et du formulaire) en fonction de la catégorie de l'item
-    if (part === "movies") {
-      setItemToAdd({
-        title: "",
-        director: "",
-        is_seen: "0",
-        when_seen: null,
-        rating: null,
-        owned: "0",
-        is_lent: "0",
-        lent_to: null,
+    instance
+      .get(`/${part}/${id}`)
+      .then((response) => {
+        setItemToEdit(response.data);
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          logout(true);
+        }
       });
-    }
-    if (part === "books") {
-      setItemToAdd({
-        title: "",
-        author: "",
-        is_read: "0",
-        when_read: null,
-        rating: null,
-        owned: "0",
-        is_lent: "0",
-        lent_to: null,
-      });
-    }
-    if (part === "discs") {
-      setItemToAdd({
-        title: "",
-        artist: "",
-        is_listened: "0",
-        when_listened: null,
-        rating: null,
-        owned: "0",
-        is_lent: "0",
-        lent_to: null,
-      });
-    }
-    if (part === "comics") {
-      setItemToAdd({
-        title: "",
-        artist: "",
-        writer: "",
-        is_read: "0",
-        when_read: null,
-        rating: null,
-        owned: "0",
-        is_lent: "0",
-        lent_to: null,
-      });
-    }
   }, []);
 
   const handleChange = (e) => {
-    setItemToAdd({ ...itemToAdd, [e.target.name]: e.target.value });
+    setItemToEdit({ ...itemToEdit, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     // TODO améliorer le schéma de validation
     e.preventDefault();
-    const { error } = schema.validate(itemToAdd);
+    // TODO gérer la suppression des valeurs des champs when_*** et lent_to si la propriété is_*** ou is_lent est à faux
+    // et le champ rating si les champs is_*** sont à faux
+
+    const { error } = schema.validate(itemToEdit);
     if (error) {
       setInfoMessage(error.message);
     } else {
-      // TODO empêcher l'ajout de deux fois la même entrée
       instance
-        .post(`/${part}`, itemToAdd)
+        .put(`/${part}/${id}`, itemToEdit)
         .then((response) => {
-          if (response.status === 201) {
-            setItemToAdd(null);
-            setInfoMessage("L'ajout s'est hyper bien passé !");
+          if (response.status === 204) {
+            setItemToEdit(null);
+            setInfoMessage("La modification s'est hyper bien passée !");
             setTimeout(() => navigate(-1), 1000);
-          } else {
-            setInfoMessage(response.data);
           }
         })
         .catch((err) => {
@@ -116,11 +80,14 @@ function Add({ part }) {
   return (
     <div className={styles.add}>
       <div className={styles.title}>
-        <h2>Ajouter un titre</h2>
+        <h2>Modifier un titre</h2>
       </div>
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
-        {itemToAdd
-          ? Object.keys(itemToAdd).map((itemKey) => {
+        {/* ----------- PARTIE EDITION -----------*/}
+
+        {itemToEdit
+          ? Object.keys(itemToEdit).map((itemKey) => {
+              if (itemKey === "id" || itemKey === "user_id") return null;
               const getField = (key) => {
                 // Conditionnement des types d'input et des labels en fonction de la propriété de l'objet à afficher
                 let field;
@@ -197,34 +164,36 @@ function Add({ part }) {
               };
 
               const getFormPart = (input) => {
+                // Conditionnement de la forme de l'input et du comportement en fonction des informations renseignées
+                // et de la propriété de l'item concernée
                 if (
                   itemKey === "is_lent" &&
-                  (itemToAdd.owned === "0" || itemToAdd.owned === 0)
+                  (itemToEdit.owned === "0" || itemToEdit.owned === 0)
                 ) {
-                  itemToAdd.is_lent = null;
+                  itemToEdit.is_lent = null;
                   return null;
                 }
 
                 if (
                   itemKey === "lent_to" &&
-                  (itemToAdd.is_lent === "0" || itemToAdd.is_lent === 0)
+                  (itemToEdit.is_lent === "0" || itemToEdit.is_lent === 0)
                 ) {
-                  itemToAdd.lent_to = null;
+                  itemToEdit.lent_to = null;
                   return null;
                 }
 
                 if (
-                  (itemKey === "lent_to" && itemToAdd.owned === "0") ||
-                  (itemKey === "lent_to" && itemToAdd.owned === 0)
+                  (itemKey === "lent_to" && itemToEdit.owned === "0") ||
+                  (itemKey === "lent_to" && itemToEdit.owned === 0)
                 ) {
-                  itemToAdd.is_lent = 0;
-                  itemToAdd.lent_to = null;
+                  itemToEdit.is_lent = 0;
+                  itemToEdit.lent_to = null;
                   return null;
                 }
 
                 if (
-                  (itemKey === "lent_to" && itemToAdd.is_lent === "1") ||
-                  (itemKey === "lent_to" && itemToAdd.is_lent === 1)
+                  (itemKey === "lent_to" && itemToEdit.is_lent === "1") ||
+                  (itemKey === "lent_to" && itemToEdit.is_lent === 1)
                 ) {
                   return (
                     <div className={styles.formBlock} key={itemKey}>
@@ -232,7 +201,7 @@ function Add({ part }) {
                       <input
                         name={itemKey}
                         type={getField(itemKey).input}
-                        value={itemToAdd.itemKey}
+                        value={itemToEdit.itemKey}
                         onChange={(e) => handleChange(e)}
                       />
                     </div>
@@ -250,9 +219,8 @@ function Add({ part }) {
                           type="radio"
                           value={0}
                           defaultChecked={
-                            !itemToAdd[itemKey] ||
-                            itemToAdd[itemKey] === "0" ||
-                            itemToAdd[itemKey] === 0
+                            itemToEdit[itemKey] === 0 ||
+                            itemToEdit[itemKey] === "0"
                           }
                           onChange={(e) => handleChange(e)}
                         />
@@ -262,8 +230,8 @@ function Add({ part }) {
                           type="radio"
                           value={1}
                           defaultChecked={
-                            itemToAdd[itemKey] === "1" ||
-                            itemToAdd[itemKey] === 1
+                            itemToEdit[itemKey] === 1 ||
+                            itemToEdit[itemKey] === "1"
                           }
                           onChange={(e) => handleChange(e)}
                         />
@@ -274,26 +242,27 @@ function Add({ part }) {
                 // Si une propriété is_*** est à false, l'input pour le when_*** associé n'est pas affichée
                 if (
                   (itemKey === "when_read" || itemKey === "rating") &&
-                  (itemToAdd.is_read === 0 || itemToAdd.is_read === "0")
+                  (itemToEdit.is_read === 0 || itemToEdit.is_read === "0")
                 ) {
-                  itemToAdd.when_read = null;
-                  itemToAdd.rating = null;
+                  itemToEdit.when_read = null;
+                  itemToEdit.rating = null;
                   return null;
                 }
                 if (
                   (itemKey === "when_listened" || itemKey === "rating") &&
-                  (itemToAdd.is_listened === 0 || itemToAdd.is_listened === "0")
+                  (itemToEdit.is_listened === 0 ||
+                    itemToEdit.is_listened === "0")
                 ) {
-                  itemToAdd.when_listened = null;
-                  itemToAdd.rating = null;
+                  itemToEdit.when_listened = null;
+                  itemToEdit.rating = null;
                   return null;
                 }
                 if (
                   (itemKey === "when_seen" || itemKey === "rating") &&
-                  (itemToAdd.is_seen === 0 || itemToAdd.is_seen === "0")
+                  (itemToEdit.is_seen === 0 || itemToEdit.is_seen === "0")
                 ) {
-                  itemToAdd.when_seen = null;
-                  itemToAdd.rating = null;
+                  itemToEdit.when_seen = null;
+                  itemToEdit.rating = null;
                   return null;
                 }
 
@@ -304,7 +273,7 @@ function Add({ part }) {
                       <input
                         name={itemKey}
                         type={getField(itemKey).input}
-                        value={itemToAdd.itemKey}
+                        value={itemToEdit[itemKey]}
                         onChange={(e) => handleChange(e)}
                       />
                     </div>
@@ -322,7 +291,7 @@ function Add({ part }) {
                       <input
                         name={itemKey}
                         type={getField(itemKey).input}
-                        value={transformDate(itemToAdd[itemKey])}
+                        value={transformDate(itemToEdit[itemKey])}
                         onChange={(e) => handleChange(e)}
                       />
                     </div>
@@ -335,7 +304,7 @@ function Add({ part }) {
                     <input
                       name={itemKey}
                       type={getField(itemKey).input}
-                      value={itemToAdd.itemKey}
+                      value={itemToEdit.itemKey}
                       onChange={(e) => handleChange(e)}
                     />
                   </div>
@@ -350,9 +319,9 @@ function Add({ part }) {
             <p>{infoMessage}</p>
           </div>
         ) : null}
-        {itemToAdd ? (
+        {itemToEdit ? (
           <button type="submit" className={styles.addButton}>
-            Ajouter
+            Modifier
           </button>
         ) : null}
       </form>
@@ -360,8 +329,8 @@ function Add({ part }) {
   );
 }
 
-export default Add;
+export default Edit;
 
-Add.propTypes = {
+Edit.propTypes = {
   part: PropTypes.string.isRequired,
 };
