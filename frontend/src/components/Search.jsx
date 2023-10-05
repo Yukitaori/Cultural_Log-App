@@ -12,6 +12,9 @@ function Search({ part }) {
   const { logout } = useUserContext();
   const [search, setSearch] = useState("");
   const [itemsToCheck, setItemsToCheck] = useState([]);
+  const [message, setMessage] = useState(
+    "Renseigne une partie du titre à chercher."
+  );
 
   // Lorsque l'utilisateur clique sur un titre, il est redirigé vers la page correspondant à l'item concerné
   const handleClick = (title) => {
@@ -28,13 +31,22 @@ function Search({ part }) {
         .get(`/${part}WithTitle/${search}`)
         .then((response) => {
           setItemsToCheck(response.data);
+          setMessage("");
         })
         .catch((error) => {
           if (error.response.status === 401) {
             logout(true);
           }
+          if (error.response.status === 404) {
+            setMessage("Aucun titre n'a été trouvé pour cette recherche !");
+          }
         });
     } else {
+      if (search.length > 0) {
+        setMessage("La recherche doit contenir au moins trois lettres.");
+      } else {
+        setMessage("Renseigne une partie du titre à chercher.");
+      }
       setItemsToCheck([]);
     }
   }, [search]);
@@ -80,6 +92,9 @@ function Search({ part }) {
           handleClick(val);
         }}
       />
+      <div>
+        <p className={styles.messageToDisplay}>{message}</p>
+      </div>
     </div>
   );
 }

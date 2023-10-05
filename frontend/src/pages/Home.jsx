@@ -13,9 +13,9 @@ export default function Home() {
           className={styles.background}
           alt="fond d'écran d'une bibliothèque cosy"
         />
-        <div className={styles.body}>
+        <main className={styles.body}>
           <Outlet />
-        </div>
+        </main>
       </div>
     </div>
   );

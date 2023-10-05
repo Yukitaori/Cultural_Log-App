@@ -7,6 +7,7 @@ import Movies from "./components/Movies";
 import Welcome from "./components/Welcome";
 import Menu from "./components/Menu";
 import Add from "./components/Add";
+import Edit from "./components/Edit";
 import Search from "./components/Search";
 import List from "./components/List";
 import "./App.css";
@@ -27,7 +28,7 @@ function App() {
               <Route path="search" element={<Search part="books" />} />
               <Route path="add" element={<Add part="books" />} />
               <Route path="list" element={<List part="books" />} />
-              <Route path="edit/:id" element={<Add part="books" edition />} />
+              <Route path="edit/:id" element={<Edit part="books" />} />
               <Route path=":id" element={<DisplayedItem part="books" />} />
             </Route>
             <Route path="comics" element={<Comics />}>
@@ -35,7 +36,7 @@ function App() {
               <Route path="search" element={<Search part="comics" />} />
               <Route path="add" element={<Add part="comics" />} />
               <Route path="list" element={<List part="comics" />} />
-              <Route path="edit/:id" element={<Add part="comics" edition />} />
+              <Route path="edit/:id" element={<Edit part="comics" />} />
               <Route path=":id" element={<DisplayedItem part="comics" />} />
             </Route>
             <Route path="discs" element={<Discs />}>
@@ -43,7 +44,7 @@ function App() {
               <Route path="search" element={<Search part="discs" />} />
               <Route path="add" element={<Add part="discs" />} />
               <Route path="list" element={<List part="discs" />} />
-              <Route path="edit/:id" element={<Add part="discs" edition />} />
+              <Route path="edit/:id" element={<Edit part="discs" />} />
               <Route path=":id" element={<DisplayedItem part="discs" />} />
             </Route>
             <Route path="movies" element={<Movies />}>
@@ -51,7 +52,7 @@ function App() {
               <Route path="search" element={<Search part="movies" />} />
               <Route path="add" element={<Add part="movies" />} />
               <Route path="list" element={<List part="movies" />} />
-              <Route path="edit/:id" element={<Add part="movies" edition />} />
+              <Route path="edit/:id" element={<Edit part="movies" />} />
               <Route path=":id" element={<DisplayedItem part="movies" />} />
             </Route>
             <Route path="/:whatever" element={<Welcome />} />

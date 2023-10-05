@@ -16,7 +16,7 @@ function NavBar() {
   const { user } = useUserContext();
 
   return (
-    <div className={styles.navBar}>
+    <header className={styles.navBar}>
       <NavLink to={user?.id ? "/books" : ""}>
         {({ isActive }) => (
           <img
@@ -51,7 +51,7 @@ function NavBar() {
           <img src={home} alt="house" />
         </NavLink>
       </div>
-    </div>
+    </header>
   );
 }
 

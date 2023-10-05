@@ -30,7 +30,7 @@
   top: 0;
   background-color: var(--main-bg-color);
   border-radius: 50px;
-  border:3px solid var(--second-color);
+  border: 3px solid var(--second-color);
 }
 
 .itemsToDisplay {
@@ -48,7 +48,7 @@
 
 .listButtons p {
   text-align: center;
-  word-break: break-all;
+  word-break: break-word;
   padding: 0.5rem;
   border-radius: 50px;
   transition: 0.2s;
@@ -66,6 +66,12 @@
   background: none;
   cursor: pointer;
   justify-self: center;
+  transition: 0.2s;
+}
+
+.filter:hover {
+  scale: 1.1;
+  transition: 0.5s;
 }
 
 .filter img {
@@ -114,13 +120,13 @@
 }
 
 .filtersButton input {
-cursor: pointer;
- width: 1.5rem;
- height: 1.5rem;
- border-radius: 25px;
- background-color: var(--main-bg-color);
- border: solid 1px var(--second-color);
- appearance: none;
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 25px;
+  background-color: var(--main-bg-color);
+  border: solid 1px var(--second-color);
+  appearance: none;
 }
 
 .filtersButton input:checked {
@@ -132,18 +138,19 @@ cursor: pointer;
   border: solid 1px var(--second-bg-color);
   appearance: none;
   transition: 0.5s;
-  box-shadow: 0px 0px 1px 3px var(--main-bg-color) inset ;
- }
+  box-shadow: 0px 0px 1px 3px var(--main-bg-color) inset;
+}
 
- @media screen and (max-height: 450px) {
-  .listButtons, .filters {
+@media screen and (max-height: 450px) {
+  .listButtons,
+  .filters {
     font-size: calc(0.2rem + 4vh);
   }
 
   .filters {
     flex-direction: row;
   }
-  
+
   .filtersButtons {
     gap: 2rem;
   }
