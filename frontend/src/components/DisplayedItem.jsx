@@ -88,22 +88,26 @@ function DisplayedItem({ part }) {
           <p>{itemToDisplay.title}</p>
         </div>
         <div className={styles.info}>
-          <div className={styles.infoPart}>
-            <p>
+          {itemToDisplay.director ||
+          itemToDisplay.author ||
+          itemToDisplay.writer ||
+          (itemToDisplay.artist && part !== "comics") ? (
+            <div className={styles.infoPart}>
               {itemToDisplay.director ? <p>Réalisateur :</p> : null}
               {itemToDisplay.author ? <p>Auteur :</p> : null}
               {itemToDisplay.writer ? <p>Scénariste :</p> : null}
               {itemToDisplay.artist && part !== "comics" ? (
                 <p>Artiste :</p>
               ) : null}
-            </p>
-            <p>
-              {itemToDisplay.director ||
-                itemToDisplay.author ||
-                itemToDisplay.writer ||
-                itemToDisplay.artist}
-            </p>
-          </div>
+
+              <p>
+                {itemToDisplay.director ||
+                  itemToDisplay.author ||
+                  itemToDisplay.writer ||
+                  itemToDisplay.artist}
+              </p>
+            </div>
+          ) : null}
 
           {part === "comics" ? (
             <div className={styles.infoPart}>
@@ -135,7 +139,7 @@ function DisplayedItem({ part }) {
           parseInt(itemToDisplay.is_read, 10) !== 0 &&
           parseInt(itemToDisplay.is_listened, 10) !== 0 ? (
             <div className={styles.infoPart}>
-              {ratingStars.map((star) => star)}
+              {ratingStars}
               <p>{` (${itemToDisplay.rating} / 10)`}</p>
             </div>
           ) : null}

@@ -320,7 +320,7 @@ function Edit({ part }) {
           </div>
         ) : null}
         {itemToEdit ? (
-          <button type="submit" className={styles.addButton}>
+          <button type="submit" className={styles.confirmButton}>
             Modifier
           </button>
         ) : null}

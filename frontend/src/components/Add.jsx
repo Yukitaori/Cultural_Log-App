@@ -351,7 +351,7 @@ function Add({ part }) {
           </div>
         ) : null}
         {itemToAdd ? (
-          <button type="submit" className={styles.addButton}>
+          <button type="submit" className={styles.confirmButton}>
             Ajouter
           </button>
         ) : null}

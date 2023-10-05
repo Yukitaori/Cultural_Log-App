@@ -39,13 +39,15 @@ const schema = Joi.object().keys({
   }),
   is_lent: Joi.number(),
   lent_to: Joi.string().allow("", null),
-  is_read: Joi.string(),
-  is_listened: Joi.string(),
-  is_seen: Joi.string(),
+  is_read: Joi.number(),
+  is_listened: Joi.number(),
+  is_seen: Joi.number(),
   when_read: Joi.string().optional().allow("", null),
   when_listened: Joi.string().optional().allow("", null),
   when_seen: Joi.string().optional().allow("", null),
   owned: Joi.number(),
+  id: Joi.number(),
+  user_id: Joi.number(),
 });
 
 export default schema;

@@ -66,6 +66,12 @@
   background: none;
   cursor: pointer;
   justify-self: center;
+  transition: 0.2s;
+}
+
+.filter:hover {
+  scale: 1.1;
+  transition: 0.5s;
 }
 
 .filter img {

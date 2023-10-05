@@ -36,7 +36,7 @@
   font-size: calc(0.2rem + 2vh);
 }
 
-.formBlock input{
+.formBlock input {
   height: 3rem;
   width: 80%;
   padding: 0.5em;
@@ -62,20 +62,20 @@
 
 .radio input {
   cursor: pointer;
-   width: 1.5rem;
-   height: 1.5rem;
-   border-radius: 25px;
-   background-color: var(--main-bg-color);
-   border: solid 1px var(--second-color);
-   appearance: none;
-   transition: 0.5s;
-  }
-  
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 25px;
+  background-color: var(--main-bg-color);
+  border: solid 1px var(--second-color);
+  appearance: none;
+  transition: 0.5s;
+}
+
 .radio input:checked {
   background-color: var(--second-color);
   border: solid 1px var(--second-bg-color);
   transition: 0.5s;
-  box-shadow: 0px 0px 1px 3px var(--main-bg-color) inset ;
+  box-shadow: 0px 0px 1px 3px var(--main-bg-color) inset;
 }
 
 .radio input:hover {
@@ -91,7 +91,7 @@
   text-align: center;
 }
 
-.addButton {
+.confirmButton {
   cursor: pointer;
   height: 3em;
   width: 50%;
@@ -105,17 +105,20 @@
   transition: 0.5s;
 }
 
-.addButton:hover {
+.confirmButton:hover {
   background-color: var(--main-bg-color);
   transition: 0.5s;
+  font-weight: bold;
 }
 
 @media screen and (max-height: 450px) {
-  .formBlock p, .formBlock label, .formBlock input {
+  .formBlock p,
+  .formBlock label,
+  .formBlock input {
     font-size: calc(0.2rem + 4vh);
   }
 
-  .addButton {
+  .confirmButton {
     font-size: calc(0.2rem + 4vh);
   }
 }
