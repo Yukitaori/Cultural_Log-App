@@ -71,13 +71,25 @@
   .loginButton {
     font-size: calc(0.2rem + 4vh);
   }
+
+  .form {
+    gap: 1.5rem;
+  }
+
   .formBlock {
     font-size: calc(0.2rem + 4vh);
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
   }
 
   .message {
     font-size: calc(0.2rem + 4vh);
   }
+
   .formBlock input {
     font-size: calc(0.2rem + 4vh);
   }

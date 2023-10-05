@@ -121,7 +121,6 @@ function List({ part }) {
             <p>Ecoutés ?</p>
             <div className={styles.filtersButtons}>
               <div className={styles.filtersButton}>
-                <label htmlFor="is_listened">Oui</label>
                 <input
                   name="is_listened"
                   type="radio"
@@ -131,9 +130,9 @@ function List({ part }) {
                     filters.is_listened && filters.is_listened === "1"
                   }
                 />
+                <label htmlFor="is_listened">Oui</label>
               </div>
               <div className={styles.filtersButton}>
-                <label htmlFor="is_listened">Non</label>
                 <input
                   name="is_listened"
                   type="radio"
@@ -143,6 +142,7 @@ function List({ part }) {
                     filters.is_listened && filters.is_listened === "0"
                   }
                 />
+                <label htmlFor="is_listened">Non</label>
               </div>
             </div>
           </div>
@@ -152,7 +152,6 @@ function List({ part }) {
             <p>Lus ?</p>
             <div className={styles.filtersButtons}>
               <div className={styles.filtersButton}>
-                <label htmlFor="is_read">Oui</label>
                 <input
                   name="is_read"
                   type="radio"
@@ -160,9 +159,9 @@ function List({ part }) {
                   onChange={(e) => handleChange(e)}
                   defaultChecked={filters.is_read && filters.is_read === "1"}
                 />
+                <label htmlFor="is_read">Oui</label>
               </div>
               <div className={styles.filtersButton}>
-                <label htmlFor="is_read">Non</label>
                 <input
                   name="is_read"
                   type="radio"
@@ -170,6 +169,7 @@ function List({ part }) {
                   onChange={(e) => handleChange(e)}
                   defaultChecked={filters.is_read && filters.is_read === "0"}
                 />
+                <label htmlFor="is_read">Non</label>
               </div>
             </div>
           </div>

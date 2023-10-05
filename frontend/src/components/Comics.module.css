@@ -24,3 +24,9 @@
 .partBody::-webkit-scrollbar {
   display: none;
 }
+
+@media screen and (max-height: 450px) {
+  .comics {
+    gap: 0.5rem;
+  }
+}

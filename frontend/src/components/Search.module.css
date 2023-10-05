@@ -8,7 +8,8 @@
 }
 
 .search h1 {
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
   text-align: center;
   overflow-wrap: break-word;
 }
@@ -27,6 +28,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  word-break: break-all;
 }
 
 .search input {
@@ -45,6 +47,11 @@
   text-align: center;
 }
 
+.messageToDisplay {
+  margin-top: 2rem;
+  font-size: calc(0.5rem + 1vh);
+}
+
 @media screen and (max-height: 450px) {
   .search input {
     font-size: calc(0.2rem + 4vh);
@@ -53,6 +60,9 @@
     font-size: calc(0.2rem + 4vh);
   }
   .search div div {
+    font-size: calc(0.2rem + 4vh);
+  }
+  .messageToDisplay {
     font-size: calc(0.2rem + 4vh);
   }
 }
@@ -64,7 +74,7 @@
   .search div div {
     font-size: calc(0.2rem + 2vh);
   }
-  .search > div {
-    margin-top: 5rem;
+  .messageToDisplay {
+    font-size: calc(0.2rem + 2vh);
   }
 }
