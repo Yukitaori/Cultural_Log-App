@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.movie
-    .findAll()
+    .findAll("movies")
     .then(([rows]) => {
       res.send(rows);
     })

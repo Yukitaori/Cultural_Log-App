@@ -23,9 +23,22 @@ class AbstractManager {
     );
   }
 
-  findAll() {
+  findAll(item) {
+    let when;
+    switch (item) {
+      case "movies":
+        when = "when_seen";
+        break;
+      case "discs":
+        when = "when_listened";
+        break;
+      default:
+        when = "when_read";
+        break;
+    }
+
     return this.database.query(
-      `select * from  ${this.table}  order by title ASC`
+      `select id, title, rating, ${when} from ${this.table} order by title ASC`
     );
   }
 

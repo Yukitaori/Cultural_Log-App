@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.disc
-    .findAll()
+    .findAll("discs")
     .then(([rows]) => {
       res.send(rows);
     })
