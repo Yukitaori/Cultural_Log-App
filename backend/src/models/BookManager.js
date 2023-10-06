@@ -5,20 +5,6 @@ class BookManager extends AbstractManager {
     super({ table: "book" });
   }
 
-  findBookWithPartTitle(title) {
-    return this.database.query(
-      `select id, title from  ${this.table} where title like ? order by title ASC`,
-      [`%${title}%`]
-    );
-  }
-
-  findBookWithTitle(title) {
-    return this.database.query(
-      `select id, title from  ${this.table} where title = ?`,
-      [title]
-    );
-  }
-
   insert(book, userId) {
     return this.database.query(
       `insert into ${this.table} (title, author, when_read, is_read, rating, owned, is_lent, lent_to, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,

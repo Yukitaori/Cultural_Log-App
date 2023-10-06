@@ -70,7 +70,7 @@ const add = async (req, res) => {
   const id = req.payloads?.sub;
   try {
     // Vérification du doublon du titre en base de données
-    const [existingTitle] = await models.movie.findMovieWithTitle(movie.title);
+    const [existingTitle] = await models.movie.findWithTitle(movie.title);
     if (!existingTitle[0]) {
       models.movie
         .insert(movie, id)
@@ -107,7 +107,7 @@ const destroy = (req, res) => {
 
 const searchWithPartTitle = (req, res) => {
   models.movie
-    .findMovieWithPartTitle(req.params.string)
+    .findWithPartTitle(req.params.string)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
