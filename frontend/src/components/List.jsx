@@ -5,6 +5,9 @@ import { useUserContext } from "../contexts/UserContext";
 import styles from "./List.module.css";
 import instance from "../services/APIService";
 import filterButton from "../assets/icons/filter.png";
+import sortDateButton from "../assets/icons/calendar.png";
+import sortRatingButton from "../assets/icons/star.png";
+import arrow from "../assets/icons/arrow.png";
 import ModalWrapper from "./ModalWrapper/ModalWrapper";
 import BasicModal from "./ModalWrapper/BasicModal";
 
@@ -12,8 +15,10 @@ function List({ part }) {
   const { logout } = useUserContext();
   const navigate = useNavigate();
   const [itemsToDisplay, setItemsToDisplay] = useState(null);
+  const [sortedList, setSortedList] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [filters, setFilters] = useState({});
+  const [sortOption, setSortOption] = useState(null);
 
   useEffect(() => {
     instance
@@ -34,6 +39,52 @@ function List({ part }) {
 
   const handleChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
+  };
+
+  const handleClickSortDate = () => {
+    const sortedItemsToDisplay = itemsToDisplay.slice();
+    const dateByPart = {
+      movies: "when_seen",
+      books: "when_read",
+      comics: "when_read",
+      discs: "when_listened",
+    };
+    switch (sortOption) {
+      case "dateDesc":
+        setSortOption("dateAsc");
+        sortedItemsToDisplay.sort(
+          (a, b) =>
+            new Date(a[dateByPart[part]]) - new Date(b[dateByPart[part]])
+        );
+        break;
+      case "dateAsc":
+        setSortOption(null);
+        break;
+      default:
+        setSortOption("dateDesc");
+        sortedItemsToDisplay.sort(
+          (a, b) =>
+            new Date(b[dateByPart[part]]) - new Date(a[dateByPart[part]])
+        );
+    }
+    setSortedList(sortedItemsToDisplay);
+  };
+
+  const handleClickSortRating = () => {
+    const sortedItemsToDisplay = itemsToDisplay.slice();
+    switch (sortOption) {
+      case "ratingDesc":
+        setSortOption("ratingAsc");
+        sortedItemsToDisplay.sort((a, b) => a.rating - b.rating);
+        break;
+      case "ratingAsc":
+        setSortOption(null);
+        break;
+      default:
+        setSortOption("ratingDesc");
+        sortedItemsToDisplay.sort((a, b) => b.rating - a.rating);
+    }
+    setSortedList(sortedItemsToDisplay);
   };
 
   const filterMenu = () => {
@@ -206,39 +257,100 @@ function List({ part }) {
           type="button"
           onClick={handleClickFilter}
         >
-          <img src={filterButton} alt="filtre" />
+          <img src={filterButton} alt="Filtres" />
+        </button>
+        <button
+          className={styles.sortDate}
+          type="button"
+          onClick={handleClickSortDate}
+        >
+          <img src={sortDateButton} alt="Tri par date de consommation" />
+          {sortOption === "dateDesc" || sortOption === "dateAsc" ? (
+            <img
+              className={
+                sortOption === "dateDesc" ? styles.arrowDesc : styles.arrowAsc
+              }
+              src={arrow}
+              alt=""
+            />
+          ) : null}
+        </button>
+        <button
+          className={styles.sortRating}
+          type="button"
+          onClick={handleClickSortRating}
+        >
+          <img src={sortRatingButton} alt="Tri par note" />
+          {sortOption === "ratingDesc" || sortOption === "ratingAsc" ? (
+            <img
+              className={
+                sortOption === "ratingDesc" ? styles.arrowDesc : styles.arrowAsc
+              }
+              src={arrow}
+              alt=""
+            />
+          ) : null}
         </button>
       </div>
       <div className={styles.itemsToDisplay}>
-        {itemsToDisplay &&
-          itemsToDisplay
-            .filter((item) => {
-              return (
-                Object.keys(filters).length === 0 ||
-                ((!filters.owned ||
-                  parseInt(filters.owned, 10) === item.owned) &&
-                  (!filters.is_lent ||
-                    parseInt(filters.is_lent, 10) === item.is_lent) &&
-                  (!filters.is_seen ||
-                    parseInt(filters.is_seen, 10) === item.is_seen) &&
-                  (!filters.is_read ||
-                    parseInt(filters.is_read, 10) === item.is_read) &&
-                  (!filters.is_listened ||
-                    parseInt(filters.is_listened, 10) === item.owned))
-              );
-            })
-            .map((item) => {
-              return (
-                <button
-                  key={`${part}${item.id}`}
-                  className={styles.listButtons}
-                  type="button"
-                  onClick={() => navigate(`/${part}/${item.id}`)}
-                >
-                  <p>{item.title}</p>
-                </button>
-              );
-            })}
+        {sortedList
+          ? sortedList
+              .filter((item) => {
+                return (
+                  Object.keys(filters).length === 0 ||
+                  ((!filters.owned ||
+                    parseInt(filters.owned, 10) === item.owned) &&
+                    (!filters.is_lent ||
+                      parseInt(filters.is_lent, 10) === item.is_lent) &&
+                    (!filters.is_seen ||
+                      parseInt(filters.is_seen, 10) === item.is_seen) &&
+                    (!filters.is_read ||
+                      parseInt(filters.is_read, 10) === item.is_read) &&
+                    (!filters.is_listened ||
+                      parseInt(filters.is_listened, 10) === item.owned))
+                );
+              })
+              .map((item) => {
+                return (
+                  <button
+                    key={`${part}${item.id}`}
+                    className={styles.listButtons}
+                    type="button"
+                    onClick={() => navigate(`/${part}/${item.id}`)}
+                  >
+                    <p>{item.title}</p>
+                  </button>
+                );
+              })
+          : itemsToDisplay &&
+            itemsToDisplay
+              .filter((item) => {
+                return (
+                  Object.keys(filters).length === 0 ||
+                  ((!filters.owned ||
+                    parseInt(filters.owned, 10) === item.owned) &&
+                    (!filters.is_lent ||
+                      parseInt(filters.is_lent, 10) === item.is_lent) &&
+                    (!filters.is_seen ||
+                      parseInt(filters.is_seen, 10) === item.is_seen) &&
+                    (!filters.is_read ||
+                      parseInt(filters.is_read, 10) === item.is_read) &&
+                    (!filters.is_listened ||
+                      parseInt(filters.is_listened, 10) === item.owned))
+                );
+              })
+              .map((item) => {
+                return (
+                  <button
+                    key={`${part}${item.id}`}
+                    className={styles.listButtons}
+                    type="button"
+                    onClick={() => navigate(`/${part}/${item.id}`)}
+                  >
+                    <p>{item.title}</p>
+                  </button>
+                );
+              })}
       </div>
     </div>
   );

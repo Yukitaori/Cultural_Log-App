@@ -36,9 +36,21 @@ class AbstractManager {
         when = "when_read";
         break;
     }
+    let is;
+    switch (item) {
+      case "movies":
+        is = "is_seen";
+        break;
+      case "discs":
+        is = "is_listened";
+        break;
+      default:
+        is = "is_read";
+        break;
+    }
 
     return this.database.query(
-      `select id, title, rating, ${when} from ${this.table} order by title ASC`
+      `select id, title, rating, ${when}, ${is}, is_lent, owned from ${this.table} order by title ASC`
     );
   }
 

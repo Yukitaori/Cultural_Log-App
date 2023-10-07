@@ -26,6 +26,7 @@
   display: grid;
   grid-template-columns: repeat(5, 20%);
   margin-bottom: 1rem;
+  padding: 0.5em;
   position: sticky;
   top: 0;
   background-color: var(--main-bg-color);
@@ -59,23 +60,51 @@
   transition: 0.2s;
 }
 
-.filter {
+.filter,
+.sortDate,
+.sortRating {
   width: 100%;
   max-width: 7vh;
-  grid-column: 3/4;
   background: none;
   cursor: pointer;
   justify-self: center;
   transition: 0.2s;
+  display: flex;
+  justify-content: center;
 }
 
-.filter:hover {
+.filter {
+  grid-column: 0/1;
+}
+
+.sortDate {
+  grid-column: 3/4;
+}
+
+.sortRating {
+  grid-column: 5/6;
+}
+
+.filter:hover,
+.sortDate:hover,
+.sortRating:hover {
   scale: 1.1;
   transition: 0.5s;
 }
 
-.filter img {
-  width: 100%;
+.filter img,
+.sortDate img,
+.sortRating img {
+  width: 50%;
+}
+
+.arrowDesc {
+  width: 50%;
+}
+
+.arrowAsc {
+  width: 50%;
+  transform: rotateX(180deg);
 }
 
 .filters {
