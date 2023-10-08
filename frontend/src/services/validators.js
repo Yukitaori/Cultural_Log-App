@@ -29,14 +29,20 @@ const schema = Joi.object().keys({
     "string.max":
       "Le nom de l'artiste/du dessinateur doit avoir une longueur maximale de 80 caractères.",
   }),
-  rating: Joi.number().integer().optional().allow("", null).messages({
-    "number.base":
-      "La note doit être constitué uniquement de caractères numériques.",
-    "number.min":
-      "La note doit être un nombre entier positif ou nul et inférieur ou égal à 10.",
-    "number.max":
-      "La note doit être un nombre entier positif ou nul et inférieur ou égal à 10.",
-  }),
+  rating: Joi.number()
+    .integer()
+    .min(0)
+    .max(10)
+    .optional()
+    .allow("", null)
+    .messages({
+      "number.base":
+        "La note doit être constitué uniquement de caractères numériques.",
+      "number.min":
+        "La note doit être un nombre entier positif ou nul et inférieur ou égal à 10.",
+      "number.max":
+        "La note doit être un nombre entier positif ou nul et inférieur ou égal à 10.",
+    }),
   is_lent: Joi.number(),
   lent_to: Joi.string().allow("", null),
   is_read: Joi.number(),

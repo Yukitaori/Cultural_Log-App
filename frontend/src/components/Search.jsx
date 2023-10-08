@@ -11,7 +11,9 @@ function Search({ part }) {
   const navigate = useNavigate();
   const { logout } = useUserContext();
   const [search, setSearch] = useState("");
+  const [searchBaseString, setSearchBaseString] = useState(null);
   const [itemsToCheck, setItemsToCheck] = useState([]);
+  const [itemsToBrowse, setItemsToBrowse] = useState(null);
   const [message, setMessage] = useState(
     "Renseigne une partie du titre à chercher."
   );
@@ -26,11 +28,18 @@ function Search({ part }) {
 
   // Une requête n'est envoyée que si la string cherchée comporte au moins 3 caractères
   useEffect(() => {
-    if (search.length >= 3) {
+    if (
+      (search.length >= 3 && !searchBaseString) ||
+      (search.length >= 3 &&
+        searchBaseString &&
+        !search.includes(searchBaseString))
+    ) {
       instance
         .get(`/${part}WithTitle/${search}`)
         .then((response) => {
           setItemsToCheck(response.data);
+          setSearchBaseString(search.slice(0));
+          setItemsToBrowse(null);
           setMessage("");
         })
         .catch((error) => {
@@ -38,9 +47,28 @@ function Search({ part }) {
             logout(true);
           }
           if (error.response.status === 404) {
+            setItemsToCheck([]);
+            setItemsToBrowse(null);
+            setSearchBaseString(null);
             setMessage("Aucun titre n'a été trouvé pour cette recherche !");
           }
         });
+    } else if (
+      search.length >= 3 &&
+      searchBaseString &&
+      search.includes(searchBaseString)
+    ) {
+      const browsableItems = [];
+      itemsToCheck.forEach((item) =>
+        item.title.toLowerCase().includes(search.toLowerCase())
+          ? browsableItems.push(item)
+          : null
+      );
+      setItemsToBrowse(browsableItems);
+    } else if (search.length < 3 && searchBaseString) {
+      setSearchBaseString(null);
+      setItemsToBrowse(null);
+      setItemsToCheck([]);
     } else {
       if (search.length > 0) {
         setMessage("La recherche doit contenir au moins trois lettres.");
@@ -56,7 +84,7 @@ function Search({ part }) {
       <h1>Tu cherches un titre ?</h1>
       <Autocomplete
         getItemValue={(item) => item.title}
-        items={itemsToCheck}
+        items={itemsToBrowse || itemsToCheck}
         menuStyle={{
           boxShadow: "0 5px 5px 0px black",
           border: "3px solid var(--second-bg-color)",
