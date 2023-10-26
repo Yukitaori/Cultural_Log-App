@@ -1,8 +1,7 @@
 <!-- Introduction -->
-<h1 href='#'>🫡Introduction</h1>
+<h1>🫡Introduction</h1>
 <p>Ciao ragazzi e ragazze. 👋.<br/>
-
-Welcome on my app that has no name 🫤.
+Welcome on my app that has no name 🫤.</p>
 <p>This is my last personal project during my training at the Wild Code School and I'm glad to present it to you.</p>
 <p>I've had two days to code it. The point was to get a full responsive application with a CRUD and a listing feature.</p>
 <br/>
@@ -10,7 +9,7 @@ Welcome on my app that has no name 🫤.
 
 
 <!-- Objectives -->
-<h1 href='#'>🎯 The Objectives</h1>
+<h1>🎯 The Objectives</h1>
 <h2>Purpose</h2>
 <p>The purpose of my project is to log all the cultural items (movies, books, comic books or discs) that I've seen, read or listened to.</p>
 <p>For example, I can add a movie and the informations about it (like the director, the date I've seen it on, if I own it in DVD, if I've lent it to someone, etc.), but I can also list the items by category and filter it, or search for one particular item with its title.</p>
@@ -24,7 +23,7 @@ Welcome on my app that has no name 🫤.
 
 
 <!-- Technical stack -->
-<h1 href='#'>⚙️Technical Stack used for the project</h1>
+<h1>⚙️Technical Stack used for the project</h1>
 <ul>
 <li>JavaScript / React.js / CSS vanilla</li>
 <li>Node.js / Express / Axios</li>
@@ -36,7 +35,7 @@ Welcome on my app that has no name 🫤.
 
 <br/>
 <br/>
-<h1 href='#'>🔄Installation</h1>
+<h1>🔄Installation</h1>
 <h3>Follow these steps</h3>
 <ul>
 <li>In VSCode, install plugins **Prettier - Code formatter** and **ESLint** and configure them</li>
@@ -63,7 +62,7 @@ Some commands :</h3>
 <br/>
 <br/>
 <!-- Packages -->
-<h1 href='#'>📦Packages</h1>
+<h1>📦Packages</h1>
 <p>For this project, I used the <a href='https://github.com/WildCodeSchool/js-template-fullstack' target='_blank' rel="noreferrer">Wild Code School - FullStack - Template</a></p>
 <h3>The template initially contained  :</h3>
 <ul>
@@ -89,11 +88,10 @@ Some commands :</h3>
 </ul>
 <br/>
 <br/>
-<h1 href='#'>🚧 What's next 🚧</h1>
+<h1>🚧 What's next 🚧</h1>
 <ul>
-<li>Video Games section (yaaaaay)</li>
+<li>Video Games and TV shows sections (yaaaaay)</li>
 <li>Account creation so anyone can enjoy the app</li>
-<li>Sort by rating and/or date of reading/watching/listening in the lists</li>
 <li>Pagination in the lists</li>
 </ul>
 <br/>
