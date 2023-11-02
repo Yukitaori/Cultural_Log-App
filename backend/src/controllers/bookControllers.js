@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.book
-    .findAll()
+    .findAll("books")
     .then(([rows]) => {
       res.send(rows);
     })
@@ -71,7 +71,7 @@ const add = async (req, res) => {
   const id = req.payloads?.sub;
   try {
     // Vérification du doublon du titre en base de données
-    const [existingTitle] = await models.book.findBookWithTitle(book.title);
+    const [existingTitle] = await models.book.findWithTitle(book.title);
     if (!existingTitle[0]) {
       models.book
         .insert(book, id)
@@ -108,7 +108,7 @@ const destroy = (req, res) => {
 
 const searchWithPartTitle = (req, res) => {
   models.book
-    .findBookWithPartTitle(req.params.string)
+    .findWithPartTitle(req.params.string)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);

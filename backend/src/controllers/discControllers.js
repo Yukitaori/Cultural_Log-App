@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.disc
-    .findAll()
+    .findAll("discs")
     .then(([rows]) => {
       res.send(rows);
     })
@@ -70,7 +70,7 @@ const add = async (req, res) => {
   const id = req.payloads?.sub;
   try {
     // Vérification du doublon du titre en base de données
-    const [existingTitle] = await models.disc.findDiscWithTitle(disc.title);
+    const [existingTitle] = await models.disc.findWithTitle(disc.title);
     if (!existingTitle[0]) {
       models.disc
         .insert(disc, id)
@@ -107,7 +107,7 @@ const destroy = (req, res) => {
 
 const searchWithPartTitle = (req, res) => {
   models.disc
-    .findDiscWithPartTitle(req.params.string)
+    .findWithPartTitle(req.params.string)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);

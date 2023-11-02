@@ -17,6 +17,8 @@ const {
   verifyToken,
 } = require("./services/auth");
 
+const cleanData = require("./services/clean");
+
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
 router.put("/items/:id", itemControllers.edit);
@@ -37,7 +39,7 @@ router.get(
   bookControllers.searchWithPartTitle
 );
 router.get("/books/:id", verifyToken, bookControllers.read);
-router.put("/books/:id", verifyToken, bookControllers.edit);
+router.put("/books/:id", verifyToken, cleanData, bookControllers.edit);
 router.delete("/books/:id", verifyToken, bookControllers.destroy);
 router.post("/books", verifyToken, bookControllers.add);
 
@@ -50,7 +52,7 @@ router.get(
   comicControllers.searchWithPartTitle
 );
 router.get("/comics/:id", verifyToken, comicControllers.read);
-router.put("/comics/:id", verifyToken, comicControllers.edit);
+router.put("/comics/:id", verifyToken, cleanData, comicControllers.edit);
 router.delete("/comics/:id", verifyToken, comicControllers.destroy);
 router.post("/comics", verifyToken, comicControllers.add);
 
@@ -63,7 +65,7 @@ router.get(
   discControllers.searchWithPartTitle
 );
 router.get("/discs/:id", verifyToken, discControllers.read);
-router.put("/discs/:id", verifyToken, discControllers.edit);
+router.put("/discs/:id", verifyToken, cleanData, discControllers.edit);
 router.delete("/discs/:id", verifyToken, discControllers.destroy);
 router.post("/discs", verifyToken, discControllers.add);
 
@@ -76,7 +78,7 @@ router.get(
   movieControllers.searchWithPartTitle
 );
 router.get("/movies/:id", verifyToken, movieControllers.read);
-router.put("/movies/:id", verifyToken, movieControllers.edit);
+router.put("/movies/:id", verifyToken, cleanData, movieControllers.edit);
 router.delete("/movies/:id", verifyToken, movieControllers.destroy);
 router.post("/movies", verifyToken, movieControllers.add);
 

@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.comic
-    .findAll()
+    .findAll("comics")
     .then(([rows]) => {
       res.send(rows);
     })
@@ -71,7 +71,7 @@ const add = async (req, res) => {
   const id = req.payloads?.sub;
   try {
     // Vérification du doublon du titre en base de données
-    const [existingTitle] = await models.comic.findComicWithTitle(comic.title);
+    const [existingTitle] = await models.comic.findWithTitle(comic.title);
     if (!existingTitle[0]) {
       models.comic
         .insert(comic, id)
@@ -108,7 +108,7 @@ const destroy = (req, res) => {
 
 const searchWithPartTitle = (req, res) => {
   models.comic
-    .findComicWithPartTitle(req.params.string)
+    .findWithPartTitle(req.params.string)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);

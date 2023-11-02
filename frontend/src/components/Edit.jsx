@@ -170,7 +170,6 @@ function Edit({ part }) {
                   itemKey === "is_lent" &&
                   (itemToEdit.owned === "0" || itemToEdit.owned === 0)
                 ) {
-                  itemToEdit.is_lent = null;
                   return null;
                 }
 
@@ -178,7 +177,6 @@ function Edit({ part }) {
                   itemKey === "lent_to" &&
                   (itemToEdit.is_lent === "0" || itemToEdit.is_lent === 0)
                 ) {
-                  itemToEdit.lent_to = null;
                   return null;
                 }
 
@@ -186,8 +184,6 @@ function Edit({ part }) {
                   (itemKey === "lent_to" && itemToEdit.owned === "0") ||
                   (itemKey === "lent_to" && itemToEdit.owned === 0)
                 ) {
-                  itemToEdit.is_lent = 0;
-                  itemToEdit.lent_to = null;
                   return null;
                 }
 
@@ -201,13 +197,12 @@ function Edit({ part }) {
                       <input
                         name={itemKey}
                         type={getField(itemKey).input}
-                        value={itemToEdit.itemKey}
+                        value={itemToEdit[itemKey]}
                         onChange={(e) => handleChange(e)}
                       />
                     </div>
                   );
                 }
-
                 if (input === "radio") {
                   return (
                     <div className={styles.formBlock} key={itemKey}>
@@ -244,8 +239,6 @@ function Edit({ part }) {
                   (itemKey === "when_read" || itemKey === "rating") &&
                   (itemToEdit.is_read === 0 || itemToEdit.is_read === "0")
                 ) {
-                  itemToEdit.when_read = null;
-                  itemToEdit.rating = null;
                   return null;
                 }
                 if (
@@ -253,16 +246,12 @@ function Edit({ part }) {
                   (itemToEdit.is_listened === 0 ||
                     itemToEdit.is_listened === "0")
                 ) {
-                  itemToEdit.when_listened = null;
-                  itemToEdit.rating = null;
                   return null;
                 }
                 if (
                   (itemKey === "when_seen" || itemKey === "rating") &&
                   (itemToEdit.is_seen === 0 || itemToEdit.is_seen === "0")
                 ) {
-                  itemToEdit.when_seen = null;
-                  itemToEdit.rating = null;
                   return null;
                 }
 
