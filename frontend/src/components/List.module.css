@@ -1,4 +1,6 @@
 .list {
+  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,6 +37,10 @@
 }
 
 .itemsToDisplay {
+  margin-top: 1rem;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,6 +48,7 @@
 }
 
 .listButtons {
+  height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -168,6 +175,16 @@
   appearance: none;
   transition: 0.5s;
   box-shadow: 0px 0px 1px 3px var(--main-bg-color) inset;
+}
+
+.pagination {
+  position: sticky;
+  color: var(--second-color);
+  font-size: calc(0.1rem + 2vh);
+}
+
+.pagination:hover {
+  color: var(--main-color);
 }
 
 @media screen and (max-height: 450px) {

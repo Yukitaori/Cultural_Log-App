@@ -292,6 +292,7 @@ function List({ part }) {
           ) : null}
         </button>
       </div>
+      <div className={styles.pagination}>1 2 3 4 5</div>
       <div className={styles.itemsToDisplay}>
         {sortedList
           ? sortedList

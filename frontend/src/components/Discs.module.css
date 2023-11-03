@@ -15,9 +15,8 @@
 }
 
 .partBody {
-  height: calc(100% - 4rem);
+  height: calc(100% - 4rem - 1em);
   width: 100%;
-  overflow-y: auto;
   scroll-behavior: smooth;
 }
 
