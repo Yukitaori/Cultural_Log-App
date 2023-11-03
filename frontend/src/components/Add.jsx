@@ -91,7 +91,6 @@ function Add({ part }) {
     if (error) {
       setInfoMessage(error.message);
     } else {
-      // TODO empêcher l'ajout de deux fois la même entrée
       instance
         .post(`/${part}`, itemToAdd)
         .then((response) => {
