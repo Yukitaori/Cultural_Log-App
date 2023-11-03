@@ -20,7 +20,7 @@ function List({ part }) {
   const [filters, setFilters] = useState({});
   const [sortOption, setSortOption] = useState(null);
   const [page, setPage] = useState(1);
-  const itemsPerPage = useRef(10);
+  const itemsPerPage = useRef(25);
 
   useEffect(() => {
     instance
@@ -40,10 +40,12 @@ function List({ part }) {
   };
 
   const handleChange = (e) => {
+    setPage(1);
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
 
   const handleClickSortDate = () => {
+    setPage(1);
     const sortedItemsToDisplay = itemsToDisplay.slice();
     const dateByPart = {
       movies: "when_seen",
@@ -73,6 +75,7 @@ function List({ part }) {
   };
 
   const handleClickSortRating = () => {
+    setPage(1);
     const sortedItemsToDisplay = itemsToDisplay.slice();
     switch (sortOption) {
       case "ratingDesc":
@@ -97,7 +100,7 @@ function List({ part }) {
       i += 1
     ) {
       pages.push(
-        <li>
+        <li key={`page ${i}`}>
           <button
             type="button"
             className={
@@ -267,6 +270,7 @@ function List({ part }) {
               setOpenModal(false);
             }}
             actionNoButton={() => {
+              setPage(1);
               setFilters({});
               setOpenModal(false);
             }}
