@@ -180,10 +180,23 @@
 .pagination {
   position: sticky;
   color: var(--second-color);
+}
+
+.pages {
+  list-style-type: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.activePageButton,
+.inactivePageButton {
+  cursor: pointer;
+  background-color: var(--main-bg-color);
   font-size: calc(0.1rem + 2vh);
 }
 
-.pagination:hover {
+.activePageButton,
+.inactivePageButton:hover {
   color: var(--main-color);
 }
 

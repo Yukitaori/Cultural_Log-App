@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
@@ -19,6 +19,8 @@ function List({ part }) {
   const [openModal, setOpenModal] = useState(false);
   const [filters, setFilters] = useState({});
   const [sortOption, setSortOption] = useState(null);
+  const [page, setPage] = useState(1);
+  const itemsPerPage = useRef(10);
 
   useEffect(() => {
     instance
@@ -85,6 +87,30 @@ function List({ part }) {
         sortedItemsToDisplay.sort((a, b) => b.rating - a.rating);
     }
     setSortedList(sortedItemsToDisplay);
+  };
+
+  const pagination = () => {
+    const pages = [];
+    for (
+      let i = 1;
+      i <= Math.ceil(itemsToDisplay.length / itemsPerPage.current);
+      i += 1
+    ) {
+      pages.push(
+        <li>
+          <button
+            type="button"
+            className={
+              page === i ? styles.activePageButton : styles.inactivePageButton
+            }
+            onClick={() => setPage(i)}
+          >
+            {i}
+          </button>
+        </li>
+      );
+    }
+    return pages;
   };
 
   const filterMenu = () => {
@@ -292,10 +318,16 @@ function List({ part }) {
           ) : null}
         </button>
       </div>
-      <div className={styles.pagination}>1 2 3 4 5</div>
+      <div className={styles.pagination}>
+        <ul className={styles.pages}>{itemsToDisplay && pagination()}</ul>
+      </div>
       <div className={styles.itemsToDisplay}>
         {sortedList
           ? sortedList
+              .slice(
+                (page - 1) * itemsPerPage.current,
+                page * itemsPerPage.current
+              )
               .filter((item) => {
                 return (
                   Object.keys(filters).length === 0 ||
@@ -325,6 +357,10 @@ function List({ part }) {
               })
           : itemsToDisplay &&
             itemsToDisplay
+              .slice(
+                (page - 1) * itemsPerPage.current,
+                page * itemsPerPage.current
+              )
               .filter((item) => {
                 return (
                   Object.keys(filters).length === 0 ||
