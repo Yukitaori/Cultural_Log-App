@@ -322,6 +322,7 @@ function List({ part }) {
         </button>
       </div>
       <div className={styles.pagination}>
+        <p>{"Pages : "}</p>
         <ul className={styles.pages}>{itemsToDisplay && pagination()}</ul>
       </div>
       <div className={styles.itemsToDisplay}>

@@ -25,10 +25,12 @@
 
 .actionButtons {
   width: 100%;
+  height: 10%;
   display: grid;
+  align-items: center;
   grid-template-columns: repeat(5, 20%);
   margin-bottom: 1rem;
-  padding: 0.5em;
+  padding: 1%;
   position: sticky;
   top: 0;
   background-color: var(--main-bg-color);
@@ -39,7 +41,7 @@
 .itemsToDisplay {
   margin-top: 1rem;
   width: 100%;
-  height: 100%;
+  height: 80%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -178,13 +180,25 @@
 }
 
 .pagination {
+  height: 5%;
   position: sticky;
+  display: flex;
+  gap: 0.2em;
   color: var(--second-color);
+  font-weight: bold;
+  font-size: calc(0.1rem + 2vh);
+}
+
+.pagination p {
+  align-self: center;
 }
 
 .pages {
+  height: 100%;
   list-style-type: none;
-  display: flex;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(5, 10%);
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -193,6 +207,8 @@
 .inactivePageButton {
   cursor: pointer;
   background-color: var(--main-bg-color);
+  font-weight: bold;
+  color: var(--second-color);
   font-size: calc(0.1rem + 2vh);
 }
 
