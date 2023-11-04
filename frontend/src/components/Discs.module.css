@@ -28,4 +28,8 @@
   .discs {
     gap: 0.5rem;
   }
+
+  .partBody {
+    height: calc(100% - 2rem - 1em);
+  }
 }

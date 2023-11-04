@@ -183,7 +183,7 @@
   height: 5%;
   position: sticky;
   display: flex;
-  gap: 0.2em;
+  gap: 4vw;
   color: var(--second-color);
   font-weight: bold;
   font-size: calc(0.1rem + 2vh);
@@ -196,11 +196,10 @@
 .pages {
   height: 100%;
   list-style-type: none;
-  display: grid;
-  align-items: center;
-  grid-template-columns: repeat(5, 10%);
+  display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  align-items: center;
+  gap: 4vw;
 }
 
 .activePageButton,
@@ -209,12 +208,24 @@
   background-color: var(--main-bg-color);
   font-weight: bold;
   color: var(--second-color);
-  font-size: calc(0.1rem + 2vh);
+  font-size: calc(0.2rem + 2vh);
 }
 
 .activePageButton,
 .inactivePageButton:hover {
   color: var(--main-color);
+}
+
+.changePagination button {
+  cursor: pointer;
+  background-color: var(--main-bg-color);
+  font-weight: bold;
+  color: var(--second-color);
+  font-size: calc(0.1rem + 2vh);
+}
+
+.hidden {
+  display: none;
 }
 
 @media screen and (max-height: 450px) {
@@ -229,5 +240,25 @@
 
   .filtersButtons {
     gap: 2rem;
+  }
+
+  .actionButtons {
+    height: 10vh;
+  }
+
+  .pagination {
+    height: 10%;
+    font-size: calc(0.5rem + 2vh);
+  }
+
+  .filter,
+  .sortDate,
+  .sortRating {
+    max-width: 10vh;
+  }
+
+  .activePageButton,
+  .inactivePageButton {
+    font-size: calc(0.5rem + 2vh);
   }
 }

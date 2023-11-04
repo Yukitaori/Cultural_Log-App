@@ -21,6 +21,7 @@ function List({ part }) {
   const [sortOption, setSortOption] = useState(null);
   const [page, setPage] = useState(1);
   const itemsPerPage = useRef(25);
+  const [pagesIndex, setPagesIndex] = useState(1);
 
   useEffect(() => {
     instance
@@ -100,7 +101,14 @@ function List({ part }) {
       i += 1
     ) {
       pages.push(
-        <li key={`page ${i}`}>
+        <li
+          key={`page ${i}`}
+          className={
+            i <= pagesIndex * 5 && i > (pagesIndex - 1) * 5
+              ? null
+              : styles.hidden
+          }
+        >
           <button
             type="button"
             className={
@@ -323,7 +331,42 @@ function List({ part }) {
       </div>
       <div className={styles.pagination}>
         <p>{"Pages : "}</p>
-        <ul className={styles.pages}>{itemsToDisplay && pagination()}</ul>
+        <ul className={styles.pages}>
+          {itemsToDisplay && (
+            <li
+              className={
+                pagesIndex === 1 ? styles.hidden : styles.changePagination
+              }
+            >
+              <button
+                className={styles.inactivePageButton}
+                type="button"
+                onClick={() => setPagesIndex(pagesIndex - 1)}
+              >
+                <p>...</p>
+              </button>
+            </li>
+          )}
+          {itemsToDisplay && pagination()}
+          {itemsToDisplay && (
+            <li
+              className={
+                pagesIndex * 5 >
+                Math.ceil(itemsToDisplay.length / itemsPerPage.current)
+                  ? styles.hidden
+                  : styles.changePagination
+              }
+            >
+              <button
+                className={styles.inactivePageButton}
+                type="button"
+                onClick={() => setPagesIndex(pagesIndex + 1)}
+              >
+                <p>...</p>
+              </button>
+            </li>
+          )}
+        </ul>
       </div>
       <div className={styles.itemsToDisplay}>
         {sortedList
