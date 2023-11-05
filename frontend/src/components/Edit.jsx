@@ -13,8 +13,6 @@ function Edit({ part }) {
   const { logout } = useUserContext();
   const navigate = useNavigate();
 
-  // TODO Faire apparaître les infos de l'item dans les champs connus
-
   const transformDate = (day) => {
     if (day) {
       const dayToTransform = new Date(day);
@@ -51,8 +49,6 @@ function Edit({ part }) {
   const handleSubmit = (e) => {
     // TODO améliorer le schéma de validation
     e.preventDefault();
-    // TODO gérer la suppression des valeurs des champs when_*** et lent_to si la propriété is_*** ou is_lent est à faux
-    // et le champ rating si les champs is_*** sont à faux
 
     const { error } = schema.validate(itemToEdit);
     if (error) {

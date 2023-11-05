@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
@@ -19,6 +19,10 @@ function List({ part }) {
   const [openModal, setOpenModal] = useState(false);
   const [filters, setFilters] = useState({});
   const [sortOption, setSortOption] = useState(null);
+  const [page, setPage] = useState(1);
+  const [pagesToList, setPagesToList] = useState(null);
+  const itemsPerPage = useRef(25);
+  const [pagesIndex, setPagesIndex] = useState(1);
 
   useEffect(() => {
     instance
@@ -38,10 +42,14 @@ function List({ part }) {
   };
 
   const handleChange = (e) => {
+    setPage(1);
+    setPagesIndex(1);
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
 
   const handleClickSortDate = () => {
+    setPage(1);
+    setPagesIndex(1);
     const sortedItemsToDisplay = itemsToDisplay.slice();
     const dateByPart = {
       movies: "when_seen",
@@ -71,6 +79,8 @@ function List({ part }) {
   };
 
   const handleClickSortRating = () => {
+    setPage(1);
+    setPagesIndex(1);
     const sortedItemsToDisplay = itemsToDisplay.slice();
     switch (sortOption) {
       case "ratingDesc":
@@ -86,6 +96,103 @@ function List({ part }) {
     }
     setSortedList(sortedItemsToDisplay);
   };
+
+  useEffect(() => {
+    if (sortedList) {
+      const pages = [];
+      for (
+        let i = 1;
+        i <=
+        Math.ceil(
+          sortedList.filter((item) => {
+            return (
+              Object.keys(filters).length === 0 ||
+              ((!filters.owned || parseInt(filters.owned, 10) === item.owned) &&
+                (!filters.is_lent ||
+                  parseInt(filters.is_lent, 10) === item.is_lent) &&
+                (!filters.is_seen ||
+                  parseInt(filters.is_seen, 10) === item.is_seen) &&
+                (!filters.is_read ||
+                  parseInt(filters.is_read, 10) === item.is_read) &&
+                (!filters.is_listened ||
+                  parseInt(filters.is_listened, 10) === item.owned))
+            );
+          }).length / itemsPerPage.current
+        );
+        i += 1
+      ) {
+        pages.push(
+          <li
+            key={`page ${i}`}
+            className={
+              i <= pagesIndex * 5 && i > (pagesIndex - 1) * 5
+                ? null
+                : styles.hidden
+            }
+          >
+            <button
+              type="button"
+              className={
+                page === i ? styles.activePageButton : styles.inactivePageButton
+              }
+              onClick={() => setPage(i)}
+            >
+              {i}
+            </button>
+          </li>
+        );
+      }
+      return setPagesToList(pages);
+    }
+
+    if (itemsToDisplay) {
+      const pages = [];
+      for (
+        let i = 1;
+        i <=
+        Math.ceil(
+          itemsToDisplay.filter((item) => {
+            return (
+              Object.keys(filters).length === 0 ||
+              ((!filters.owned || parseInt(filters.owned, 10) === item.owned) &&
+                (!filters.is_lent ||
+                  parseInt(filters.is_lent, 10) === item.is_lent) &&
+                (!filters.is_seen ||
+                  parseInt(filters.is_seen, 10) === item.is_seen) &&
+                (!filters.is_read ||
+                  parseInt(filters.is_read, 10) === item.is_read) &&
+                (!filters.is_listened ||
+                  parseInt(filters.is_listened, 10) === item.owned))
+            );
+          }).length / itemsPerPage.current
+        );
+        i += 1
+      ) {
+        pages.push(
+          <li
+            key={`page ${i}`}
+            className={
+              i <= pagesIndex * 5 && i > (pagesIndex - 1) * 5
+                ? null
+                : styles.hidden
+            }
+          >
+            <button
+              type="button"
+              className={
+                page === i ? styles.activePageButton : styles.inactivePageButton
+              }
+              onClick={() => setPage(i)}
+            >
+              {i}
+            </button>
+          </li>
+        );
+      }
+      return setPagesToList(pages);
+    }
+    return setPagesToList(null);
+  }, [itemsToDisplay, sortedList, pagesIndex, page, filters]);
 
   const filterMenu = () => {
     return (
@@ -230,7 +337,6 @@ function List({ part }) {
   };
 
   return (
-    // TODO Mettre en place les boutons tri et filtres
     <div className={styles.list}>
       {openModal ? (
         <ModalWrapper>
@@ -241,6 +347,7 @@ function List({ part }) {
               setOpenModal(false);
             }}
             actionNoButton={() => {
+              setPage(1);
               setFilters({});
               setOpenModal(false);
             }}
@@ -292,9 +399,83 @@ function List({ part }) {
           ) : null}
         </button>
       </div>
+      <div className={styles.pagination}>
+        <p>{"Pages : "}</p>
+        <ul className={styles.pages}>
+          {itemsToDisplay && (
+            <li
+              className={
+                pagesIndex === 1 ? styles.hidden : styles.changePagination
+              }
+            >
+              <button
+                className={styles.inactivePageButton}
+                type="button"
+                onClick={() => setPagesIndex(pagesIndex - 1)}
+              >
+                <p>...</p>
+              </button>
+            </li>
+          )}
+          {itemsToDisplay &&
+            pagesToList?.map((button) => {
+              return button;
+            })}
+          {itemsToDisplay && (
+            <li
+              className={
+                pagesIndex * 5 >
+                Math.ceil(
+                  (sortedList?.filter((item) => {
+                    return (
+                      Object.keys(filters).length === 0 ||
+                      ((!filters.owned ||
+                        parseInt(filters.owned, 10) === item.owned) &&
+                        (!filters.is_lent ||
+                          parseInt(filters.is_lent, 10) === item.is_lent) &&
+                        (!filters.is_seen ||
+                          parseInt(filters.is_seen, 10) === item.is_seen) &&
+                        (!filters.is_read ||
+                          parseInt(filters.is_read, 10) === item.is_read) &&
+                        (!filters.is_listened ||
+                          parseInt(filters.is_listened, 10) === item.owned))
+                    );
+                  })?.length ||
+                    itemsToDisplay.filter((item) => {
+                      return (
+                        Object.keys(filters).length === 0 ||
+                        ((!filters.owned ||
+                          parseInt(filters.owned, 10) === item.owned) &&
+                          (!filters.is_lent ||
+                            parseInt(filters.is_lent, 10) === item.is_lent) &&
+                          (!filters.is_seen ||
+                            parseInt(filters.is_seen, 10) === item.is_seen) &&
+                          (!filters.is_read ||
+                            parseInt(filters.is_read, 10) === item.is_read) &&
+                          (!filters.is_listened ||
+                            parseInt(filters.is_listened, 10) === item.owned))
+                      );
+                    }).length) / itemsPerPage.current
+                )
+                  ? styles.hidden
+                  : styles.changePagination
+              }
+            >
+              <button
+                className={styles.inactivePageButton}
+                type="button"
+                onClick={() => setPagesIndex(pagesIndex + 1)}
+              >
+                <p>...</p>
+              </button>
+            </li>
+          )}
+        </ul>
+      </div>
       <div className={styles.itemsToDisplay}>
         {sortedList
           ? sortedList
+
               .filter((item) => {
                 return (
                   Object.keys(filters).length === 0 ||
@@ -310,6 +491,10 @@ function List({ part }) {
                       parseInt(filters.is_listened, 10) === item.owned))
                 );
               })
+              .slice(
+                (page - 1) * itemsPerPage.current,
+                page * itemsPerPage.current
+              )
               .map((item) => {
                 return (
                   <button
@@ -339,6 +524,10 @@ function List({ part }) {
                       parseInt(filters.is_listened, 10) === item.owned))
                 );
               })
+              .slice(
+                (page - 1) * itemsPerPage.current,
+                page * itemsPerPage.current
+              )
               .map((item) => {
                 return (
                   <button

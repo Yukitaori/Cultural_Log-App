@@ -27,7 +27,7 @@
 }
 
 .partHeader h1 {
-  grid-column: 3 / 4;
+  grid-column: 2 / 5;
   text-align: center;
   font-size: calc(1rem + 2vh);
 }
@@ -36,10 +36,18 @@
   .back img {
     height: 2rem;
   }
+
+  .partHeader {
+    height: 3rem;
+  }
 }
 
 @media screen and (max-width: 600px) {
   .back img {
     height: 2rem;
+  }
+
+  .partBody {
+    height: calc(100% - 2rem - 1em);
   }
 }

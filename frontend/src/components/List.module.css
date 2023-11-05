@@ -1,4 +1,6 @@
 .list {
+  height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,10 +25,12 @@
 
 .actionButtons {
   width: 100%;
+  height: 10%;
   display: grid;
+  align-items: center;
   grid-template-columns: repeat(5, 20%);
   margin-bottom: 1rem;
-  padding: 0.5em;
+  padding: 1%;
   position: sticky;
   top: 0;
   background-color: var(--main-bg-color);
@@ -35,6 +39,10 @@
 }
 
 .itemsToDisplay {
+  margin-top: 1rem;
+  width: 100%;
+  height: 80%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,6 +50,7 @@
 }
 
 .listButtons {
+  height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -170,6 +179,55 @@
   box-shadow: 0px 0px 1px 3px var(--main-bg-color) inset;
 }
 
+.pagination {
+  height: 5%;
+  position: sticky;
+  display: flex;
+  gap: 4vw;
+  color: var(--second-color);
+  font-weight: bold;
+  font-size: calc(0.1rem + 2vh);
+}
+
+.pagination p {
+  align-self: center;
+}
+
+.pages {
+  height: 100%;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4vw;
+}
+
+.activePageButton,
+.inactivePageButton {
+  cursor: pointer;
+  background-color: var(--main-bg-color);
+  font-weight: bold;
+  color: var(--second-color);
+  font-size: calc(0.2rem + 2vh);
+}
+
+.activePageButton,
+.inactivePageButton:hover {
+  color: var(--main-color);
+}
+
+.changePagination button {
+  cursor: pointer;
+  background-color: var(--main-bg-color);
+  font-weight: bold;
+  color: var(--second-color);
+  font-size: calc(0.1rem + 2vh);
+}
+
+.hidden {
+  display: none;
+}
+
 @media screen and (max-height: 450px) {
   .listButtons,
   .filters {
@@ -182,5 +240,25 @@
 
   .filtersButtons {
     gap: 2rem;
+  }
+
+  .actionButtons {
+    height: 10vh;
+  }
+
+  .pagination {
+    height: 10%;
+    font-size: calc(0.5rem + 2vh);
+  }
+
+  .filter,
+  .sortDate,
+  .sortRating {
+    max-width: 10vh;
+  }
+
+  .activePageButton,
+  .inactivePageButton {
+    font-size: calc(0.5rem + 2vh);
   }
 }
