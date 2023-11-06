@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { registerSchema } from "../services/validators";
 import styles from "./Register.module.css";
 
 function Register() {
@@ -8,10 +9,15 @@ function Register() {
     password: "",
     verifyPassword: "",
   });
-  const [infoMessage, setinfoMessage] = useState("");
+  const [infoMessage, setInfoMessage] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    setinfoMessage(`Bienvenue ${registerInfo.pseudo}`);
+    const { error } = registerSchema.validate(registerInfo);
+    if (error) {
+      setInfoMessage(error.message);
+    } else {
+      setInfoMessage(`Bienvenue ${registerInfo.pseudo}`);
+    }
   };
 
   const handleChange = (e) => {
@@ -60,7 +66,7 @@ function Register() {
           S'inscrire
         </button>
         <p className={styles.redirect}>
-          Déjà inscrit ? <Link to="/">Reviens par-là.</Link>
+          Déjà inscrit ? <Link to="/">Reviens par là.</Link>
         </p>
       </form>
     </div>

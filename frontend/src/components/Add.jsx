@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
 import styles from "./Add.module.css";
-import schema from "../services/validators";
+import { addSchema } from "../services/validators";
 import instance from "../services/APIService";
 
 function Add({ part }) {
@@ -87,7 +87,7 @@ function Add({ part }) {
   const handleSubmit = (e) => {
     // TODO améliorer le schéma de validation
     e.preventDefault();
-    const { error } = schema.validate(itemToAdd);
+    const { error } = addSchema.validate(itemToAdd);
     if (error) {
       setInfoMessage(error.message);
     } else {
