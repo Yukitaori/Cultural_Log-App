@@ -57,7 +57,7 @@ const verifyPassword = (req, res) => {
           algorithm: "HS512",
           expiresIn: JWT_TIMING, // le token expire après le délai défini dans le .env
         });
-        delete req.user.hashedPassword;
+        delete req.user.hashed_password;
         delete req.user.password;
         res.cookie("access_token", token, {
           httpOnly: true,
