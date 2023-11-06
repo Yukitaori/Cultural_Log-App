@@ -1,9 +1,17 @@
-.login {
-  width: 100%;
+.register {
+  width: 80%;
+  max-width: 1000px;
+  height: 90%;
+  padding: 0.5em;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 2rem;
   align-items: center;
+  background-color: var(--main-bg-color);
+  border: 3px solid var(--second-color);
+  border-radius: 50px;
+  box-shadow: 7px 7px 10px black;
 }
 
 .form {
@@ -35,13 +43,6 @@
   font-size: calc(0.2rem + 2vh);
 }
 
-.message {
-  padding: 0.5rem;
-  font-weight: bolder;
-  font-size: calc(0.2rem + 2vh);
-  text-align: center;
-}
-
 .infoMessage {
   padding: 0.5rem;
   font-weight: bolder;
@@ -49,7 +50,7 @@
   text-align: center;
 }
 
-.loginButton {
+.registerButton {
   cursor: pointer;
   height: 3em;
   width: 50%;
@@ -62,7 +63,7 @@
   transition: 0.5s;
 }
 
-.loginButton:hover {
+.registerButton:hover {
   background-color: var(--main-bg-color);
   transition: 0.5s;
 }
@@ -84,7 +85,7 @@
 }
 
 @media screen and (max-height: 450px) {
-  .loginButton {
+  .registerButton {
     font-size: calc(0.2rem + 4vh);
   }
 
@@ -100,10 +101,6 @@
     justify-content: center;
     gap: 1rem;
     text-align: center;
-  }
-
-  .message {
-    font-size: calc(0.2rem + 4vh);
   }
 
   .formBlock input {
