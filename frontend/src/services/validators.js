@@ -1,5 +1,7 @@
 import Joi from "joi";
 
+// TODO : Améliorer les schemas de validation
+
 const addSchema = Joi.object().keys({
   title: Joi.string().min(3).max(80).messages({
     "string.min": "Le titre doit avoir une longueur minimale de 3 caractères.",
@@ -58,11 +60,11 @@ const addSchema = Joi.object().keys({
 
 const registerSchema = Joi.object().keys({
   pseudo: Joi.string()
-    .min(5)
+    .min(4)
     .max(45)
     .messages({
       "string.min":
-        "Le pseudo doit avoir une longueur minimale de 5 caractères.",
+        "Le pseudo doit avoir une longueur minimale de 4 caractères.",
       "string.max":
         "Le pseudo doit avoir une longueur maximale de 45 caractères.",
     })

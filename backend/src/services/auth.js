@@ -87,6 +87,22 @@ const verifyToken = (req, res, next) => {
   }
 };
 
+const verifyIfRegistered = (req, res, next) => {
+  models.user
+    .findByPseudo(req.body)
+    .then(([users]) => {
+      if (users.length === 0) {
+        next();
+      } else {
+        res.sendStatus(401);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const logout = (req, res) => {
   // Lors de la déconnexion, on nettoie le cookie relatif au token
   res.clearCookie("access_token").sendStatus(200);
@@ -98,4 +114,5 @@ module.exports = {
   hashPassword,
   verifyToken,
   logout,
+  verifyIfRegistered,
 };

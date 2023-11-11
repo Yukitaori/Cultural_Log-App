@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerSchema } from "../services/validators";
 import styles from "./Register.module.css";
+import instance from "../services/APIService";
 
 function Register() {
+  const navigate = useNavigate();
   const [registerInfo, setRegisterInfo] = useState({
     pseudo: "",
     password: "",
@@ -16,7 +18,23 @@ function Register() {
     if (error) {
       setInfoMessage(error.message);
     } else {
-      setInfoMessage(`Bienvenue ${registerInfo.pseudo}`);
+      instance
+        .post("/register", registerInfo)
+        .then((res) => {
+          if (res.status === 201) {
+            setInfoMessage(
+              `Le compte a bien été créé. Tu vas être redirigé vers la page de connexion.`
+            );
+            setTimeout(() => navigate("/"), 2000);
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            setInfoMessage(`Ce pseudo existe déjà.`);
+          } else {
+            setInfoMessage(`Il y a eu une erreur. Essaye plus tard.`);
+          }
+        });
     }
   };
 
