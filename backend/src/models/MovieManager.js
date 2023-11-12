@@ -24,7 +24,7 @@ class MovieManager extends AbstractManager {
 
   update(movie, userId) {
     return this.database.query(
-      `update ${this.table} set title = ?, director = ?, when_seen = ?, is_seen = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
+      `update ${this.table} set title = ?, director = ?, when_seen = ?, is_seen = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ? and user_id = ?`,
       [
         movie.title,
         movie.director,
@@ -36,6 +36,7 @@ class MovieManager extends AbstractManager {
         movie.lent_to,
         userId,
         movie.id,
+        userId,
       ]
     );
   }

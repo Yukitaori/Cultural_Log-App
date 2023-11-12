@@ -1,8 +1,9 @@
 const models = require("../models");
 
 const browse = (req, res) => {
+  const userId = req.payloads?.sub;
   models.movie
-    .findAll("movies")
+    .findAll("movies", userId)
     .then(([rows]) => {
       res.send(rows);
     })
@@ -13,8 +14,9 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
+  const userId = req.payloads?.sub;
   models.movie
-    .find(req.params.id)
+    .find(req.params.id, userId)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -45,13 +47,13 @@ const edit = (req, res) => {
     return null;
   };
   const movie = req.body;
-  const id = req.payloads?.sub;
+  const userId = req.payloads?.sub;
 
   movie.id = parseInt(req.params.id, 10);
   movie.when_seen = transformDate(movie.when_seen);
 
   models.movie
-    .update(movie, id)
+    .update(movie, userId)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -67,13 +69,16 @@ const edit = (req, res) => {
 
 const add = async (req, res) => {
   const movie = req.body;
-  const id = req.payloads?.sub;
+  const userId = req.payloads?.sub;
   try {
     // Vérification du doublon du titre en base de données
-    const [existingTitle] = await models.movie.findWithTitle(movie.title);
+    const [existingTitle] = await models.movie.findWithTitle(
+      movie.title,
+      userId
+    );
     if (!existingTitle[0]) {
       models.movie
-        .insert(movie, id)
+        .insert(movie, userId)
         .then(([result]) => {
           res.location(`/movies/${result.insertId}`).sendStatus(201);
         })
@@ -90,8 +95,9 @@ const add = async (req, res) => {
 };
 
 const destroy = (req, res) => {
+  const userId = req.payloads?.sub;
   models.movie
-    .delete(req.params.id)
+    .delete(req.params.id, userId)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -106,8 +112,9 @@ const destroy = (req, res) => {
 };
 
 const searchWithPartTitle = (req, res) => {
+  const userId = req.payloads?.sub;
   models.movie
-    .findWithPartTitle(req.params.string)
+    .findWithPartTitle(req.params.string, userId)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);

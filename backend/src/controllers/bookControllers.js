@@ -1,8 +1,9 @@
 const models = require("../models");
 
 const browse = (req, res) => {
+  const userId = req.payloads?.sub;
   models.book
-    .findAll("books")
+    .findAll("books", userId)
     .then(([rows]) => {
       res.send(rows);
     })
@@ -13,8 +14,9 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
+  const userId = req.payloads?.sub;
   models.book
-    .find(req.params.id)
+    .find(req.params.id, userId)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
@@ -46,13 +48,13 @@ const edit = (req, res) => {
   };
 
   const book = req.body;
-  const id = req.payloads?.sub;
+  const userId = req.payloads?.sub;
 
   book.id = parseInt(req.params.id, 10);
   book.when_read = transformDate(book.when_read);
 
   models.book
-    .update(book, id)
+    .update(book, userId)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -68,13 +70,13 @@ const edit = (req, res) => {
 
 const add = async (req, res) => {
   const book = req.body;
-  const id = req.payloads?.sub;
+  const userId = req.payloads?.sub;
   try {
     // Vérification du doublon du titre en base de données
-    const [existingTitle] = await models.book.findWithTitle(book.title);
+    const [existingTitle] = await models.book.findWithTitle(book.title, userId);
     if (!existingTitle[0]) {
       models.book
-        .insert(book, id)
+        .insert(book, userId)
         .then(([result]) => {
           res.location(`/books/${result.insertId}`).sendStatus(201);
         })
@@ -91,8 +93,9 @@ const add = async (req, res) => {
 };
 
 const destroy = (req, res) => {
+  const userId = req.payloads?.sub;
   models.book
-    .delete(req.params.id)
+    .delete(req.params.id, userId)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -107,8 +110,9 @@ const destroy = (req, res) => {
 };
 
 const searchWithPartTitle = (req, res) => {
+  const userId = req.payloads?.sub;
   models.book
-    .findWithPartTitle(req.params.string)
+    .findWithPartTitle(req.params.string, userId)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);

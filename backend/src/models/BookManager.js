@@ -24,7 +24,7 @@ class BookManager extends AbstractManager {
 
   update(book, userId) {
     return this.database.query(
-      `update ${this.table} set title = ?, author = ?, when_read = ?, is_read = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
+      `update ${this.table} set title = ?, author = ?, when_read = ?, is_read = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ? and user_id = ?`,
       [
         book.title,
         book.author,
@@ -36,6 +36,7 @@ class BookManager extends AbstractManager {
         book.lent_to,
         userId,
         book.id,
+        userId,
       ]
     );
   }
