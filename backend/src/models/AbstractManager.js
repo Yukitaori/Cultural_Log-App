@@ -3,27 +3,28 @@ class AbstractManager {
     this.table = table;
   }
 
-  find(id) {
-    return this.database.query(`select * from  ${this.table} where id = ?`, [
-      id,
-    ]);
-  }
-
-  findWithTitle(title) {
+  find(id, userId) {
     return this.database.query(
-      `select id, title from  ${this.table} where title = ?`,
-      [title]
+      `select * from  ${this.table} where id = ? and user_id = ?`,
+      [id, userId]
     );
   }
 
-  findWithPartTitle(title) {
+  findWithTitle(title, userId) {
     return this.database.query(
-      `select id, title from  ${this.table} where title like ? order by title ASC`,
-      [`%${title}%`]
+      `select id, title from  ${this.table} where title = ? and user_id = ?`,
+      [title, userId]
     );
   }
 
-  findAll(item) {
+  findWithPartTitle(title, userId) {
+    return this.database.query(
+      `select id, title from  ${this.table} where title like ? and user_id = ? order by title ASC`,
+      [`%${title}%`, userId]
+    );
+  }
+
+  findAll(item, userId) {
     let when;
     switch (item) {
       case "movies":
@@ -50,12 +51,16 @@ class AbstractManager {
     }
 
     return this.database.query(
-      `select id, title, rating, ${when}, ${is}, is_lent, owned from ${this.table} order by title ASC`
+      `select id, title, rating, ${when}, ${is}, is_lent, owned from ${this.table} where user_id = ? order by title ASC`,
+      [userId]
     );
   }
 
-  delete(id) {
-    return this.database.query(`delete from ${this.table} where id = ?`, [id]);
+  delete(id, userId) {
+    return this.database.query(
+      `delete from ${this.table} where id = ? and user_id = ?`,
+      [id, userId]
+    );
   }
 
   setDatabase(database) {

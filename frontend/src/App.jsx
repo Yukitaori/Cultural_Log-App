@@ -10,6 +10,7 @@ import Add from "./components/Add";
 import Edit from "./components/Edit";
 import Search from "./components/Search";
 import List from "./components/List";
+import Register from "./components/Register";
 import "./App.css";
 import { useUserContext } from "./contexts/UserContext";
 import DisplayedItem from "./components/DisplayedItem";
@@ -63,6 +64,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}>
             <Route index element={<Welcome />} />
+            <Route path="register" element={<Register />} />
             <Route path="/:whatever" element={<Welcome />} />
           </Route>
         </Routes>

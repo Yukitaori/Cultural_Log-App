@@ -1,6 +1,8 @@
 import Joi from "joi";
 
-const schema = Joi.object().keys({
+// TODO : Améliorer les schemas de validation
+
+const addSchema = Joi.object().keys({
   title: Joi.string().min(3).max(80).messages({
     "string.min": "Le titre doit avoir une longueur minimale de 3 caractères.",
     "string.max": "Le titre doit avoir une longueur maximale de 80 caractères.",
@@ -56,4 +58,39 @@ const schema = Joi.object().keys({
   user_id: Joi.number(),
 });
 
-export default schema;
+const registerSchema = Joi.object().keys({
+  pseudo: Joi.string()
+    .min(4)
+    .max(45)
+    .messages({
+      "string.min":
+        "Le pseudo doit avoir une longueur minimale de 4 caractères.",
+      "string.max":
+        "Le pseudo doit avoir une longueur maximale de 45 caractères.",
+    })
+    .required(),
+  password: Joi.string()
+    .min(5)
+    .max(45)
+    .messages({
+      "string.min":
+        "Le mot de passe doit avoir une longueur minimale de 5 caractères.",
+      "string.max":
+        "Le mot de passe doit avoir une longueur maximale de 45 caractères.",
+    })
+    .required(),
+  verifyPassword: Joi.string()
+    .min(8)
+    .max(45)
+    .valid(Joi.ref("password"))
+    .messages({
+      "string.min":
+        "Le mot de passe doit avoir une longueur minimale de 8 caractères.",
+      "string.max":
+        "Le mot de passe doit avoir une longueur maximale de 45 caractères.",
+      "any.only": "Les mots de passe ne correspondent pas.",
+    })
+    .required(),
+});
+
+export { addSchema, registerSchema };

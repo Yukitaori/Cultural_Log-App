@@ -15,6 +15,7 @@ const {
   getUserByPseudo,
   logout,
   verifyToken,
+  verifyIfRegistered,
 } = require("./services/auth");
 
 const cleanData = require("./services/clean");
@@ -27,6 +28,7 @@ router.delete("/items/:id", itemControllers.destroy);
 
 /* ------------------ AUTHENTIFICATION ------------------ */
 
+router.post("/register", verifyIfRegistered, hashPassword, userControllers.add);
 router.post("/login", getUserByPseudo, verifyPassword);
 router.get("/logout", logout);
 

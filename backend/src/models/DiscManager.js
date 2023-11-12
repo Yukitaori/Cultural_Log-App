@@ -24,7 +24,7 @@ class DiscManager extends AbstractManager {
 
   update(disc, userId) {
     return this.database.query(
-      `update ${this.table} set title = ?, artist = ?, when_listened = ?, is_listened = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ?`,
+      `update ${this.table} set title = ?, artist = ?, when_listened = ?, is_listened = ?, rating = ?, owned = ?, is_lent = ?, lent_to = ?, user_id = ? where id = ? and user_id = ?`,
       [
         disc.title,
         disc.artist,
@@ -36,6 +36,7 @@ class DiscManager extends AbstractManager {
         disc.lent_to,
         userId,
         disc.id,
+        userId,
       ]
     );
   }

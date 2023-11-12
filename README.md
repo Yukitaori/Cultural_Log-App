@@ -7,7 +7,6 @@ Welcome on my app that has no name 🫤.</p>
 <br/>
 <br/>
 
-
 <!-- Objectives -->
 <h1>🎯 The Objectives</h1>
 <h2>Purpose</h2>
@@ -20,7 +19,6 @@ Welcome on my app that has no name 🫤.</p>
 
 <br/>
 <br/>
-
 
 <!-- Technical stack -->
 <h1>⚙️Technical Stack used for the project</h1>
@@ -92,7 +90,7 @@ Some commands :</h3>
 <ul>
 <li>Video Games and TV shows sections (yaaaaay)</li>
 <li>Account creation so anyone can enjoy the app</li>
-<li>Pagination in the lists</li>
 </ul>
 <br/>
 <br/>
+
