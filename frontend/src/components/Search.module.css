@@ -21,7 +21,7 @@
   align-items: center;
 }
 
-.search div div {
+/* .search div div {
   width: 100%;
   padding: 0.5rem;
   border-radius: 25px;
@@ -29,6 +29,43 @@
   justify-content: center;
   align-items: center;
   word-break: break-all;
+} */
+
+.searchListBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchListBox ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.2em;
+  padding: 1em;
+  height: 10em;
+  overflow: auto;
+  box-shadow: 0 5px 5px 0px black;
+  border: 3px solid var(--second-bg-color);
+  background-color: var(--main-bg-color);
+  color: var(--main-color);
+  border-radius: 0 0 10px 10px;
+  width: 100%;
+  margin-bottom: 1rem;
+  text-align: center;
+  list-style: none;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.searchListBox ul li {
+  width: 100%;
+  padding: 0.2em;
+}
+
+.searchListBox ul li:hover {
+  cursor: pointer;
+  background-color: var(--second-bg-color);
 }
 
 .search input {
@@ -58,12 +95,22 @@
   }
   .search h1 {
     font-size: calc(0.2rem + 4vh);
+    margin-bottom: 1em;
   }
   .search div div {
     font-size: calc(0.2rem + 4vh);
   }
   .messageToDisplay {
     font-size: calc(0.2rem + 4vh);
+  }
+  .searchListBox {
+    font-size: calc(0.2rem + 3vh);
+  }
+  .searchListBox ul {
+    height: 5rem;
+  }
+  .searchListBox ul li {
+    padding: 0;
   }
 }
 
@@ -75,6 +122,9 @@
     font-size: calc(0.2rem + 2vh);
   }
   .messageToDisplay {
+    font-size: calc(0.2rem + 2vh);
+  }
+  .searchListBox ul {
     font-size: calc(0.2rem + 2vh);
   }
 }

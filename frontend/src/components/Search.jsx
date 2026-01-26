@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import Autocomplete from "react-autocomplete";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useUserContext } from "../contexts/UserContext";
@@ -25,6 +24,26 @@ function Search({ part }) {
     ).id;
     navigate(`/${part}/${itemToDisplayId}`);
   };
+
+  const handleSearch = (value) => {
+    setSearch(value);
+  };
+
+  useEffect(() => {
+    const items = itemsToBrowse || itemsToCheck;
+    if (items && items.length > 0) {
+      document.getElementById("searchList").innerHTML = "";
+      items.map((item) => {
+        const line = document.createElement("li");
+        line.innerText = item.title;
+        document.getElementById("searchList").append(line);
+        line.addEventListener("click", (e) => {
+          handleClick(e.target.innerText);
+        });
+        return true;
+      });
+    }
+  }, [itemsToBrowse, itemsToCheck]);
 
   // Une requête n'est envoyée que si la string cherchée comporte au moins 3 caractères
   useEffect(() => {
@@ -69,6 +88,7 @@ function Search({ part }) {
       setSearchBaseString(null);
       setItemsToBrowse(null);
       setItemsToCheck([]);
+      setMessage("La recherche doit contenir au moins trois lettres.");
     } else {
       if (search.length > 0) {
         setMessage("La recherche doit contenir au moins trois lettres.");
@@ -82,44 +102,14 @@ function Search({ part }) {
   return (
     <div className={styles.search}>
       <h1>Tu cherches un titre ?</h1>
-      <Autocomplete
-        getItemValue={(item) => item.title}
-        items={itemsToBrowse || itemsToCheck}
-        menuStyle={{
-          boxShadow: "0 5px 5px 0px black",
-          border: "3px solid var(--second-bg-color)",
-          backgroundColor: "var(--main-bg-color)",
-          color: "var(--main-color)",
-          borderRadius: "0 0 50px 50px",
-          padding: "1rem",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          marginBottom: "1rem",
-          textAlign: "center",
-          fontWeight: "bold",
-          gap: "0.5em",
-          cursor: "pointer",
-        }}
-        renderItem={(item, isHighlighted) => (
-          <div
-            style={{
-              background: isHighlighted
-                ? "var(--second-bg-color)"
-                : "var(--main-bg-color)",
-            }}
-          >
-            {item.title}
-          </div>
-        )}
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        onSelect={(val) => {
-          handleClick(val);
-        }}
-      />
+      <div className={styles.searchListBox} id="searchListBox">
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+        {(itemsToBrowse || itemsToCheck.length > 0) && <ul id="searchList" />}
+      </div>
       <div>
         <p className={styles.messageToDisplay}>{message}</p>
       </div>

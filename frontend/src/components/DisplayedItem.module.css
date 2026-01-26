@@ -1,7 +1,10 @@
 .displayedItem {
   position: relative;
+  padding: 1em;
+  border: 3px solid var(--second-bg-color);
+  border-radius: 50px;
   width: 100%;
-  height: 100%;
+  height: 85%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -70,21 +73,34 @@
 }
 
 .delete {
+  justify-self: end;
+  margin-right: 1em;
+  margin-bottom: 1em;
   cursor: pointer;
   height: 80%;
   grid-column: 5/6;
   background: none;
+  border-radius: 50px;
+  border: 3px solid var(--second-bg-color);
+  background-color: var(--main-bg-color);
 }
 
 .edit {
+  justify-self: start;
+  margin-left: 1em;
+  margin-bottom: 1em;
   cursor: pointer;
   height: 80%;
   grid-column: 1/2;
   background: none;
+  border-radius: 50px;
+  border: 3px solid var(--second-bg-color);
+  background-color: var(--main-bg-color);
 }
 
 .buttons img {
   height: 100%;
+  scale: 0.6;
   filter: drop-shadow(2px 2px 1px black);
 }
 
@@ -100,11 +116,13 @@
   }
 
   .buttons {
-    position: fixed;
+    position: absolute;
   }
 
   .edit {
     justify-self: start;
+    margin-left: 1em;
+    margin-bottom: 1em;
     background-color: var(--main-bg-color);
     padding: 0.5rem;
     border-radius: 50px;
@@ -112,6 +130,8 @@
 
   .delete {
     justify-self: end;
+    margin-right: 1em;
+    margin-bottom: 1em;
     background-color: var(--main-bg-color);
     padding: 0.5rem;
     border-radius: 50px;
@@ -144,23 +164,24 @@
   }
 
   .buttons {
-    position: fixed;
+    position: absolute;
+    bottom: -2em;
   }
 
   .edit {
     justify-self: start;
+    margin-left: 1em;
+    margin-bottom: 1em;
     background-color: var(--main-bg-color);
     padding: 0.5rem;
-    border-radius: 50px;
-    border: 3px solid var(--second-color);
   }
 
   .delete {
     justify-self: end;
+    margin-right: 1em;
+    margin-bottom: 1em;
     background-color: var(--main-bg-color);
     padding: 0.5rem;
-    border-radius: 50px;
-    border: 3px solid var(--second-color);
   }
 }
 

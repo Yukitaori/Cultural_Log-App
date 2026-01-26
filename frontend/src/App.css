@@ -31,6 +31,10 @@ body {
   color: var(--main-color);
 }
 
+.hidden {
+  display: none;
+}
+
 ::-webkit-scrollbar {
   width: 0.8rem;
 }

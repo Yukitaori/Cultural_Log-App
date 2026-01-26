@@ -83,89 +83,105 @@ function DisplayedItem({ part }) {
 
   return (
     itemToDisplay && (
-      <div className={styles.displayedItem}>
-        <div className={styles.title}>
-          <p>{itemToDisplay.title}</p>
+      <>
+        <div className={styles.displayedItem}>
+          <div className={styles.title}>
+            <p>{itemToDisplay.title}</p>
+          </div>
+          <div className={styles.info}>
+            {itemToDisplay.director ||
+            itemToDisplay.author ||
+            itemToDisplay.writer ||
+            (itemToDisplay.artist && part !== "comics") ? (
+              <div className={styles.infoPart}>
+                {itemToDisplay.director ? <p>Réalisateur :</p> : null}
+                {itemToDisplay.author ? <p>Auteur :</p> : null}
+                {itemToDisplay.writer ? <p>Scénariste :</p> : null}
+                {itemToDisplay.artist && part !== "comics" ? (
+                  <p>Artiste :</p>
+                ) : null}
+
+                <p>
+                  {itemToDisplay.director ||
+                    itemToDisplay.author ||
+                    itemToDisplay.writer ||
+                    itemToDisplay.artist}
+                </p>
+              </div>
+            ) : null}
+
+            {part === "comics" ? (
+              <div className={styles.infoPart}>
+                <p>Dessinateur :</p>
+                <p>{itemToDisplay.artist}</p>
+              </div>
+            ) : null}
+
+            {itemToDisplay.is_seen ||
+            itemToDisplay.is_read ||
+            itemToDisplay.is_listened ? (
+              <div className={styles.infoPart}>
+                {part === "movies" ? <p>Vu le :</p> : null}
+                {part === "discs" ? <p>Ecouté le :</p> : null}
+                {part === "books" || part === "comics" ? <p>Lu le :</p> : null}
+                <p>
+                  {(itemToDisplay.when_seen &&
+                    transformDate(itemToDisplay.when_seen)) ||
+                    (itemToDisplay.when_read &&
+                      transformDate(itemToDisplay.when_read)) ||
+                    (itemToDisplay.when_listened &&
+                      transformDate(itemToDisplay.when_listened))}
+                </p>
+              </div>
+            ) : null}
+
+            {itemToDisplay.rating &&
+            parseInt(itemToDisplay.is_seen, 10) !== 0 &&
+            parseInt(itemToDisplay.is_read, 10) !== 0 &&
+            parseInt(itemToDisplay.is_listened, 10) !== 0 ? (
+              <div className={styles.infoPart}>
+                {ratingStars}
+                <p>{` (${itemToDisplay.rating} / 10)`}</p>
+              </div>
+            ) : null}
+
+            {parseInt(itemToDisplay.owned, 10) === 1 ? (
+              <div className={styles.infoPart}>
+                <p>Dans la collec' !</p>
+              </div>
+            ) : (
+              <div className={styles.infoPart}>
+                <p>Pas dans la collec'.</p>
+              </div>
+            )}
+
+            {parseInt(itemToDisplay.is_lent, 10) === 1 ? (
+              <div className={styles.infoPart}>
+                <p>
+                  Prêté à :{" "}
+                  {itemToDisplay.lent_to !== "" && itemToDisplay.lent_to
+                    ? itemToDisplay.lent_to
+                    : "personne"}
+                </p>
+              </div>
+            ) : null}
+          </div>
+
+          {openModal ? (
+            <ModalWrapper>
+              <BasicModal
+                modalText="Souhaites-tu REELLEMENT supprimer cet élément ?"
+                closeModal={() => setOpenModal(false)}
+                actionYesButton={deleteForGood}
+                actionNoButton={() => setOpenModal(false)}
+                setOpenModal={setOpenModal}
+                setMessage={setMessage}
+                message={message}
+                part={part}
+              />
+            </ModalWrapper>
+          ) : null}
         </div>
-        <div className={styles.info}>
-          {itemToDisplay.director ||
-          itemToDisplay.author ||
-          itemToDisplay.writer ||
-          (itemToDisplay.artist && part !== "comics") ? (
-            <div className={styles.infoPart}>
-              {itemToDisplay.director ? <p>Réalisateur :</p> : null}
-              {itemToDisplay.author ? <p>Auteur :</p> : null}
-              {itemToDisplay.writer ? <p>Scénariste :</p> : null}
-              {itemToDisplay.artist && part !== "comics" ? (
-                <p>Artiste :</p>
-              ) : null}
-
-              <p>
-                {itemToDisplay.director ||
-                  itemToDisplay.author ||
-                  itemToDisplay.writer ||
-                  itemToDisplay.artist}
-              </p>
-            </div>
-          ) : null}
-
-          {part === "comics" ? (
-            <div className={styles.infoPart}>
-              <p>Dessinateur :</p>
-              <p>{itemToDisplay.artist}</p>
-            </div>
-          ) : null}
-
-          {itemToDisplay.is_seen ||
-          itemToDisplay.is_read ||
-          itemToDisplay.is_listened ? (
-            <div className={styles.infoPart}>
-              {part === "movies" ? <p>Vu le :</p> : null}
-              {part === "discs" ? <p>Ecouté le :</p> : null}
-              {part === "books" || part === "comics" ? <p>Lu le :</p> : null}
-              <p>
-                {(itemToDisplay.when_seen &&
-                  transformDate(itemToDisplay.when_seen)) ||
-                  (itemToDisplay.when_read &&
-                    transformDate(itemToDisplay.when_read)) ||
-                  (itemToDisplay.when_listened &&
-                    transformDate(itemToDisplay.when_listened))}
-              </p>
-            </div>
-          ) : null}
-
-          {itemToDisplay.rating &&
-          parseInt(itemToDisplay.is_seen, 10) !== 0 &&
-          parseInt(itemToDisplay.is_read, 10) !== 0 &&
-          parseInt(itemToDisplay.is_listened, 10) !== 0 ? (
-            <div className={styles.infoPart}>
-              {ratingStars}
-              <p>{` (${itemToDisplay.rating} / 10)`}</p>
-            </div>
-          ) : null}
-
-          {parseInt(itemToDisplay.owned, 10) === 1 ? (
-            <div className={styles.infoPart}>
-              <p>Dans la collec' !</p>
-            </div>
-          ) : (
-            <div className={styles.infoPart}>
-              <p>Pas dans la collec'.</p>
-            </div>
-          )}
-
-          {parseInt(itemToDisplay.is_lent, 10) === 1 ? (
-            <div className={styles.infoPart}>
-              <p>
-                Prêté à :{" "}
-                {itemToDisplay.lent_to !== "" && itemToDisplay.lent_to
-                  ? itemToDisplay.lent_to
-                  : "personne"}
-              </p>
-            </div>
-          ) : null}
-        </div>
-
         <div className={styles.buttons}>
           <button
             className={styles.edit}
@@ -182,21 +198,7 @@ function DisplayedItem({ part }) {
             <img src={bin} alt="poubelle" />
           </button>
         </div>
-        {openModal ? (
-          <ModalWrapper>
-            <BasicModal
-              modalText="Souhaites-tu REELLEMENT supprimer cet élément ?"
-              closeModal={() => setOpenModal(false)}
-              actionYesButton={deleteForGood}
-              actionNoButton={() => setOpenModal(false)}
-              setOpenModal={setOpenModal}
-              setMessage={setMessage}
-              message={message}
-              part={part}
-            />
-          </ModalWrapper>
-        ) : null}
-      </div>
+      </>
     )
   );
 }

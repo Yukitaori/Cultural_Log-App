@@ -15,6 +15,7 @@
 }
 
 .partBody {
+  position: relative;
   height: calc(100% - 4rem - 1em);
   width: 100%;
   scroll-behavior: smooth;
@@ -30,6 +31,7 @@
   }
 
   .partBody {
+    position: relative;
     height: calc(100% - 2rem - 1em);
   }
 }
